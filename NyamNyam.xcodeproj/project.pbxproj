@@ -17,13 +17,18 @@
 		26A3190E298AA0F400681392 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26A3190C298AA0F400681392 /* Main.storyboard */; };
 		26A31910298AA0F500681392 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26A3190F298AA0F500681392 /* Assets.xcassets */; };
 		26A31913298AA0F500681392 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26A31911298AA0F500681392 /* LaunchScreen.storyboard */; };
+		688AC99D29ACDF430038965D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC99C29ACDF430038965D /* Message.swift */; };
+		688AC9A129ACDF890038965D /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC99E29ACDF890038965D /* ReviewViewController.swift */; };
+		688AC9A229ACDF890038965D /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC99F29ACDF890038965D /* AddViewController.swift */; };
+		688AC9A329ACDF890038965D /* KaKaoAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC9A029ACDF890038965D /* KaKaoAddressViewController.swift */; };
+		688AC9A529ACE03C0038965D /* KakaoZipCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		26158E6B29ACC9DE0082CE75 /* StoreDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoreDB.swift; path = ../../../../SQLite/SQLite/Model/StoreDB.swift; sourceTree = "<group>"; };
-		26158E6D29ACCA050082CE75 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = ../../../SQLite/SQLite/TableViewController.swift; sourceTree = "<group>"; };
-		26158E6F29ACCA170082CE75 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewCell.swift; path = ../../../SQLite/SQLite/TableViewCell.swift; sourceTree = "<group>"; };
-		26158E7129ACCB7B0082CE75 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Store.swift; path = ../../../../SQLite/SQLite/Model/Store.swift; sourceTree = "<group>"; };
+		26158E6B29ACC9DE0082CE75 /* StoreDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDB.swift; sourceTree = "<group>"; };
+		26158E6D29ACCA050082CE75 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		26158E6F29ACCA170082CE75 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		26158E7129ACCB7B0082CE75 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		26A31903298AA0F400681392 /* NyamNyam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyamNyam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26A31906298AA0F400681392 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26A31908298AA0F400681392 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,6 +37,11 @@
 		26A3190F298AA0F500681392 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		26A31912298AA0F500681392 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26A31914298AA0F500681392 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		688AC99C29ACDF430038965D /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		688AC99E29ACDF890038965D /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		688AC99F29ACDF890038965D /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		688AC9A029ACDF890038965D /* KaKaoAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoAddressViewController.swift; sourceTree = "<group>"; };
+		688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakaoZipCodeVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +58,7 @@
 		26158E6A29ACC9930082CE75 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				688AC99C29ACDF430038965D /* Message.swift */,
 				26158E7129ACCB7B0082CE75 /* Store.swift */,
 				26158E6B29ACC9DE0082CE75 /* StoreDB.swift */,
 			);
@@ -83,6 +94,10 @@
 				26A31914298AA0F500681392 /* Info.plist */,
 				26158E6F29ACCA170082CE75 /* TableViewCell.swift */,
 				26158E6D29ACCA050082CE75 /* TableViewController.swift */,
+				688AC99F29ACDF890038965D /* AddViewController.swift */,
+				688AC9A029ACDF890038965D /* KaKaoAddressViewController.swift */,
+				688AC99E29ACDF890038965D /* ReviewViewController.swift */,
+				688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */,
 			);
 			path = NyamNyam;
 			sourceTree = "<group>";
@@ -158,13 +173,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				688AC9A329ACDF890038965D /* KaKaoAddressViewController.swift in Sources */,
+				688AC9A229ACDF890038965D /* AddViewController.swift in Sources */,
 				26158E7229ACCB7B0082CE75 /* Store.swift in Sources */,
 				26A3190B298AA0F400681392 /* ViewController.swift in Sources */,
 				26A31907298AA0F400681392 /* AppDelegate.swift in Sources */,
 				26A31909298AA0F400681392 /* SceneDelegate.swift in Sources */,
 				26158E7029ACCA170082CE75 /* TableViewCell.swift in Sources */,
+				688AC99D29ACDF430038965D /* Message.swift in Sources */,
 				26158E6E29ACCA060082CE75 /* TableViewController.swift in Sources */,
+				688AC9A529ACE03C0038965D /* KakaoZipCodeVC.swift in Sources */,
 				26158E6C29ACC9DE0082CE75 /* StoreDB.swift in Sources */,
+				688AC9A129ACDF890038965D /* ReviewViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +334,10 @@
 				DEVELOPMENT_TEAM = B575A5584Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NyamNyam/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "게시물 업로드를 위해 카메라 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -342,6 +366,10 @@
 				DEVELOPMENT_TEAM = B575A5584Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NyamNyam/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "게시물 업로드를 위해 카메라 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
