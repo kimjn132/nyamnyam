@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26158E6C29ACC9DE0082CE75 /* StoreDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E6B29ACC9DE0082CE75 /* StoreDB.swift */; };
+		26158E6E29ACCA060082CE75 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E6D29ACCA050082CE75 /* TableViewController.swift */; };
+		26158E7029ACCA170082CE75 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E6F29ACCA170082CE75 /* TableViewCell.swift */; };
+		26158E7229ACCB7B0082CE75 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E7129ACCB7B0082CE75 /* Store.swift */; };
 		26A31907298AA0F400681392 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A31906298AA0F400681392 /* AppDelegate.swift */; };
 		26A31909298AA0F400681392 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A31908298AA0F400681392 /* SceneDelegate.swift */; };
 		26A3190B298AA0F400681392 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3190A298AA0F400681392 /* ViewController.swift */; };
@@ -16,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26158E6B29ACC9DE0082CE75 /* StoreDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoreDB.swift; path = ../../../../SQLite/SQLite/Model/StoreDB.swift; sourceTree = "<group>"; };
+		26158E6D29ACCA050082CE75 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = ../../../SQLite/SQLite/TableViewController.swift; sourceTree = "<group>"; };
+		26158E6F29ACCA170082CE75 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewCell.swift; path = ../../../SQLite/SQLite/TableViewCell.swift; sourceTree = "<group>"; };
+		26158E7129ACCB7B0082CE75 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Store.swift; path = ../../../../SQLite/SQLite/Model/Store.swift; sourceTree = "<group>"; };
 		26A31903298AA0F400681392 /* NyamNyam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyamNyam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26A31906298AA0F400681392 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26A31908298AA0F400681392 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +45,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26158E6A29ACC9930082CE75 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				26158E7129ACCB7B0082CE75 /* Store.swift */,
+				26158E6B29ACC9DE0082CE75 /* StoreDB.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		26A318FA298AA0F400681392 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +73,7 @@
 		26A31905298AA0F400681392 /* NyamNyam */ = {
 			isa = PBXGroup;
 			children = (
+				26158E6A29ACC9930082CE75 /* Model */,
 				26A31906298AA0F400681392 /* AppDelegate.swift */,
 				26A31908298AA0F400681392 /* SceneDelegate.swift */,
 				26A3190A298AA0F400681392 /* ViewController.swift */,
@@ -63,6 +81,8 @@
 				26A3190F298AA0F500681392 /* Assets.xcassets */,
 				26A31911298AA0F500681392 /* LaunchScreen.storyboard */,
 				26A31914298AA0F500681392 /* Info.plist */,
+				26158E6F29ACCA170082CE75 /* TableViewCell.swift */,
+				26158E6D29ACCA050082CE75 /* TableViewController.swift */,
 			);
 			path = NyamNyam;
 			sourceTree = "<group>";
@@ -138,9 +158,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26158E7229ACCB7B0082CE75 /* Store.swift in Sources */,
 				26A3190B298AA0F400681392 /* ViewController.swift in Sources */,
 				26A31907298AA0F400681392 /* AppDelegate.swift in Sources */,
 				26A31909298AA0F400681392 /* SceneDelegate.swift in Sources */,
+				26158E7029ACCA170082CE75 /* TableViewCell.swift in Sources */,
+				26158E6E29ACCA060082CE75 /* TableViewController.swift in Sources */,
+				26158E6C29ACC9DE0082CE75 /* StoreDB.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
