@@ -56,11 +56,11 @@
             </objects>
             <point key="canvasLocation" x="973" y="2191"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="j2O-JZ-3cL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iy1-83-C0V" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="EJm-ko-86b"/>
+                    <tabBarItem key="tabBarItem" title="" image="baseline_home_black_18pt_1x" landscapeImage="baseline_home_black_18pt_1x" largeContentSizeImage="baseline_home_black_18pt_1x" selectedImage="baseline_home_black_18pt_1x" id="EJm-ko-86b"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="viz-Cl-5M2">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -75,11 +75,11 @@
             </objects>
             <point key="canvasLocation" x="45" y="13"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="F4t-tw-6dE">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6VS-Yc-Ghl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Lbz-BQ-k4O"/>
+                    <tabBarItem key="tabBarItem" title="" image="baseline_apps_black_18pt_1x" landscapeImage="baseline_apps_black_18pt_1x" largeContentSizeImage="baseline_apps_black_18pt_1x" selectedImage="baseline_apps_black_18pt_1x" id="Lbz-BQ-k4O"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vtK-zP-N1V">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -156,13 +156,13 @@
         <!--Main View-->
         <scene sceneID="7d5-u9-Mx6">
             <objects>
-                <tableViewController id="fkQ-lo-yR0" customClass="TableViewController" customModule="SQLite" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="fkQ-lo-yR0" customClass="TableViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="400" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="xh3-CF-HRG">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableCell" rowHeight="400" id="PMg-5I-L9I" customClass="TableViewCell" customModule="SQLite" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableCell" rowHeight="400" id="PMg-5I-L9I" customClass="TableViewCell" customModule="NyamNyam" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.333332061767578" width="393" height="400"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PMg-5I-L9I" id="Y3t-5m-2fN">
@@ -258,6 +258,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="baseline_apps_black_18pt_1x" width="18" height="18"/>
+        <image name="baseline_home_black_18pt_1x" width="18" height="18"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
