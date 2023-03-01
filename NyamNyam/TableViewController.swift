@@ -75,7 +75,7 @@ class TableViewController: UITableViewController {
         cell.lblAddress.text = storeList[indexPath.row].address
         cell.lblCategory.text = storeList[indexPath.row].category
         cell.tvContent.text = storeList[indexPath.row].contents
-        cell.imageLoca?.image = UIImage(named:"loca.png")
+        //cell.imageLoca?.image = UIImage(named:"loca.png")
         
         
         return cell
