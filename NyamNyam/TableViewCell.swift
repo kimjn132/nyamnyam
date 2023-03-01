@@ -7,7 +7,6 @@
 
 import UIKit
 
-@IBDesignable
 class TableViewCell: UITableViewCell {
     
     
@@ -17,14 +16,17 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var tvContent: UITextView!
     @IBOutlet weak var lblCategory: UILabel!
     @IBOutlet weak var imageLoca: UIImageView!
-    
+    @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var contentViewCell: UIView!
+    
+    
     
     
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         
 //            // Set up cell appearance
 //            self.backgroundColor = .white
@@ -65,26 +67,38 @@ class TableViewCell: UITableViewCell {
             super.setSelected(selected, animated: animated)
         }
     
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
-                contentView.layer.cornerRadius = 10
-                contentView.layer.borderWidth = 2
+//        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
+//                contentView.layer.cornerRadius = 10
+//                contentView.layer.borderWidth = 2
 //                contentView.layer.borderColor = UIColor(hexString: "#757575")
                 
         ImageView.contentMode = .scaleAspectFill
         ImageView.clipsToBounds = true
-        ImageView.layer.cornerRadius = 10
+//        ImageView.layer.cornerRadius = 10
+//        ImageView.layer.borderWidth = 2
                 
         lblStore.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         lblStore.textColor = .black
+        
+        lblDate.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        lblDate.textColor = .lightGray
                 
+        
+        
         lblAddress.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         lblAddress.textColor = .gray
                 
-        lblCategory.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        lblCategory.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         lblCategory.textColor = .black
+        
+        tvContent.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        tvContent.textColor = .black
+        
+        
             }
 }
     
