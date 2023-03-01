@@ -18,6 +18,12 @@ class AddViewController: UIViewController, UITextViewDelegate{
     @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet weak var tvContent: UITextView!
     
+    // * 필수 입력 설명하는 라벨들
+    @IBOutlet weak var lblImage: UILabel!
+    @IBOutlet weak var lblCategory: UILabel!
+    @IBOutlet weak var lblReview: UILabel!
+    @IBOutlet weak var lblAddress2: UILabel!
+    
     // 한식, 중식, 양식, 분식, 일식, 카페 선택 라디오 버튼
     @IBOutlet var radioButtons: [UIButton]!
     //라디오 버튼 선택 index
@@ -70,6 +76,14 @@ class AddViewController: UIViewController, UITextViewDelegate{
         
     }//viewDidLoad
     
+    // tfTitle 수정 시작
+    @IBAction func tfTitleEditingDidBegin(_ sender: UITextField) {
+        tfTitle.layer.borderWidth = 0.5
+        tfTitle.layer.cornerRadius = 5
+        tfTitle.layer.borderColor = UIColor.systemGray5.cgColor
+    }
+    
+    
     // 맛집 카테고리 클릭 버튼
     @IBAction func btnChooseCategory(_ sender: UIButton) {
         
@@ -106,22 +120,28 @@ class AddViewController: UIViewController, UITextViewDelegate{
         
     }//btnChooseCategory
     
-    // 이미지 추가 버튼 클릭시 alert를 띄운다.
+    // 이미지 추가 버튼 클릭
     @IBAction func btnImage(_ sender: UIButton) {
         
-        showAlert()
+        // 맛집 이름을 적어주지 않았으면 텍스트 필드 색을 빨갛게
+        if (tfTitle.text == "") {
+            tfTitle.layer.borderWidth = 0.5
+            tfTitle.layer.cornerRadius = 5
+            tfTitle.layer.borderColor = UIColor.systemRed.cgColor
+        }
         
-        tfTitle.text = ""
-//        imageView = nil
-        lblAddress.text = ""
-        tvContent.text = ""
+        // 권한 alert
+        showAlert()
         
     }//btnImage
     
-    // 완료 버튼 클릭시 db에 정보를 insert한다.
+    // 완료 버튼
     @IBAction func btnDone(_ sender: UIButton) {
         
+        // DB에 정보 insert
         dbInsert()
+        
+        
         
         
     }//btnDone
@@ -157,10 +177,10 @@ class AddViewController: UIViewController, UITextViewDelegate{
         super.viewWillDisappear(animated)
         print("viewWillDisappear")
         
-        tfTitle.text = ""
-        imageView.image = nil
-        lblAddress.text = ""
-        tvContent.text = ""
+//        tfTitle.text = ""
+//        imageView.image = nil
+//        lblAddress.text = ""
+//        tvContent.text = ""
         
     }//viewwillDisappear
     
@@ -181,10 +201,10 @@ class AddViewController: UIViewController, UITextViewDelegate{
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        // address label 채워준다.
         
+        // address label 채워준다.
         if Message.address.isEmpty {
-            lblAddress.text = " + 버튼을 눌러 주소를 추가하세요."
+            lblAddress.text = " + 버튼을 눌러 위치를 추가하세요."
             lblAddress.textColor = UIColor.lightGray
         } else {
             lblAddress.text = " \(Message.address)"
