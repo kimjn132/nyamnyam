@@ -98,7 +98,7 @@ class TableViewController: UITableViewController {
             let storeDB = StoreDB()
             let id = storeList[indexPath.row].id
             storeDB.delegate = self
-            //storeDB.deleteAction(id: id)    // 삭제
+            storeDB.deleteAction(id: id)    // 삭제
 
             selectData()    //삭제한 후 화면 다시 불러오기
 
