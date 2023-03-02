@@ -33,6 +33,8 @@ class TableViewCell: UITableViewCell {
     
     
     
+    
+    
 //    tvContent.UILabel = UILabel {
 //        let lbl = UILabel()
 //        lbl.translatesAutoresizingMaskIntoConstraints = false
