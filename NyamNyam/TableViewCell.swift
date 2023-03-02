@@ -13,7 +13,19 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var lblStore: UILabel!
     @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet weak var ImageView: UIImageView!
-    @IBOutlet weak var tvContent: UITextView!
+    //@IBOutlet weak var tvContent: UITextView!
+    
+    
+    @IBOutlet weak var tvContent: UILabel!
+//    = {
+//
+//        lbl.translatesAutoresizingMaskIntoConstraints = false
+//            lbl.numberOfLines = 0
+//            lbl.font = UIFont(name: "Apple SD Gothic Neo", size: 13)
+//        return lbl
+//    }()
+
+    
     @IBOutlet weak var lblCategory: UILabel!
     @IBOutlet weak var imageLoca: UIImageView!
     @IBOutlet weak var lblDate: UILabel!
@@ -21,31 +33,35 @@ class TableViewCell: UITableViewCell {
     
     
     
-    
+//    tvContent.UILabel = UILabel {
+//        let lbl = UILabel()
+//        lbl.translatesAutoresizingMaskIntoConstraints = false
+//        lbl.numberOfLines = 0
+//        lbl.font = UIFont(name: "Apple SD Gothic Neo", size: 13)
+//        return lbl
+//    }
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        let lbl = UILabel()
+        // Configure tvContent label
+                tvContent.translatesAutoresizingMaskIntoConstraints = false
+                tvContent.numberOfLines = 0
+                tvContent.font = UIFont(name: "Apple SD Gothic Neo", size: 13)
+                
+                let contentTextLength = tvContent.text?.count ?? 0
+                
+                if contentTextLength > 1 {
+                    DispatchQueue.main.async {
+                        self.tvContent.addTrailing(with: "... ", moreText: "더보기", moreTextFont: .systemFont(ofSize: 13), moreTextColor: UIColor.lightGray)
+                    }
+                }
+           }
+    
         
-//            // Set up cell appearance
-//            self.backgroundColor = .white
-//
-//            // Set up labels
-//            lblStore.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-//            lblAddress.font = UIFont.systemFont(ofSize: 14)
-//            lblCategory.font = UIFont.systemFont(ofSize: 14)
-//            tvContent.font = UIFont.systemFont(ofSize: 14)
-//
-//            // Set up image view
-//            ImageView.contentMode = .scaleAspectFill
-//            ImageView.clipsToBounds = true
-//
-//            // Set up location icon image view
-//            imageLoca.contentMode = .scaleAspectFit
-//            imageLoca.tintColor = .systemGray
-
-    }
+    
  
     
     
@@ -54,11 +70,11 @@ class TableViewCell: UITableViewCell {
             super.prepareForReuse()
             
             // Reset cell properties
-        ImageView.image = nil
-        lblStore.text = nil
-        lblCategory.text = nil
-        lblAddress.text = nil
-        tvContent.text = nil
+//        ImageView.image = nil
+//        lblStore.text = nil
+//        lblCategory.text = nil
+//        lblAddress.text = nil
+//        tvContent.text = nil
         }
     
     
