@@ -18,14 +18,14 @@ class TableViewController: UITableViewController {
     // 사용자 작성 내용 리스트 형식으로 담는 변수
     var storeList: [Store] = []
 
-    
+    var selectedId: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         print("실행")
 
-    }//viewDidLoad
+    } //viewDidLoad
     
     
     
@@ -34,6 +34,12 @@ class TableViewController: UITableViewController {
         //readValues()
         print("출력")
         selectData()
+        
+        if let selectedId = selectedId,
+                let index = storeList.firstIndex(where: { $0.id == selectedId }) {
+                let indexPath = IndexPath(row: index, section: 0)
+                tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+            }
     }
     
     func selectData(){
@@ -75,7 +81,7 @@ class TableViewController: UITableViewController {
         cell.lblAddress.text = storeList[indexPath.row].address
         cell.lblCategory.text = storeList[indexPath.row].category
         cell.tvContent.text = storeList[indexPath.row].contents
-        cell.imageLoca?.image = UIImage(named:"loca.png")
+        //cell.imageLoca?.image = UIImage(named:"loca.png")
         
         
         return cell
@@ -98,7 +104,7 @@ class TableViewController: UITableViewController {
             let storeDB = StoreDB()
             let id = storeList[indexPath.row].id
             storeDB.delegate = self
-            //storeDB.deleteAction(id: id)    // 삭제
+            storeDB.deleteAction(id: id)    // 삭제
 
             selectData()    //삭제한 후 화면 다시 불러오기
 

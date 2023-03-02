@@ -18,6 +18,12 @@ class AddViewController: UIViewController, UITextViewDelegate{
     @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet weak var tvContent: UITextView!
     
+    // * 필수 입력 설명하는 라벨들
+    @IBOutlet weak var lblImage: UILabel!
+    @IBOutlet weak var lblCategory: UILabel!
+    @IBOutlet weak var lblReview: UILabel!
+    @IBOutlet weak var lblAddress2: UILabel!
+    
     // 한식, 중식, 양식, 분식, 일식, 카페 선택 라디오 버튼
     @IBOutlet var radioButtons: [UIButton]!
     //라디오 버튼 선택 index
@@ -70,6 +76,13 @@ class AddViewController: UIViewController, UITextViewDelegate{
         
     }//viewDidLoad
     
+    // tfTitle 수정 시작
+    @IBAction func tfTitleEditingDidBegin(_ sender: UITextField) {
+        tfTitle.layer.borderWidth = 0.5
+        tfTitle.layer.cornerRadius = 5
+        tfTitle.layer.borderColor = UIColor.systemGray5.cgColor
+    }
+    
     // 맛집 카테고리 클릭 버튼
     @IBAction func btnChooseCategory(_ sender: UIButton) {
         
@@ -103,26 +116,28 @@ class AddViewController: UIViewController, UITextViewDelegate{
             myTag = "카페"
         }
 
-        
     }//btnChooseCategory
     
-    // 이미지 추가 버튼 클릭시 alert를 띄운다.
+    // 이미지 추가 버튼 클릭
     @IBAction func btnImage(_ sender: UIButton) {
         
-        showAlert()
+        // 맛집 이름을 적어주지 않았으면 텍스트 필드 색을 빨갛게
+        if (tfTitle.text == "") {
+            tfTitle.layer.borderWidth = 0.5
+            tfTitle.layer.cornerRadius = 5
+            tfTitle.layer.borderColor = UIColor.systemRed.cgColor
+        }
         
-        tfTitle.text = ""
-//        imageView = nil
-        lblAddress.text = ""
-        tvContent.text = ""
+        // 권한 alert
+        showAlert()
         
     }//btnImage
     
-    // 완료 버튼 클릭시 db에 정보를 insert한다.
+    // 완료 버튼
     @IBAction func btnDone(_ sender: UIButton) {
         
+        // DB에 정보 insert
         dbInsert()
-        
         
     }//btnDone
     
@@ -135,7 +150,8 @@ class AddViewController: UIViewController, UITextViewDelegate{
         
     }//btnAddAddress
     
-    // override funcs ==================================================================
+    // ===================================================================================================================================================
+    // override funcs ====================================================================================================================================
     
     // 뷰 화면 표시
     override func viewDidAppear(_ animated: Bool) {
@@ -157,10 +173,10 @@ class AddViewController: UIViewController, UITextViewDelegate{
         super.viewWillDisappear(animated)
         print("viewWillDisappear")
         
-        tfTitle.text = ""
-        imageView.image = nil
-        lblAddress.text = ""
-        tvContent.text = ""
+//        tfTitle.text = ""
+//        imageView.image = nil
+//        lblAddress.text = ""
+//        tvContent.text = ""
         
     }//viewwillDisappear
     
@@ -181,16 +197,15 @@ class AddViewController: UIViewController, UITextViewDelegate{
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        // address label 채워준다.
         
+        // address label 채워준다.
         if Message.address.isEmpty {
-            lblAddress.text = " + 버튼을 눌러 주소를 추가하세요."
+            lblAddress.text = " + 버튼을 눌러 위치를 추가하세요."
             lblAddress.textColor = UIColor.lightGray
         } else {
             lblAddress.text = " \(Message.address)"
             lblAddress.textColor = UIColor.black
         }
-        
         
         print("view will appear: \(Message.address)")
         
@@ -201,7 +216,6 @@ class AddViewController: UIViewController, UITextViewDelegate{
     }
     @objc func checkBackground(){
     }
-    
 
     /*
     // MARK: - Navigation
@@ -290,39 +304,67 @@ class AddViewController: UIViewController, UITextViewDelegate{
     // db에 정보 저장
     func dbInsert(){
         
-        var stmt: OpaquePointer?
-        let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
+        // DB 인스턴스 만들기
+        let storeDB = StoreDB()
         
         let tag = myTag
-        let name = tfTitle.text?.trimmingCharacters(in: .whitespaces)
-        let address = lblAddress.text?.trimmingCharacters(in: .whitespaces)
-        let content = tvContent.text?.trimmingCharacters(in: .whitespaces)
-        let image = UIImage(data: imageData! as Data)
-        let data = image!.pngData()! as NSData
-
-        //-1은 한글 때문이다. 한글은 2byte이기 때문에..
-        let queryString = "INSERT INTO store (sName, sAddress, sImage, sContents, sCategory) VALUES (?,?,?,?,?)"
+        guard let name = tfTitle.text?.trimmingCharacters(in: .whitespaces) else { return }
+        guard let address = lblAddress.text?.trimmingCharacters(in: .whitespaces) else { return }
+        guard let content = tvContent.text?.trimmingCharacters(in: .whitespaces) else { return }
+        guard let image = UIImage(data: imageData! as Data) else { return }
+        let data = image.pngData()! as NSData
         
-//        CREATE TABLE IF NOT EXISTS store (sid INTEGER PRIMARY KEY AUTOINCREMENT, sName TEXT, sAddress TEXT, sImage BLOB, sContents TEXT)
-
-        sqlite3_prepare(db, queryString, -1, &stmt, nil)
+        let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
+        
+        if result {
+            let resultAlert = UIAlertController(title: "완료", message: "입력이 되었습니다.", preferredStyle: .alert)
+            let onAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in
+                self.navigationController?.popViewController(animated: true)
+            })
             
-        sqlite3_bind_text(stmt, 1, name, -1, SQLITE_TRANSIENT)
-        sqlite3_bind_text(stmt, 2, address, -1, SQLITE_TRANSIENT)
-        sqlite3_bind_blob(stmt, 3, data.bytes, Int32(Int64(data.length)), SQLITE_TRANSIENT)
-        sqlite3_bind_text(stmt, 4, content, -1, SQLITE_TRANSIENT)
-        sqlite3_bind_text(stmt , 5, tag, -1, SQLITE_TRANSIENT)
+            resultAlert.addAction(onAction)
+            present(resultAlert, animated: true)
+        } else {
+            let resultAlert = UIAlertController(title: "실패", message: "에러가 발생 되었습니다.", preferredStyle: .alert)
+            let onAction = UIAlertAction(title: "OK", style: .default)
+            
+            resultAlert.addAction(onAction)
+            present(resultAlert, animated: true)
+        }
         
-        sqlite3_step(stmt)
-        
-        let resultAlert = UIAlertController(title: "결과", message: "입력되었습니다", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in self.navigationController?.popViewController(animated: true)})
-        
-        resultAlert.addAction(okAction)
-        present(resultAlert, animated: true)
-        
-        print("성공")
-        print(data)
+//        var stmt: OpaquePointer?
+//        let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
+//
+//        let tag = myTag
+//        let name = tfTitle.text?.trimmingCharacters(in: .whitespaces)
+//        let address = lblAddress.text?.trimmingCharacters(in: .whitespaces)
+//        let content = tvContent.text?.trimmingCharacters(in: .whitespaces)
+//        let image = UIImage(data: imageData! as Data)
+//        let data = image!.pngData()! as NSData
+//
+//        //-1은 한글 때문이다. 한글은 2byte이기 때문에..
+//        let queryString = "INSERT INTO store (sName, sAddress, sImage, sContents, sCategory) VALUES (?,?,?,?,?)"
+//
+////        CREATE TABLE IF NOT EXISTS store (sid INTEGER PRIMARY KEY AUTOINCREMENT, sName TEXT, sAddress TEXT, sImage BLOB, sContents TEXT)
+//
+//        sqlite3_prepare(db, queryString, -1, &stmt, nil)
+//
+//        sqlite3_bind_text(stmt, 1, name, -1, SQLITE_TRANSIENT)
+//        sqlite3_bind_text(stmt, 2, address, -1, SQLITE_TRANSIENT)
+//        sqlite3_bind_blob(stmt, 3, data.bytes, Int32(Int64(data.length)), SQLITE_TRANSIENT)
+//        sqlite3_bind_text(stmt, 4, content, -1, SQLITE_TRANSIENT)
+//        sqlite3_bind_text(stmt , 5, tag, -1, SQLITE_TRANSIENT)
+//
+//        sqlite3_step(stmt)
+//
+//        let resultAlert = UIAlertController(title: "결과", message: "입력되었습니다", preferredStyle: .alert)
+//        let okAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in self.navigationController?.popViewController(animated: true)})
+//
+//        resultAlert.addAction(okAction)
+//        present(resultAlert, animated: true)
+//
+//        print("성공")
+//        print(data)
 
     }//dbInsert
 

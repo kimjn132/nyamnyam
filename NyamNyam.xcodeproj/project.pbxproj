@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16A1D93A29AF1AC90010C328 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A1D93829AF1AC90010C328 /* CollectionViewController.swift */; };
+		16A1D93B29AF1AC90010C328 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A1D93929AF1AC90010C328 /* CollectionViewCell.swift */; };
 		26158E6C29ACC9DE0082CE75 /* StoreDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E6B29ACC9DE0082CE75 /* StoreDB.swift */; };
 		26158E6E29ACCA060082CE75 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E6D29ACCA050082CE75 /* TableViewController.swift */; };
 		26158E7029ACCA170082CE75 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E6F29ACCA170082CE75 /* TableViewCell.swift */; };
 		26158E7229ACCB7B0082CE75 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E7129ACCB7B0082CE75 /* Store.swift */; };
+		2669A97F29AF66B300C57EC7 /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2669A97E29AF66B300C57EC7 /* LabelExtension.swift */; };
 		26A31907298AA0F400681392 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A31906298AA0F400681392 /* AppDelegate.swift */; };
 		26A31909298AA0F400681392 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A31908298AA0F400681392 /* SceneDelegate.swift */; };
 		26A3190B298AA0F400681392 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3190A298AA0F400681392 /* ViewController.swift */; };
@@ -28,10 +31,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16A1D93829AF1AC90010C328 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		16A1D93929AF1AC90010C328 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		26158E6B29ACC9DE0082CE75 /* StoreDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDB.swift; sourceTree = "<group>"; };
 		26158E6D29ACCA050082CE75 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		26158E6F29ACCA170082CE75 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		26158E7129ACCB7B0082CE75 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		2669A97E29AF66B300C57EC7 /* LabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtension.swift; sourceTree = "<group>"; };
 		26A31903298AA0F400681392 /* NyamNyam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyamNyam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26A31906298AA0F400681392 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26A31908298AA0F400681392 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +113,9 @@
 				688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */,
 				BCB1B0EB29ADAA5000DAECB7 /* WishAddViewController.swift */,
 				BCB1B0EC29ADAA5000DAECB7 /* WishTableViewController.swift */,
+				16A1D93929AF1AC90010C328 /* CollectionViewCell.swift */,
+				16A1D93829AF1AC90010C328 /* CollectionViewController.swift */,
+				2669A97E29AF66B300C57EC7 /* LabelExtension.swift */,
 			);
 			path = NyamNyam;
 			sourceTree = "<group>";
@@ -191,17 +200,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16A1D93A29AF1AC90010C328 /* CollectionViewController.swift in Sources */,
 				688AC9A329ACDF890038965D /* KaKaoAddressViewController.swift in Sources */,
 				688AC9A229ACDF890038965D /* AddViewController.swift in Sources */,
 				26158E7229ACCB7B0082CE75 /* Store.swift in Sources */,
 				26A3190B298AA0F400681392 /* ViewController.swift in Sources */,
 				26A31907298AA0F400681392 /* AppDelegate.swift in Sources */,
+				2669A97F29AF66B300C57EC7 /* LabelExtension.swift in Sources */,
 				26A31909298AA0F400681392 /* SceneDelegate.swift in Sources */,
 				26158E7029ACCA170082CE75 /* TableViewCell.swift in Sources */,
 				688AC99D29ACDF430038965D /* Message.swift in Sources */,
 				BCB1B0EE29ADAA5000DAECB7 /* WishTableViewController.swift in Sources */,
 				26158E6E29ACCA060082CE75 /* TableViewController.swift in Sources */,
 				BCB1B0ED29ADAA5000DAECB7 /* WishAddViewController.swift in Sources */,
+				16A1D93B29AF1AC90010C328 /* CollectionViewCell.swift in Sources */,
 				688AC9A529ACE03C0038965D /* KakaoZipCodeVC.swift in Sources */,
 				26158E6C29ACC9DE0082CE75 /* StoreDB.swift in Sources */,
 				688AC9A129ACDF890038965D /* ReviewViewController.swift in Sources */,
@@ -356,8 +368,8 @@
 				INFOPLIST_FILE = NyamNyam/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "게시물 업로드를 위해 카메라 접근 권한이 필요합니다. 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "2게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "1게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -388,8 +400,8 @@
 				INFOPLIST_FILE = NyamNyam/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "게시물 업로드를 위해 카메라 접근 권한이 필요합니다. 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "2게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "1게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
