@@ -18,14 +18,14 @@ class TableViewController: UITableViewController {
     // 사용자 작성 내용 리스트 형식으로 담는 변수
     var storeList: [Store] = []
 
-    
+    var selectedId: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         print("실행")
 
-    }//viewDidLoad
+    } //viewDidLoad
     
     
     
@@ -34,6 +34,12 @@ class TableViewController: UITableViewController {
         //readValues()
         print("출력")
         selectData()
+        
+        if let selectedId = selectedId,
+                let index = storeList.firstIndex(where: { $0.id == selectedId }) {
+                let indexPath = IndexPath(row: index, section: 0)
+                tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+            }
     }
     
     func selectData(){

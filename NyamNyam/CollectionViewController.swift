@@ -10,63 +10,72 @@ import SQLite3
 
 private let reuseIdentifier = "Cell"
 
-class CollectionViewController: UIViewController {
+class CollectionViewController: UICollectionViewController {
     
-    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var cvList: UICollectionView!
     
-    var db: OpaquePointer?
     var storeList: [Store] = []
-    
-    var imageData : NSData? = nil
+    var selectedId: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.delegate = self
-        collectionView.dataSource = self
-
+        cvList.delegate = self
+        cvList.dataSource = self
     }
     
-    // 추가 입력 새로 불러오는 역할
     override func viewWillAppear(_ animated: Bool) {
-        //readValues()
-        print("출력")
         selectData()
     }
     
     func selectData(){
         let storeDB = StoreDB()
         storeList.removeAll()
-        
         storeDB.delegate = self
-
         storeDB.queryDB()
-        collectionView.reloadData()
-        
+        cvList.reloadData()
     }
     
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
 
-}
-
-extension CollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate{
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return storeList.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! CollectionViewCell
     
         // Configure the cell
-        
         cell.uiImage?.image = UIImage(data: storeList[indexPath.row].image!)
-        
+      
+      
         return cell
     }
+  
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        tabBarController?.selectedIndex = 1
+        selectedId = storeList[indexPath.row].id
+        performSegue(withIdentifier: "sgTV", sender: AnyObject.self)
+    }
+  
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sgTV" {
+            if let vc = segue.destination as? TableViewController {
+                vc.selectedId = selectedId
+            }
+        }
+      
+    }
+    
 }
-
 
 //cell에 대한 (extension) Layout
 extension CollectionViewController: UICollectionViewDelegateFlowLayout{
@@ -87,16 +96,12 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout{
         return 0.1
     }
     
-    
-    
 }
 
 extension CollectionViewController: StoreModelProtocol {
     func itemdownloaded(items: [Store]) {
         storeList = items
-        self.collectionView.reloadData()
+        self.cvList.reloadData()
     }
-    
-  
-    
+   
 }
