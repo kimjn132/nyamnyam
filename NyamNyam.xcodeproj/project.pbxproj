@@ -25,9 +25,6 @@
 		688AC9A229ACDF890038965D /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC99F29ACDF890038965D /* AddViewController.swift */; };
 		688AC9A329ACDF890038965D /* KaKaoAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC9A029ACDF890038965D /* KaKaoAddressViewController.swift */; };
 		688AC9A529ACE03C0038965D /* KakaoZipCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */; };
-		BCB1B0EA29ADA9A000DAECB7 /* sample.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BCB1B0E929ADA9A000DAECB7 /* sample.jpeg */; };
-		BCB1B0ED29ADAA5000DAECB7 /* WishAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1B0EB29ADAA5000DAECB7 /* WishAddViewController.swift */; };
-		BCB1B0EE29ADAA5000DAECB7 /* WishTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1B0EC29ADAA5000DAECB7 /* WishTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,9 +48,6 @@
 		688AC99F29ACDF890038965D /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		688AC9A029ACDF890038965D /* KaKaoAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoAddressViewController.swift; sourceTree = "<group>"; };
 		688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakaoZipCodeVC.swift; sourceTree = "<group>"; };
-		BCB1B0E929ADA9A000DAECB7 /* sample.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpeg; sourceTree = "<group>"; };
-		BCB1B0EB29ADAA5000DAECB7 /* WishAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishAddViewController.swift; sourceTree = "<group>"; };
-		BCB1B0EC29ADAA5000DAECB7 /* WishTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +90,6 @@
 		26A31905298AA0F400681392 /* NyamNyam */ = {
 			isa = PBXGroup;
 			children = (
-				BCB1B0E829ADA98000DAECB7 /* Images */,
 				26158E6A29ACC9930082CE75 /* Model */,
 				26A31906298AA0F400681392 /* AppDelegate.swift */,
 				26A31908298AA0F400681392 /* SceneDelegate.swift */,
@@ -111,21 +104,11 @@
 				688AC9A029ACDF890038965D /* KaKaoAddressViewController.swift */,
 				688AC99E29ACDF890038965D /* ReviewViewController.swift */,
 				688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */,
-				BCB1B0EB29ADAA5000DAECB7 /* WishAddViewController.swift */,
-				BCB1B0EC29ADAA5000DAECB7 /* WishTableViewController.swift */,
 				16A1D93929AF1AC90010C328 /* CollectionViewCell.swift */,
 				16A1D93829AF1AC90010C328 /* CollectionViewController.swift */,
 				2669A97E29AF66B300C57EC7 /* LabelExtension.swift */,
 			);
 			path = NyamNyam;
-			sourceTree = "<group>";
-		};
-		BCB1B0E829ADA98000DAECB7 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				BCB1B0E929ADA9A000DAECB7 /* sample.jpeg */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,7 +170,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				26A31913298AA0F500681392 /* LaunchScreen.storyboard in Resources */,
-				BCB1B0EA29ADA9A000DAECB7 /* sample.jpeg in Resources */,
 				26A31910298AA0F500681392 /* Assets.xcassets in Resources */,
 				26A3190E298AA0F400681392 /* Main.storyboard in Resources */,
 			);
@@ -210,9 +192,7 @@
 				26A31909298AA0F400681392 /* SceneDelegate.swift in Sources */,
 				26158E7029ACCA170082CE75 /* TableViewCell.swift in Sources */,
 				688AC99D29ACDF430038965D /* Message.swift in Sources */,
-				BCB1B0EE29ADAA5000DAECB7 /* WishTableViewController.swift in Sources */,
 				26158E6E29ACCA060082CE75 /* TableViewController.swift in Sources */,
-				BCB1B0ED29ADAA5000DAECB7 /* WishAddViewController.swift in Sources */,
 				16A1D93B29AF1AC90010C328 /* CollectionViewCell.swift in Sources */,
 				688AC9A529ACE03C0038965D /* KakaoZipCodeVC.swift in Sources */,
 				26158E6C29ACC9DE0082CE75 /* StoreDB.swift in Sources */,
