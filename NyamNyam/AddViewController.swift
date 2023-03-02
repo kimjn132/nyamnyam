@@ -76,6 +76,12 @@ class AddViewController: UIViewController, UITextViewDelegate{
         
     }//viewDidLoad
     
+    //키보드 내리기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //self == java의 this
+        self.view.endEditing(true)
+    }
+    
     // tfTitle 수정 시작
     @IBAction func tfTitleEditingDidBegin(_ sender: UITextField) {
         tfTitle.layer.borderWidth = 0.5
