@@ -63,16 +63,19 @@ class AddViewController: UIViewController, UITextViewDelegate{
         tvContent.layer.cornerRadius = 5
         
         //DB 연결
-        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("StoreData.sqlite")
+//        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("StoreData.sqlite")
         
         // 설정한 것 실행(파일 연결)
-        if sqlite3_open(fileURL.path(), &db) != SQLITE_OK{
-            //if error 걸리면
-            print("Error opening database")
-        }
+//        if sqlite3_open(fileURL.path(), &db) != SQLITE_OK{
+//            //if error 걸리면
+//            print("Error opening database")
+//        }
         
         // 앨범 컨트롤러 딜리게이트 지정
         self.photo.delegate = self
+        
+        // 카테고리 버튼 중 하나 기본 선택
+//        radioButtons[0].isSelected = true
         
     }//viewDidLoad
     
@@ -196,6 +199,9 @@ class AddViewController: UIViewController, UITextViewDelegate{
         NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
         
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }//viewDiddisappear
     
     // viewWillAppear: 다른 화면에서 다시 올 때 실행된다.
@@ -213,7 +219,12 @@ class AddViewController: UIViewController, UITextViewDelegate{
             lblAddress.textColor = UIColor.black
         }
         
+        // 옵저버 등록
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         print("view will appear: \(Message.address)")
+        
         
     }
 
@@ -221,6 +232,23 @@ class AddViewController: UIViewController, UITextViewDelegate{
     @objc func checkForeground(){
     }
     @objc func checkBackground(){
+    }
+    
+    @objc func keyboardUp(notification:NSNotification) {
+        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+           let keyboardRectangle = keyboardFrame.cgRectValue
+       
+            UIView.animate(
+                withDuration: 0.3
+                , animations: {
+                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
+                }
+            )
+        }
+    }
+    
+    @objc func keyboardDown() {
+        self.view.transform = .identity
     }
 
     /*
@@ -319,8 +347,11 @@ class AddViewController: UIViewController, UITextViewDelegate{
         guard let content = tvContent.text?.trimmingCharacters(in: .whitespaces) else { return }
         guard let image = UIImage(data: imageData! as Data) else { return }
         let data = image.pngData()! as NSData
+//        let date = Date.now
         
         let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
+        
+//        let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
         
         if result {
             let resultAlert = UIAlertController(title: "완료", message: "입력이 되었습니다.", preferredStyle: .alert)
@@ -394,6 +425,8 @@ class AddViewController: UIViewController, UITextViewDelegate{
         }
         
     }
+    
+    
     
 
 }// End
