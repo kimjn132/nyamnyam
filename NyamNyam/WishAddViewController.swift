@@ -46,6 +46,12 @@ class WishAddViewController: UIViewController {
         self.photo.delegate = self
     }
     
+    //키보드 내리기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //self == java의 this
+        self.view.endEditing(true)
+    }
+    
     @objc
     private func handleButton(_ sender: UIButton) {
         let nextVC = KakaoZipCodeVC()
