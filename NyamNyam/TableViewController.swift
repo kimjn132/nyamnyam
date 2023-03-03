@@ -42,6 +42,12 @@ class TableViewController: UITableViewController {
             }
     }
     
+    
+    
+    
+    
+    
+    
     func selectData(){
         let storeDB = StoreDB()
         storeList.removeAll()
@@ -105,8 +111,28 @@ class TableViewController: UITableViewController {
             let storeDB = StoreDB()
             let id = storeList[indexPath.row].id
             storeDB.delegate = self
-            storeDB.deleteAction(id: id)    // 삭제
-
+            
+            
+            
+            
+            
+            let result = storeDB.deleteAction(id: id)
+            if result {
+                let resultAlert = UIAlertController(title: "완료", message: "삭제가 되었습니다.", preferredStyle: .alert)
+                let onAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in
+                    self.navigationController?.popViewController(animated: true)
+                })
+                
+                resultAlert.addAction(onAction)
+                present(resultAlert, animated: true)
+            } else {
+                let resultAlert = UIAlertController(title: "실패", message: "에러가 발생 되었습니다.", preferredStyle: .alert)
+                let onAction = UIAlertAction(title: "OK", style: .default)
+                
+                resultAlert.addAction(onAction)
+                present(resultAlert, animated: true)
+            }
+            
             selectData()    //삭제한 후 화면 다시 불러오기
 
         } else if editingStyle == .insert {

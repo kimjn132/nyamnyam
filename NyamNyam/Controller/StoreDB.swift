@@ -145,24 +145,27 @@ class StoreDB {
     
     
     
-    func deleteAction(id: Int) -> Bool{
-
+    func deleteAction(id: Int) -> Bool {
+        
         var stmt: OpaquePointer?
-
+        
         //-1은 한글 때문이다. 한글은 2byte이기 때문에..
         let queryString = "DELETE FROM store WHERE sid = ?"
-
+        
         sqlite3_prepare(db, queryString, -1, &stmt, nil)
-
-
+        
+        
         sqlite3_bind_int(stmt, 1, Int32(id))
-
-        if sqlite3_step(stmt) == SQLITE_DONE {
-            return true
-        } else {
-            return false
-        }
-    }// deleteDB
+        
+        //completion() // call the completion closure after the deletion is done
+        
+                if sqlite3_step(stmt) == SQLITE_DONE {
+                    return true
+                } else {
+                    return false
+                }
+    }
+    
 
     
     

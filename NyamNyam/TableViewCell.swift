@@ -13,17 +13,15 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var lblStore: UILabel!
     @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet weak var ImageView: UIImageView!
-    //@IBOutlet weak var tvContent: UITextView!
+    @IBOutlet weak var tvContent: UITextView!
     
+//    let kCharacterBeforReadMore =  20
+//    let kReadMoreText           =  "...더보기"
+//    let kReadLessText           =  "...접기"
     
-    @IBOutlet weak var tvContent: UILabel!
-//    = {
-//
-//        lbl.translatesAutoresizingMaskIntoConstraints = false
-//            lbl.numberOfLines = 0
-//            lbl.font = UIFont(name: "Apple SD Gothic Neo", size: 13)
-//        return lbl
-//    }()
+
+//    @IBOutlet weak var tvContent: UILabel!
+
 
     
     @IBOutlet weak var lblCategory: UILabel!
@@ -32,39 +30,55 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var contentViewCell: UIView!
     
     
+
     
     
     
-//    tvContent.UILabel = UILabel {
-//        let lbl = UILabel()
-//        lbl.translatesAutoresizingMaskIntoConstraints = false
-//        lbl.numberOfLines = 0
-//        lbl.font = UIFont(name: "Apple SD Gothic Neo", size: 13)
-//        return lbl
-//    }
+    
+
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let lbl = UILabel()
-        // Configure tvContent label
-                tvContent.translatesAutoresizingMaskIntoConstraints = false
-                tvContent.numberOfLines = 0
-                tvContent.font = UIFont(name: "Apple SD Gothic Neo", size: 13)
-                
-                let contentTextLength = tvContent.text?.count ?? 0
-                
-                if contentTextLength > 1 {
-                    DispatchQueue.main.async {
-                        self.tvContent.addTrailing(with: "... ", moreText: "더보기", moreTextFont: .systemFont(ofSize: 13), moreTextColor: UIColor.lightGray)
-                    }
-                }
+        
+       
+        
+        
+//        let lbl = UILabel()
+////        Configure.tvContent.label
+////                tvContent.translatesAutoresizingMaskIntoConstraints = false
+////                tvContent.numberOfLines = 0
+////                tvContent.font = UIFont(name: "Apple SD Gothic Neo", size: 13)
+//
+//                let contentTextLength = tvContent.text?.count ?? 0
+//
+//                if contentTextLength > 1 {
+//                    DispatchQueue.main.async {
+//                        self.tvContent.addTrailing(with: "... ", moreText: "더보기", moreTextFont: .systemFont(ofSize: 13), moreTextColor: UIColor.lightGray)
+//                    }
+//                }
+//
+        
            }
     
-        
     
- 
+    
+//    @IBAction func touchMoreButton1(_ sender: UIButton) {
+//        sender.isSelected = !sender.isSelected
+//
+//        if sender.isSelected {
+//            // 펼치기
+//            reviewTextViews.textContainer.maximumNumberOfLines = 0
+//            reviewTextViews.invalidateIntrinsicContentSize()
+//        } else {
+//            // 접기
+//            reviewTextViews.textContainer.maximumNumberOfLines = 3
+//            reviewTextViews.invalidateIntrinsicContentSize()
+//
+//        }
+//
+//    }
     
     
 
@@ -122,8 +136,5 @@ class TableViewCell: UITableViewCell {
     
     
     
-    
-
-
     
 
