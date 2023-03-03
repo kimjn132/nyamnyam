@@ -543,13 +543,13 @@
         <!--Table View Controller-->
         <scene sceneID="M9X-TO-2Sh">
             <objects>
-                <tableViewController id="5ha-DF-rQC" customClass="TableViewController" customModule="MyWish" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="5ha-DF-rQC" customClass="TableViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="bE1-ik-HTy">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="myCell" rowHeight="140" id="giq-ht-t2z" customClass="MyTableViewCell" customModule="MyWish" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="myCell" rowHeight="140" id="giq-ht-t2z" customClass="MyTableViewCell" customModule="NyamNyam" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="393" height="140"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="giq-ht-t2z" id="aaJ-Za-Etd">
@@ -632,13 +632,13 @@
         <!--Add View Controller-->
         <scene sceneID="B0r-Kc-yqY">
             <objects>
-                <viewController id="kyY-bp-FJk" customClass="AddViewController" customModule="MyWish" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="RqE-Et-rhC">
+                <viewController id="kyY-bp-FJk" customClass="AddViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RqE-Et-rhC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="0qo-aY-KzO">
-                                <rect key="frame" x="16" y="59" width="361" height="666"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="0qo-aY-KzO">
+                                <rect key="frame" x="16" y="103" width="361" height="666"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="맛집 이름" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4mf-kS-smA">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
@@ -721,17 +721,17 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tTM-5R-7sl">
-                                        <rect key="frame" x="0.0" y="443.33333333333337" width="361" height="28.666666666666686"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tTM-5R-7sl">
+                                        <rect key="frame" x="0.0" y="443.33333333333337" width="361" height="68.333333333333314"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다녀온 맛집의 종류를 선택하세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uiA-8X-rbi">
-                                                <rect key="frame" x="0.0" y="0.0" width="361" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="361" height="13.333333333333334"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3fx-tv-kAx">
-                                                <rect key="frame" x="0.0" y="5" width="361" height="0.0"/>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fx-tv-kAx">
+                                                <rect key="frame" x="0.0" y="18.333333333333258" width="361" height="50"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HwE-PG-tmx">
                                                         <rect key="frame" x="0.0" y="0.0" width="546" height="50"/>
@@ -829,23 +829,16 @@
                                                 <viewLayoutGuide key="contentLayoutGuide" id="Cz5-gl-Scy"/>
                                                 <viewLayoutGuide key="frameLayoutGuide" id="pIN-V1-Zm6"/>
                                             </scrollView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ok2-Pf-RzQ">
-                                                <rect key="frame" x="0.0" y="10" width="361" height="18.666666666666671"/>
-                                            </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="Ok2-Pf-RzQ" firstAttribute="top" secondItem="3fx-tv-kAx" secondAttribute="bottom" constant="5" id="Dbu-Pp-Iuy"/>
                                             <constraint firstItem="3fx-tv-kAx" firstAttribute="top" secondItem="uiA-8X-rbi" secondAttribute="bottom" constant="5" id="FXo-7E-Mm0"/>
                                             <constraint firstAttribute="trailing" secondItem="3fx-tv-kAx" secondAttribute="trailing" id="M7V-to-ieV"/>
                                             <constraint firstItem="3fx-tv-kAx" firstAttribute="leading" secondItem="tTM-5R-7sl" secondAttribute="leading" id="jm0-6d-Cf4"/>
                                         </constraints>
                                     </stackView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRu-pG-xgQ">
-                                        <rect key="frame" x="0.0" y="486" width="361" height="180"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRu-pG-xgQ">
+                                        <rect key="frame" x="0.0" y="525.66666666666663" width="361" height="140.33333333333337"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="180" id="STf-f7-Ceb"/>
-                                        </constraints>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
