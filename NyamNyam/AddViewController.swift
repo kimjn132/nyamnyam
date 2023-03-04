@@ -105,6 +105,7 @@ class AddViewController: UIViewController, UITextViewDelegate{
     @IBAction func btnChooseCategory(_ sender: UIButton) {
         
         if indexOfBtns != nil{
+
             if !sender.isSelected {
                 for unselectIndex in radioButtons.indices {
                     radioButtons[unselectIndex].isSelected = false
@@ -119,7 +120,7 @@ class AddViewController: UIViewController, UITextViewDelegate{
             sender.isSelected = true
             indexOfBtns = radioButtons.firstIndex(of: sender)
         }
-        
+
         if indexOfBtns == 0{
             myTag = "한식"
         }else if indexOfBtns == 1{
@@ -130,11 +131,22 @@ class AddViewController: UIViewController, UITextViewDelegate{
             myTag = "일식"
         }else if indexOfBtns == 4{
             myTag = "분식"
-        }else{
+        }else if indexOfBtns == 5{
             myTag = "카페"
+        }else {
+            myTag = "기타"
         }
         
-        if imageView.image == nil {
+        print("myTag:", myTag, "/ index: ", indexOfBtns)
+        
+        if ((imageView.image == nil) || (imageView.image == UIImage(named: "카페.png"))
+            || (imageView.image == UIImage(named: "한식.png"))
+            || (imageView.image == UIImage(named: "양식.png"))
+            || (imageView.image == UIImage(named: "일식.png"))
+            || (imageView.image == UIImage(named: "중식.png"))
+            || (imageView.image == UIImage(named: "분식.png"))
+            || (imageView.image == UIImage(named: "기타.png"))) {
+            
             if myTag == "카페"{
 //                print("카페 이미지")
                 imageView.image = UIImage(named: "카페.png")
@@ -150,6 +162,10 @@ class AddViewController: UIViewController, UITextViewDelegate{
             if myTag == "일식"{
 //                print("카페 이미지")
                 imageView.image = UIImage(named: "일식.png")
+            }
+            if myTag == "중식"{
+//                print("카페 이미지")
+                imageView.image = UIImage(named: "중식.png")
             }
             if myTag == "분식"{
 //                print("카페 이미지")
@@ -268,11 +284,10 @@ class AddViewController: UIViewController, UITextViewDelegate{
         }
         
         // 옵저버 등록
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         print("view will appear: \(Message.address)")
-        
         
     }
 
@@ -282,26 +297,25 @@ class AddViewController: UIViewController, UITextViewDelegate{
     @objc func checkBackground(){
     }
     
-    @objc func keyboardUp(notification:NSNotification) {
-        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-           let keyboardRectangle = keyboardFrame.cgRectValue
-       
-            UIView.animate(
-                withDuration: 0.3
-                , animations: {
-                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
-                }
-            )
-        }
-    }
-    
-    @objc func keyboardDown() {
-        self.view.transform = .identity
-    }
+//    @objc func keyboardUp(notification:NSNotification) {
+//        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+//           let keyboardRectangle = keyboardFrame.cgRectValue
+//
+//            UIView.animate(
+//                withDuration: 0.3
+//                , animations: {
+//                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
+//                }
+//            )
+//        }
+//    }
+//
+//    @objc func keyboardDown() {
+//        self.view.transform = .identity
+//    }
 
     
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //
@@ -404,8 +418,40 @@ class AddViewController: UIViewController, UITextViewDelegate{
         guard let name = tfTitle.text?.trimmingCharacters(in: .whitespaces) else { return }
         guard let address = lblAddress.text?.trimmingCharacters(in: .whitespaces) else { return }
         guard let content = tvContent.text?.trimmingCharacters(in: .whitespaces) else { return }
-        guard let image = UIImage(data: imageData! as Data) else { return }
-        let data = image.pngData()! as NSData
+//        guard let image = UIImage(data: imageData! as Data) else { return }
+        var image : UIImage!
+        var data : NSData!
+        
+        if imageData != nil {
+            image = UIImage(data: imageData! as Data)
+            data = image.pngData()! as NSData
+        }else{ // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
+            
+            if (myTag == "한식"){
+                image = UIImage(named: "한식.png")
+            }
+            if (myTag == "일식"){
+                image = UIImage(named: "일식.png")
+            }
+            if (myTag == "분식"){
+                image = UIImage(named: "분식.png")
+            }
+            if (myTag == "양식"){
+                image = UIImage(named: "양식.png")
+            }
+            if (myTag == "기타"){
+                image = UIImage(named: "기타.png")
+            }
+            if (myTag == "중식"){
+                image = UIImage(named: "중식.png")
+            }
+            
+            data = image.pngData()! as NSData
+        }
+        
+//        data = image!.pngData()! as NSData
+        
+//        let data = image.pngData()! as NSData
 //        let date = Date.now
         
         let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
