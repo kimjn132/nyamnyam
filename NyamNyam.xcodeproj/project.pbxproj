@@ -15,7 +15,6 @@
 		26158E7229ACCB7B0082CE75 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E7129ACCB7B0082CE75 /* Store.swift */; };
 		26A31907298AA0F400681392 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A31906298AA0F400681392 /* AppDelegate.swift */; };
 		26A31909298AA0F400681392 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A31908298AA0F400681392 /* SceneDelegate.swift */; };
-		26A3190B298AA0F400681392 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3190A298AA0F400681392 /* ViewController.swift */; };
 		26A3190E298AA0F400681392 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26A3190C298AA0F400681392 /* Main.storyboard */; };
 		26A31910298AA0F500681392 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26A3190F298AA0F500681392 /* Assets.xcassets */; };
 		26A31913298AA0F500681392 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26A31911298AA0F500681392 /* LaunchScreen.storyboard */; };
@@ -50,7 +49,6 @@
 		26A31903298AA0F400681392 /* NyamNyam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyamNyam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26A31906298AA0F400681392 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26A31908298AA0F400681392 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		26A3190A298AA0F400681392 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		26A3190D298AA0F400681392 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		26A3190F298AA0F500681392 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		26A31912298AA0F500681392 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				26158E6A29ACC9930082CE75 /* Model */,
 				26A31906298AA0F400681392 /* AppDelegate.swift */,
 				26A31908298AA0F400681392 /* SceneDelegate.swift */,
-				26A3190A298AA0F400681392 /* ViewController.swift */,
 				26A3190C298AA0F400681392 /* Main.storyboard */,
 				26A3190F298AA0F500681392 /* Assets.xcassets */,
 				26A31911298AA0F500681392 /* LaunchScreen.storyboard */,
@@ -250,7 +247,6 @@
 				688AC9A229ACDF890038965D /* AddViewController.swift in Sources */,
 				26158E7229ACCB7B0082CE75 /* Store.swift in Sources */,
 				BC7C44B429B1F7860068EDC5 /* WishList.swift in Sources */,
-				26A3190B298AA0F400681392 /* ViewController.swift in Sources */,
 				26A31907298AA0F400681392 /* AppDelegate.swift in Sources */,
 				BC7C44B729B1F78D0068EDC5 /* ImageInsert.swift in Sources */,
 				26A31909298AA0F400681392 /* SceneDelegate.swift in Sources */,

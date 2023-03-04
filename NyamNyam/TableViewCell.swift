@@ -26,13 +26,15 @@ class TableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+       
+        
     }
     
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        
+       
         
     }
     
@@ -49,13 +51,21 @@ class TableViewCell: UITableViewCell {
         //                contentView.layer.borderWidth = 2
         //                contentView.layer.borderColor = UIColor(hexString: "#757575")
         
+        
+
+        
         ImageView.contentMode = .scaleAspectFill
         ImageView.clipsToBounds = true
         //        ImageView.layer.cornerRadius = 10
         //        ImageView.layer.borderWidth = 2
         
         lblStore.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        lblStore.textColor = .black
+        if traitCollection.userInterfaceStyle == .dark{
+            lblStore.textColor = .white
+        }else{
+            lblStore.textColor = .black
+        }
+        
         
         lblDate.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         lblDate.textColor = .lightGray
@@ -66,11 +76,18 @@ class TableViewCell: UITableViewCell {
         lblAddress.textColor = .gray
         
         lblCategory.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        lblCategory.textColor = .black
+        if traitCollection.userInterfaceStyle == .dark{
+            lblCategory.textColor = .white
+        }else{
+            lblCategory.textColor = .black
+        }
         
         tvContent.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        tvContent.textColor = .black
-        
+        if traitCollection.userInterfaceStyle == .dark{
+            tvContent.textColor = .white
+        }else{
+            tvContent.textColor = .black
+        }
         
     }
     
