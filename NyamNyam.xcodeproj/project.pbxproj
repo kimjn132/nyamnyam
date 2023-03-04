@@ -44,7 +44,7 @@
 /* Begin PBXFileReference section */
 		16A1D93829AF1AC90010C328 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		16A1D93929AF1AC90010C328 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
-		16CD1C2F29B3AEEF001EBA0C /* chuloop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chuloop.png; path = ../../../../../Downloads/chuloop.png; sourceTree = "<group>"; };
+		16CD1C2F29B3AEEF001EBA0C /* chuloop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chuloop.png; sourceTree = "<group>"; };
 		26158E6B29ACC9DE0082CE75 /* StoreDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDB.swift; sourceTree = "<group>"; };
 		26158E6D29ACCA050082CE75 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		26158E6F29ACCA170082CE75 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
