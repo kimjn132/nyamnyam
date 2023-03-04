@@ -471,7 +471,6 @@
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="btnDone:" destination="4jG-iZ-W8h" id="aPh-Ne-lqh"/>
-                                <segue destination="fkQ-lo-yR0" kind="show" id="3Vd-5g-CIf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -541,16 +540,16 @@
             </objects>
             <point key="canvasLocation" x="972" y="701"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Wish Table View Controller-->
         <scene sceneID="M9X-TO-2Sh">
             <objects>
-                <tableViewController id="5ha-DF-rQC" customClass="TableViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="5ha-DF-rQC" customClass="WishTableViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="bE1-ik-HTy">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="myCell" rowHeight="140" id="giq-ht-t2z" customClass="MyTableViewCell" customModule="NyamNyam" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="myWishCell" rowHeight="140" id="giq-ht-t2z" customClass="MyTableViewCell" customModule="NyamNyam" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="393" height="140"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="giq-ht-t2z" id="aaJ-Za-Etd">
@@ -630,10 +629,10 @@
             </objects>
             <point key="canvasLocation" x="972" y="1451"/>
         </scene>
-        <!--Add View Controller-->
+        <!--Wish Add View Controller-->
         <scene sceneID="B0r-Kc-yqY">
             <objects>
-                <viewController id="kyY-bp-FJk" customClass="AddViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kyY-bp-FJk" customClass="WishAddViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RqE-Et-rhC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -652,7 +651,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="aBY-4b-0Nd">
                                         <rect key="frame" x="0.0" y="54" width="361" height="342"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사진을 추가하세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQd-sF-QGy">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* 사진을 추가하세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQd-sF-QGy">
                                                 <rect key="frame" x="0.0" y="0.0" width="361" height="14"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -725,7 +724,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tTM-5R-7sl">
                                         <rect key="frame" x="0.0" y="458.33333333333337" width="361" height="68.333333333333371"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다녀온 맛집의 종류를 선택하세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uiA-8X-rbi">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* 가고 싶은 맛집의 종류를 선택하세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uiA-8X-rbi">
                                                 <rect key="frame" x="0.0" y="0.0" width="361" height="13.333333333333334"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -886,7 +885,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="CwD-2O-9gs"/>
         <segue reference="fsq-j7-lHH"/>
     </inferredMetricsTieBreakers>
     <resources>
