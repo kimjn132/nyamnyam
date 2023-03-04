@@ -654,6 +654,8 @@ class AddViewController: UIViewController, UITextViewDelegate{
 //        tvContent.layer.cornerRadius = 5
         
         tvContent.resignFirstResponder()
+        
+        Message.address = ""
                 
         // 앨범 컨트롤러 딜리게이트 지정
 //        self.photo.delegate = self
