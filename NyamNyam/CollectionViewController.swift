@@ -13,6 +13,7 @@ private let reuseIdentifier = "Cell"
 class CollectionViewController: UICollectionViewController {
     
     @IBOutlet var cvList: UICollectionView!
+    @IBOutlet weak var noDataLabel: UILabel!
     
     var storeList: [Store] = []
     var selectedId: Int?
@@ -37,8 +38,17 @@ class CollectionViewController: UICollectionViewController {
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+      if storeList.count > 0 {
+          collectionView.backgroundView = nil
+          return 1
+      } else {
+          let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
+          noDataLabel.text = "데이터가 없습니다."
+          noDataLabel.textColor = .black
+          noDataLabel.textAlignment = .center
+          collectionView.backgroundView = noDataLabel
+          return 0
+      }
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -66,15 +76,20 @@ class CollectionViewController: UICollectionViewController {
         performSegue(withIdentifier: "sgTV", sender: AnyObject.self)
     }
   
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "sgTV" {
-            if let vc = segue.destination as? TableViewController {
-                vc.selectedId = selectedId
-            }
-        }
-      
-    }
-    
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      if segue.identifier == "sgTV" {
+          // 이동할 뷰 컨트롤러가 Navigation Controller인 경우
+          if let navController = segue.destination as? UINavigationController,
+             let tableViewController = navController.topViewController as? TableViewController {
+              tableViewController.selectedId = selectedId
+          // 이동할 뷰 컨트롤러가 TableViewController인 경우
+          } else if let tableViewController = segue.destination as? TableViewController {
+              tableViewController.selectedId = selectedId
+          }
+      }
+  }
+
+
 }
 
 //cell에 대한 (extension) Layout
