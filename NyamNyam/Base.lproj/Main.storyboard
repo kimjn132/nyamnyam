@@ -110,7 +110,7 @@
         <!--Main View-->
         <scene sceneID="7d5-u9-Mx6">
             <objects>
-                <tableViewController id="fkQ-lo-yR0" customClass="TableViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TableViewController" id="fkQ-lo-yR0" customClass="TableViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="433" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="xh3-CF-HRG">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
