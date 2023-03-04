@@ -39,6 +39,25 @@ class AddViewController: UIViewController, UITextViewDelegate{
     
     var imageData : NSData? = nil   // 서버로 이미지 등록을 하기 위함
     
+    //segue를 통해 Done 버튼 클릭시 메인 피드로 이동
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        //segue를 통해 editViewController의 생성자를 만들어서 페이지 넘김
+//        let addViewController = segue.destination as! AddViewController //생성자 만들기
+        
+//        if segue.identifier == "addDoneToMain" {
+//            addViewController.textWayValue = "segue: Use Bar Btn"
+//        }
+//        else{
+//            editViewController.textWayValue = "segue: use btn"
+//        }
+        
+//        editViewController.textMessage = tfMessage.text!
+//        editViewController.isOn = isOn
+//        //연결시키기
+//        editViewController.delegate = self
+        
+//    }
+    
     override func viewDidLoad() {
         
         print("viewDidLoad")
@@ -61,18 +80,10 @@ class AddViewController: UIViewController, UITextViewDelegate{
         tvContent.layer.borderColor = UIColor.systemGray4.cgColor
         tvContent.layer.borderWidth = 0.3
         tvContent.layer.cornerRadius = 5
-        
-        //DB 연결
-//        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("StoreData.sqlite")
-        
-        // 설정한 것 실행(파일 연결)
-//        if sqlite3_open(fileURL.path(), &db) != SQLITE_OK{
-//            //if error 걸리면
-//            print("Error opening database")
-//        }
-        
+                
         // 앨범 컨트롤러 딜리게이트 지정
         self.photo.delegate = self
+        
         
         // 카테고리 버튼 중 하나 기본 선택
 //        radioButtons[0].isSelected = true
@@ -148,6 +159,9 @@ class AddViewController: UIViewController, UITextViewDelegate{
         // DB에 정보 insert
         dbInsert()
         
+//        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "TableViewController") else {return}
+//        self.present(nextVC, animated: true)
+        
     }//btnDone
     
     // + 버튼 눌렀을 때 kakao api를 불러온다.
@@ -181,11 +195,6 @@ class AddViewController: UIViewController, UITextViewDelegate{
         
         super.viewWillDisappear(animated)
         print("viewWillDisappear")
-        
-//        tfTitle.text = ""
-//        imageView.image = nil
-//        lblAddress.text = ""
-//        tvContent.text = ""
         
     }//viewwillDisappear
     
@@ -251,15 +260,24 @@ class AddViewController: UIViewController, UITextViewDelegate{
         self.view.transform = .identity
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//        dbInsert()
+//        // Get the new view controller using segue.destination.
+//        // Pass the selected object to the new view controller.
+//        let tableViewController = segue.destination as! TableViewController //생성자 만들기
+//
+//        //연결시키기
+////        tableViewController.delegate = self
+//
+//        print("prepare")
+//
+//    }
+    
     
     // funcs =========================================================================
     // alert
@@ -338,6 +356,8 @@ class AddViewController: UIViewController, UITextViewDelegate{
     // db에 정보 저장
     func dbInsert(){
         
+        print("insert")
+        
         // DB 인스턴스 만들기
         let storeDB = StoreDB()
         
@@ -361,6 +381,11 @@ class AddViewController: UIViewController, UITextViewDelegate{
             
             resultAlert.addAction(onAction)
             present(resultAlert, animated: true)
+            
+            //페이지 넘기기
+            guard let nextVC = self.storyboard?.instantiateViewController(identifier: "TableViewController") else {return}
+            self.present(nextVC, animated: true)
+
         } else {
             let resultAlert = UIAlertController(title: "실패", message: "에러가 발생 되었습니다.", preferredStyle: .alert)
             let onAction = UIAlertAction(title: "OK", style: .default)
@@ -369,6 +394,7 @@ class AddViewController: UIViewController, UITextViewDelegate{
             present(resultAlert, animated: true)
         }
         
+        // DB Delegate로 수정
 //        var stmt: OpaquePointer?
 //        let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
 //
@@ -425,9 +451,6 @@ class AddViewController: UIViewController, UITextViewDelegate{
         }
         
     }
-    
-    
-    
 
 }// End
 
@@ -476,3 +499,42 @@ extension AddViewController: UIImagePickerControllerDelegate & UINavigationContr
     
 }// extension
 
+//extension AddViewController: DoneDelegate{
+//
+//
+//    func didContentsAddDone(_ controller: TableViewController) {
+////        func dbInsert(){
+//        print("dbInsert")
+//
+//            // DB 인스턴스 만들기
+//            let storeDB = StoreDB()
+//
+//            let tag = myTag
+//            guard let name = tfTitle.text?.trimmingCharacters(in: .whitespaces) else { return }
+//            guard let address = lblAddress.text?.trimmingCharacters(in: .whitespaces) else { return }
+//            guard let content = tvContent.text?.trimmingCharacters(in: .whitespaces) else { return }
+//            guard let image = UIImage(data: imageData! as Data) else { return }
+//            let data = image.pngData()! as NSData
+//
+//            let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
+//
+//
+//            if result {
+//                let resultAlert = UIAlertController(title: "완료", message: "입력이 되었습니다.", preferredStyle: .alert)
+//                let onAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in
+//                    self.navigationController?.popViewController(animated: true)
+//                })
+//
+//                resultAlert.addAction(onAction)
+//                present(resultAlert, animated: true)
+//            } else {
+//                let resultAlert = UIAlertController(title: "실패", message: "에러가 발생 되었습니다.", preferredStyle: .alert)
+//                let onAction = UIAlertAction(title: "OK", style: .default)
+//
+//                resultAlert.addAction(onAction)
+//                present(resultAlert, animated: true)
+//            }
+//        }
+//
+//}//ViewController: DoneDelegate
+//
