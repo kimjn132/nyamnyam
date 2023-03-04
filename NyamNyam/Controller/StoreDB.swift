@@ -29,9 +29,14 @@ class StoreDB {
         
         // 설정한 것 실행(파일 연결)
         // percentEncoded: url이 정상적으로 불러와지면 string으로 만들어줌, 정상적으로 안 불러와지면 nil로 받아줌
-        if sqlite3_open(fileURL.path(percentEncoded: true), &db) != SQLITE_OK{
-            //if error 걸리면
-            print("Error opening database")
+//        if sqlite3_open(fileURL.path(percentEncoded: true), &db) != SQLITE_OK{
+//            //if error 걸리면
+//            print("Error opening database")
+//        }
+        if let percentEncodedPath = fileURL.path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
+            if sqlite3_open(percentEncodedPath, &db) != SQLITE_OK {
+                print("Error opening database")
+            }
         }
         
         //shared preferences를 주로 사용, 고객들 개인 정보를 서버에 안두고 분산하기
@@ -145,24 +150,27 @@ class StoreDB {
     
     
     
-    func deleteAction(id: Int) -> Bool{
-
+    func deleteAction(id: Int) -> Bool {
+        
         var stmt: OpaquePointer?
-
+        
         //-1은 한글 때문이다. 한글은 2byte이기 때문에..
         let queryString = "DELETE FROM store WHERE sid = ?"
-
+        
         sqlite3_prepare(db, queryString, -1, &stmt, nil)
-
-
+        
+        
         sqlite3_bind_int(stmt, 1, Int32(id))
-
-        if sqlite3_step(stmt) == SQLITE_DONE {
-            return true
-        } else {
-            return false
-        }
-    }// deleteDB
+        
+        //completion() // call the completion closure after the deletion is done
+        
+                if sqlite3_step(stmt) == SQLITE_DONE {
+                    return true
+                } else {
+                    return false
+                }
+    }
+    
 
     
     
