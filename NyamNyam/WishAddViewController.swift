@@ -46,6 +46,7 @@ class WishAddViewController: UIViewController {
         self.photo.delegate = self
     }
     
+    
     //키보드 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //self == java의 this
@@ -131,7 +132,6 @@ class WishAddViewController: UIViewController {
     // Tag 버튼 중 하나 선택
     @IBAction func btnSelectTag(_ sender: UIButton) {
         
-        
         if indexOfBtns != nil{
             if !sender.isSelected {
                 for unselectIndex in tagButtons.indices {
@@ -168,8 +168,26 @@ class WishAddViewController: UIViewController {
         
         if lbltitle.text?.trimmingCharacters(in: .whitespaces) != ""{
             dbInsert()
-        }else{
+        }else if lbltitle.text?.trimmingCharacters(in: .whitespaces) == ""{ // 맛집 텍스트필드 미입력시 Alert
             // Alert
+            let testAlert = UIAlertController(title: nil, message: "맛집 이름을 작성해주세요!", preferredStyle: .alert)
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = NSTextAlignment.left
+            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 17.0)!]
+            let messageAttrString = NSMutableAttributedString(string: "맛집 이름을 작성해주세요!", attributes: messageFont)
+            testAlert.setValue(messageAttrString, forKey: "attributedMessage")
+
+            // UIAlertAcrion 설정
+            let actionCancel = UIAlertAction(title: "닫기", style: .cancel)
+            
+            // UIAlertController에 UIAlertAction버튼 추가하기
+            testAlert.addAction(actionCancel)
+            
+            // Alert 띄우기
+            present(testAlert, animated: true)
+        }else{ // tag 미선택시 Alert
+            
         }
     }
     

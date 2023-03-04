@@ -38,20 +38,6 @@ class WishTableViewController: UITableViewController {
             return  //에러 나면은 실행 안한다.
         }
         
-        // 셀 리소스 파일 가져오기
-//        let myTableViewCellNib = UINib(nibName: String(describing: MyTableViewCell.self), bundle: nil)
-//
-//        // 셀 리소스 등록
-//        self.tableView.register(myTableViewCellNib, forCellReuseIdentifier: "myCell")
-//        self.tableView.rowHeight = UITableView.automaticDimension
-//        self.tableView.estimatedRowHeight = 120
-        
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     } // viewDidLoad
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,7 +77,17 @@ class WishTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        if wishList.count > 0 {
+            tableView.backgroundView = nil
+            return 1
+        } else {
+            let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+            noDataLabel.text = "'+'버튼을 눌러 가고 싶은 맛집을 추가해보세요."
+            noDataLabel.textColor = .black
+            noDataLabel.textAlignment = .center
+            tableView.backgroundView = noDataLabel
+            return 0
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
