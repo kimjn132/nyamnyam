@@ -154,15 +154,21 @@ class AddViewController: UIViewController, UITextViewDelegate{
     }//btnImage
     
     // 완료 버튼
-    @IBAction func btnDone(_ sender: UIButton) {
-        
+    @IBAction func btnDone(_ sender: UIBarButtonItem) {
         // DB에 정보 insert
         dbInsert()
-        
-//        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "TableViewController") else {return}
-//        self.present(nextVC, animated: true)
-        
-    }//btnDone
+
+    }
+    
+//    @IBAction func btnDone(_ sender: UIButton) {
+//
+//        // DB에 정보 insert
+//        dbInsert()
+//
+////        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "TableViewController") else {return}
+////        self.present(nextVC, animated: true)
+//
+//    }//btnDone
     
     // + 버튼 눌렀을 때 kakao api를 불러온다.
     @IBAction func btnAddAddress(_ sender: UIButton) {
