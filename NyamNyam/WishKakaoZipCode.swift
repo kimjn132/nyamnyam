@@ -1,12 +1,19 @@
+//
+//  WishKakaoZipCode.swift
+//  NyamNyam
+//
+//  Created by 예띤 on 2023/03/04.
+//
+
 import UIKit
 import WebKit
 
-class KakaoZipCodeVC: UIViewController {
+class WishKakaoZipCodeVC: UIViewController {
 
     // MARK: - Properties
     var webView: WKWebView?
     let indicator = UIActivityIndicatorView(style: .medium)
-    var address = ""
+    var wishaddress = ""
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -59,22 +66,22 @@ class KakaoZipCodeVC: UIViewController {
     }
 }
 
-extension KakaoZipCodeVC: WKScriptMessageHandler {
+extension WishKakaoZipCodeVC: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if let data = message.body as? [String: Any] {
-            address = data["roadAddress"] as? String ?? ""
+            wishaddress = data["roadAddress"] as? String ?? ""
         }
 //        guard let previousVC = presentingViewController as? AddViewController else { return }
         
         // 텍스트 필드를 받아온 address로 채워준다.
-        print("address: \(address)")
+        print("address: \(wishaddress)")
 //        previousVC.lblAddress.text = address
-        Message.address = address
+        Message.wishaddress = wishaddress
         self.dismiss(animated: true, completion: nil)
     }
 }
 
-extension KakaoZipCodeVC: WKNavigationDelegate {
+extension WishKakaoZipCodeVC: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         indicator.startAnimating()
     }
