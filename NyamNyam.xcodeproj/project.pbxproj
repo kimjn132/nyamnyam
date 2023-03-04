@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		16A1D93A29AF1AC90010C328 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A1D93829AF1AC90010C328 /* CollectionViewController.swift */; };
 		16A1D93B29AF1AC90010C328 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A1D93929AF1AC90010C328 /* CollectionViewCell.swift */; };
+		16CD1C3029B3AEEF001EBA0C /* chuloop.png in Resources */ = {isa = PBXBuildFile; fileRef = 16CD1C2F29B3AEEF001EBA0C /* chuloop.png */; };
 		26158E6C29ACC9DE0082CE75 /* StoreDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E6B29ACC9DE0082CE75 /* StoreDB.swift */; };
 		26158E6E29ACCA060082CE75 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E6D29ACCA050082CE75 /* TableViewController.swift */; };
 		26158E7029ACCA170082CE75 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E6F29ACCA170082CE75 /* TableViewCell.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		16A1D93829AF1AC90010C328 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		16A1D93929AF1AC90010C328 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		16CD1C2F29B3AEEF001EBA0C /* chuloop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chuloop.png; sourceTree = "<group>"; };
 		26158E6B29ACC9DE0082CE75 /* StoreDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDB.swift; sourceTree = "<group>"; };
 		26158E6D29ACCA050082CE75 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		26158E6F29ACCA170082CE75 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		BC2AF5E429B33B6700942180 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				16CD1C2F29B3AEEF001EBA0C /* chuloop.png */,
 				683FB27529B34E6900800390 /* 기타.png */,
 				683FB27429B34E6900800390 /* 양식.png */,
 				683FB27629B34E6900800390 /* 일식.png */,
@@ -224,6 +227,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16CD1C3029B3AEEF001EBA0C /* chuloop.png in Resources */,
 				26A31913298AA0F500681392 /* LaunchScreen.storyboard in Resources */,
 				683FB27D29B34E6900800390 /* 중식.png in Resources */,
 				683FB27B29B34E6900800390 /* 기타.png in Resources */,
