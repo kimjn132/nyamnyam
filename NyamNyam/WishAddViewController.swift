@@ -20,7 +20,7 @@ class WishAddViewController: UIViewController {
     
     var db:OpaquePointer?
     
-    var indexOfBtns: Int?
+    var indexOfBtns: Int? = 0
     
     let ls = ImageInsert()
     
@@ -41,7 +41,7 @@ class WishAddViewController: UIViewController {
         sqlite3_open(fileURL.path(), &db) // open한다
         
         imgImage.image = UIImage(named: "sample.jpeg")
-//        tagButtons[0].isSelected = true
+        tagButtons[0].isSelected = true
         
         self.photo.delegate = self
     }
@@ -133,6 +133,7 @@ class WishAddViewController: UIViewController {
     @IBAction func btnSelectTag(_ sender: UIButton) {
         
         if indexOfBtns != nil{
+
             if !sender.isSelected {
                 for unselectIndex in tagButtons.indices {
                     tagButtons[unselectIndex].isSelected = false
@@ -232,6 +233,7 @@ class WishAddViewController: UIViewController {
         present(resultAlert, animated: true)
         
         Message.wishaddress = "위치를 추가해주세요."
+        Message.address = ""
     
     }//dbInsert
         
