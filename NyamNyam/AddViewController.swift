@@ -137,7 +137,7 @@ class AddViewController: UIViewController, UITextViewDelegate{
             myTag = "기타"
         }
         
-        print("myTag:", myTag, "/ index: ", indexOfBtns)
+//        print("myTag:", myTag, "/ index: ", indexOfBtns)
         
         if ((imageView.image == nil) || (imageView.image == UIImage(named: "카페.png"))
             || (imageView.image == UIImage(named: "한식.png"))
