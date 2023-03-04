@@ -33,8 +33,6 @@ class AddViewController: UIViewController, UITextViewDelegate{
 
     let photo = UIImagePickerController()   //앨범 이동
     
-//    let ls = ImageInsert()
-    
     var myTag = "한식"
     
     var imageData : NSData? = nil   // 서버로 이미지 등록을 하기 위함
@@ -135,6 +133,35 @@ class AddViewController: UIViewController, UITextViewDelegate{
         }else{
             myTag = "카페"
         }
+        
+        if imageView.image == nil {
+            if myTag == "카페"{
+//                print("카페 이미지")
+                imageView.image = UIImage(named: "카페.png")
+            }
+            if myTag == "한식"{
+//                print("카페 이미지")
+                imageView.image = UIImage(named: "한식.png")
+            }
+            if myTag == "양식"{
+//                print("카페 이미지")
+                imageView.image = UIImage(named: "양식.png")
+            }
+            if myTag == "일식"{
+//                print("카페 이미지")
+                imageView.image = UIImage(named: "일식.png")
+            }
+            if myTag == "분식"{
+//                print("카페 이미지")
+                imageView.image = UIImage(named: "분식.png")
+            }
+            if myTag == "기타"{
+//                print("카페 이미지")
+                imageView.image = UIImage(named: "기타.png")
+            }
+
+        }
+
 
     }//btnChooseCategory
     
@@ -155,6 +182,12 @@ class AddViewController: UIViewController, UITextViewDelegate{
     
     // 완료 버튼
     @IBAction func btnDone(_ sender: UIBarButtonItem) {
+        
+//        if imageView == nil {
+//            if myTag == "카페"{
+//                imageView.image = UIImage(named: "caffe.png")
+//            }
+//        }
         // DB에 정보 insert
         dbInsert()
 
