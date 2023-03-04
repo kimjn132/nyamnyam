@@ -7,6 +7,7 @@ class KakaoZipCodeVC: UIViewController {
     var webView: WKWebView?
     let indicator = UIActivityIndicatorView(style: .medium)
     var address = ""
+    var wishaddress = ""
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -63,6 +64,7 @@ extension KakaoZipCodeVC: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if let data = message.body as? [String: Any] {
             address = data["roadAddress"] as? String ?? ""
+            wishaddress = data["roadAddress"] as? String ?? ""
         }
 //        guard let previousVC = presentingViewController as? AddViewController else { return }
         
@@ -70,6 +72,8 @@ extension KakaoZipCodeVC: WKScriptMessageHandler {
         print("address: \(address)")
 //        previousVC.lblAddress.text = address
         Message.address = address
+        Message.wishaddress = wishaddress
+        
         self.dismiss(animated: true, completion: nil)
     }
 }
