@@ -56,7 +56,7 @@
 		26A31914298AA0F500681392 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		683FB27229B34E6900800390 /* 카페.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "카페.png"; sourceTree = "<group>"; };
 		683FB27329B34E6900800390 /* 한식.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "한식.png"; sourceTree = "<group>"; };
-		683FB27429B34E6900800390 /* 양식.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "양식.png"; path = "../../../../../../../../../Desktop/양식.png"; sourceTree = "<group>"; };
+		683FB27429B34E6900800390 /* 양식.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "양식.png"; sourceTree = "<group>"; };
 		683FB27529B34E6900800390 /* 기타.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "기타.png"; sourceTree = "<group>"; };
 		683FB27629B34E6900800390 /* 일식.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "일식.png"; sourceTree = "<group>"; };
 		683FB27729B34E6900800390 /* 중식.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "중식.png"; sourceTree = "<group>"; };
