@@ -10,7 +10,6 @@ import UIKit
 
 
 class TableViewController: UITableViewController {
-
     
     @IBOutlet var tvListView: UITableView!
     
@@ -23,7 +22,6 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("실행")
 
     } //viewDidLoad
     
@@ -32,17 +30,35 @@ class TableViewController: UITableViewController {
     // 추가 입력 새로 불러오는 역할
     override func viewWillAppear(_ animated: Bool) {
         //readValues()
-        print("출력")
         selectData()
         
+        // Date : 2023-03-04
+        // Name : YunHyeon Jeong
+        // Desc : collection에서 선택한 값(selectedId) 및 modal dismiss용 button 추가(dismissButton)
         if let selectedId = selectedId,
                 let index = storeList.firstIndex(where: { $0.id == selectedId }) {
                 let indexPath = IndexPath(row: index, section: 0)
                 tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
             }
+
+        let dismissButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissModal))
+        navigationItem.leftBarButtonItem = dismissButton
+        if selectedId == nil {
+            dismissButton.isHidden = true
+        } else {
+            dismissButton.isHidden = false
+        }
     }
- 
+
     
+    // Date : 2023-03-04
+    // Name : YunHyeon Jeong
+    // Desc : NotificationCenter로 Dismiss를 알림
+    @IBAction func dismissModal(_ sender: UIBarButtonItem) {
+        NotificationCenter.default.post(name: NSNotification.Name("TableViewDidDismiss"), object: nil)
+        dismiss(animated: true, completion: nil)
+    }
+
     func selectData(){
         let storeDB = StoreDB()
         storeList.removeAll()
