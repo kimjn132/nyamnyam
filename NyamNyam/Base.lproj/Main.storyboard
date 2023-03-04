@@ -470,7 +470,6 @@
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="btnDone:" destination="4jG-iZ-W8h" id="aPh-Ne-lqh"/>
-                                <segue destination="fkQ-lo-yR0" kind="show" id="3Vd-5g-CIf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -885,8 +884,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="CwD-2O-9gs"/>
-        <segue reference="3Vd-5g-CIf"/>
+
+        <segue reference="fsq-j7-lHH"/>
+
     </inferredMetricsTieBreakers>
     <resources>
         <image name="baseline_apps_black_18pt_1x" width="18" height="18"/>
