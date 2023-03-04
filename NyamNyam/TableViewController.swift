@@ -22,6 +22,7 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+       
 
     } //viewDidLoad
     
@@ -58,6 +59,8 @@ class TableViewController: UITableViewController {
         NotificationCenter.default.post(name: NSNotification.Name("TableViewDidDismiss"), object: nil)
         dismiss(animated: true, completion: nil)
     }
+    
+    
 
     func selectData(){
         let storeDB = StoreDB()
@@ -70,7 +73,7 @@ class TableViewController: UITableViewController {
         
     }
 
-    
+   
     // MARK: - Table view data source
 
     // Table column 수
