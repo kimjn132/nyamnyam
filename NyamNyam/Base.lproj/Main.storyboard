@@ -119,9 +119,7 @@
                                                 <rect key="frame" x="0.0" y="71" width="382.33333333333331" height="50"/>
                                                 <subviews>
                                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4NB-WB-OfE">
-
                                                         <rect key="frame" x="0.0" y="0.0" width="382.33333333333331" height="50"/>
-
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dub-oP-X5i">
                                                                 <rect key="frame" x="0.0" y="0.0" width="615" height="50"/>
@@ -392,9 +390,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="enb-pN-U1h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-
             <point key="canvasLocation" x="1129" y="2215"/>
-
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="2tR-yx-dvd">
@@ -422,9 +418,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="TableViewController" id="fkQ-lo-yR0" customClass="TableViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="433" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="xh3-CF-HRG">
-
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -543,9 +537,7 @@
             </objects>
             <point key="canvasLocation" x="1897" y="13"/>
         </scene>
-
-        <!--모아보기-->
-
+        <!--Collection View Controller-->
         <scene sceneID="zt6-3b-atF">
             <objects>
                 <collectionViewController id="Zh8-dP-n44" customClass="CollectionViewController" customModule="NyamNyam" sceneMemberID="viewController">
