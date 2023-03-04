@@ -97,7 +97,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="trE-Wf-m17">
                                 <rect key="frame" x="16" y="103" width="361" height="666"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="QDJ-qC-Cay">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="QDJ-qC-Cay" userLabel="AllStackView">
                                         <rect key="frame" x="0.0" y="0.0" width="361.33333333333331" height="1300"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="맛집 이름" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lfA-6D-pnq">
@@ -108,7 +108,7 @@
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jqn-og-m3o">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jqn-og-m3o" userLabel="CategoryStackView">
                                                 <rect key="frame" x="0.0" y="54.999999999999993" width="361.33333333333331" height="68.333333333333314"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*카테고리를 선택하세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ynd-6F-or4">
@@ -121,10 +121,10 @@
                                                         <rect key="frame" x="0.0" y="18.333333333333343" width="361.33333333333331" height="50"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dub-oP-X5i">
-                                                                <rect key="frame" x="0.0" y="0.0" width="546" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="615" height="50"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="xOo-LK-u7F">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="525" height="34.333333333333336"/>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="xOo-LK-u7F">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="615" height="34.333333333333336"/>
                                                                         <subviews>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pto-yx-Ysm">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="75" height="34.333333333333336"/>
@@ -137,7 +137,7 @@
                                                                                     <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </buttonConfiguration>
                                                                                 <connections>
-                                                                                    <action selector="btnChooseCategory:" destination="OIi-zZ-fA6" eventType="touchUpInside" id="dEH-FI-PGn"/>
+                                                                                    <action selector="btnChooseCategory:" destination="OIi-zZ-fA6" eventType="touchUpInside" id="26B-or-eJb"/>
                                                                                 </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ba-jA-Ig1">
@@ -148,7 +148,7 @@
                                                                                     <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </buttonConfiguration>
                                                                                 <connections>
-                                                                                    <action selector="btnChooseCategory:" destination="OIi-zZ-fA6" eventType="touchUpInside" id="If2-V8-dHy"/>
+                                                                                    <action selector="btnChooseCategory:" destination="OIi-zZ-fA6" eventType="touchUpInside" id="o98-aP-ckd"/>
                                                                                 </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEW-yH-IUj">
@@ -159,7 +159,7 @@
                                                                                     <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </buttonConfiguration>
                                                                                 <connections>
-                                                                                    <action selector="btnChooseCategory:" destination="OIi-zZ-fA6" eventType="touchUpInside" id="Dd9-qE-Nc3"/>
+                                                                                    <action selector="btnChooseCategory:" destination="OIi-zZ-fA6" eventType="touchUpInside" id="9cf-8j-xhq"/>
                                                                                 </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="890-xY-UmO">
@@ -170,7 +170,7 @@
                                                                                     <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </buttonConfiguration>
                                                                                 <connections>
-                                                                                    <action selector="btnChooseCategory:" destination="OIi-zZ-fA6" eventType="touchUpInside" id="7lG-zF-jVb"/>
+                                                                                    <action selector="btnChooseCategory:" destination="OIi-zZ-fA6" eventType="touchUpInside" id="XUn-uX-7J6"/>
                                                                                 </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGE-5u-ga9">
@@ -181,7 +181,7 @@
                                                                                     <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </buttonConfiguration>
                                                                                 <connections>
-                                                                                    <action selector="btnChooseCategory:" destination="OIi-zZ-fA6" eventType="touchUpInside" id="ZqX-JI-yXd"/>
+                                                                                    <action selector="btnChooseCategory:" destination="OIi-zZ-fA6" eventType="touchUpInside" id="h5N-zn-TSo"/>
                                                                                 </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Lj-fJ-NPp">
@@ -192,16 +192,33 @@
                                                                                     <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </buttonConfiguration>
                                                                                 <connections>
-                                                                                    <action selector="btnChooseCategory:" destination="OIi-zZ-fA6" eventType="touchUpInside" id="bIa-cM-1eM"/>
+                                                                                    <action selector="btnChooseCategory:" destination="OIi-zZ-fA6" eventType="touchUpInside" id="tTH-AR-Z7u"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eqG-eD-tVk" userLabel="기타">
+                                                                                <rect key="frame" x="540" y="0.0" width="75" height="34.333333333333336"/>
+                                                                                <color key="tintColor" systemColor="tintColor"/>
+                                                                                <state key="normal" title="Button"/>
+                                                                                <buttonConfiguration key="configuration" style="gray" title="기타">
+                                                                                    <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                </buttonConfiguration>
+                                                                                <connections>
+                                                                                    <action selector="btnChooseCategory:" destination="OIi-zZ-fA6" eventType="touchUpInside" id="fsR-lH-wge"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="615" id="CEK-dR-2JG"/>
+                                                                            <constraint firstAttribute="width" constant="615" id="KMF-dO-eS7"/>
+                                                                        </constraints>
                                                                     </stackView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="546" id="8nr-i9-hl0"/>
                                                                     <constraint firstAttribute="height" constant="50" id="GXz-PM-D17"/>
+                                                                    <constraint firstItem="xOo-LK-u7F" firstAttribute="centerX" secondItem="Dub-oP-X5i" secondAttribute="centerX" id="jHw-Ta-iA2"/>
+                                                                    <constraint firstAttribute="width" constant="615" id="lS5-yM-XbX"/>
+                                                                    <constraint firstItem="xOo-LK-u7F" firstAttribute="top" secondItem="Dub-oP-X5i" secondAttribute="top" id="pQP-a4-yvs"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
@@ -218,7 +235,7 @@
                                                     </scrollView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Yy8-DO-2YA">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Yy8-DO-2YA" userLabel="ImageStackView">
                                                 <rect key="frame" x="0.0" y="138.33333333333337" width="361.33333333333331" height="312"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*사진을 추가하세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IfN-0y-RNq">
@@ -269,8 +286,13 @@
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="x30-Xl-Rti">
                                                 <rect key="frame" x="0.0" y="493.66666666666663" width="361.33333333333331" height="20"/>
+
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="x30-Xl-Rti" userLabel="AddressStackView">
+                                                <rect key="frame" x="0.0" y="493.66666666666663" width="361.33333333333331" height="19.333333333333371"/>
+
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ㅎㅎ" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaT-VF-3U0">
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="20"/>
@@ -350,12 +372,13 @@
                         <outlet property="lblReview" destination="yJj-4K-g74" id="CCe-0D-rKB"/>
                         <outlet property="tfTitle" destination="lfA-6D-pnq" id="ftv-2a-eZV"/>
                         <outlet property="tvContent" destination="PDH-fy-inX" id="klR-I3-qSu"/>
-                        <outletCollection property="radioButtons" destination="3Ba-jA-Ig1" collectionClass="NSMutableArray" id="IfT-ia-3BJ"/>
-                        <outletCollection property="radioButtons" destination="890-xY-UmO" collectionClass="NSMutableArray" id="yNK-cQ-veD"/>
-                        <outletCollection property="radioButtons" destination="Pto-yx-Ysm" collectionClass="NSMutableArray" id="N5t-t2-puO"/>
-                        <outletCollection property="radioButtons" destination="0Lj-fJ-NPp" collectionClass="NSMutableArray" id="AWV-uX-g14"/>
-                        <outletCollection property="radioButtons" destination="tGE-5u-ga9" collectionClass="NSMutableArray" id="XTS-Nl-HbD"/>
-                        <outletCollection property="radioButtons" destination="DEW-yH-IUj" collectionClass="NSMutableArray" id="wv8-o6-m34"/>
+                        <outletCollection property="radioButtons" destination="Pto-yx-Ysm" collectionClass="NSMutableArray" id="ilW-ev-onR"/>
+                        <outletCollection property="radioButtons" destination="3Ba-jA-Ig1" collectionClass="NSMutableArray" id="1qL-wZ-Djm"/>
+                        <outletCollection property="radioButtons" destination="DEW-yH-IUj" collectionClass="NSMutableArray" id="klK-82-ylD"/>
+                        <outletCollection property="radioButtons" destination="890-xY-UmO" collectionClass="NSMutableArray" id="4kM-2T-uya"/>
+                        <outletCollection property="radioButtons" destination="tGE-5u-ga9" collectionClass="NSMutableArray" id="hLs-a0-OP6"/>
+                        <outletCollection property="radioButtons" destination="0Lj-fJ-NPp" collectionClass="NSMutableArray" id="gVk-IO-vog"/>
+                        <outletCollection property="radioButtons" destination="eqG-eD-tVk" collectionClass="NSMutableArray" id="z7R-jD-kzY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="enb-pN-U1h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -510,7 +533,7 @@
         <!--리뷰 쓰기-->
         <scene sceneID="77Y-SK-blN">
             <objects>
-                <viewController id="4jG-iZ-W8h" customClass="AddViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddViewController" id="4jG-iZ-W8h" customClass="AddViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tvb-E4-9b2">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
