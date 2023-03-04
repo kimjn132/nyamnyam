@@ -13,7 +13,6 @@
 		26158E6E29ACCA060082CE75 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E6D29ACCA050082CE75 /* TableViewController.swift */; };
 		26158E7029ACCA170082CE75 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E6F29ACCA170082CE75 /* TableViewCell.swift */; };
 		26158E7229ACCB7B0082CE75 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26158E7129ACCB7B0082CE75 /* Store.swift */; };
-		2669A97F29AF66B300C57EC7 /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2669A97E29AF66B300C57EC7 /* LabelExtension.swift */; };
 		26A31907298AA0F400681392 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A31906298AA0F400681392 /* AppDelegate.swift */; };
 		26A31909298AA0F400681392 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A31908298AA0F400681392 /* SceneDelegate.swift */; };
 		26A3190B298AA0F400681392 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A3190A298AA0F400681392 /* ViewController.swift */; };
@@ -40,7 +39,6 @@
 		26158E6D29ACCA050082CE75 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		26158E6F29ACCA170082CE75 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		26158E7129ACCB7B0082CE75 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
-		2669A97E29AF66B300C57EC7 /* LabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtension.swift; sourceTree = "<group>"; };
 		26A31903298AA0F400681392 /* NyamNyam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyamNyam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26A31906298AA0F400681392 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26A31908298AA0F400681392 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 				688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */,
 				16A1D93929AF1AC90010C328 /* CollectionViewCell.swift */,
 				16A1D93829AF1AC90010C328 /* CollectionViewController.swift */,
-				2669A97E29AF66B300C57EC7 /* LabelExtension.swift */,
 				BC7C44B029B1F7850068EDC5 /* WishAddViewController.swift */,
 				BC7C44B129B1F7850068EDC5 /* WishList.swift */,
 				BC7C44B229B1F7850068EDC5 /* WishTableViewController.swift */,
@@ -224,7 +221,6 @@
 				BC7C44B429B1F7860068EDC5 /* WishList.swift in Sources */,
 				26A3190B298AA0F400681392 /* ViewController.swift in Sources */,
 				26A31907298AA0F400681392 /* AppDelegate.swift in Sources */,
-				2669A97F29AF66B300C57EC7 /* LabelExtension.swift in Sources */,
 				BC7C44B729B1F78D0068EDC5 /* ImageInsert.swift in Sources */,
 				26A31909298AA0F400681392 /* SceneDelegate.swift in Sources */,
 				26158E7029ACCA170082CE75 /* TableViewCell.swift in Sources */,

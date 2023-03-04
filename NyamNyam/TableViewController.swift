@@ -49,6 +49,7 @@ class TableViewController: UITableViewController {
             dismissButton.isHidden = false
         }
     }
+
     
     // Date : 2023-03-04
     // Name : YunHyeon Jeong
@@ -57,7 +58,7 @@ class TableViewController: UITableViewController {
         NotificationCenter.default.post(name: NSNotification.Name("TableViewDidDismiss"), object: nil)
         dismiss(animated: true, completion: nil)
     }
-    
+
     func selectData(){
         let storeDB = StoreDB()
         storeList.removeAll()
@@ -69,15 +70,23 @@ class TableViewController: UITableViewController {
         
     }
 
-
-
     
     // MARK: - Table view data source
 
     // Table column 수
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        if storeList.count > 0 {
+                  tableView.backgroundView = nil
+                  return 1
+              } else {
+                  let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+                  noDataLabel.text = "데이터가 없습니다."
+                  noDataLabel.textColor = .black
+                  noDataLabel.textAlignment = .center
+                  tableView.backgroundView = noDataLabel
+                  return 0
+              }
+
     }
 
     // Table Row 수(사용자 입력 데이터만큼)
@@ -170,29 +179,6 @@ class TableViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        // Get the new view controller using segue.destination.
-//        // Pass the selected object to the new view controller.
-//        if segue.identifier == "sgDetail"{
-//            let cell = sender as! UITableViewCell
-//            let indexPath = self.tvListView.indexPath(for: cell)
-//            let detailView = segue.destination as! DetailViewController
-//
-//            detailView.receivedId = storeList[indexPath!.row].id
-//            detailView.receivedName = storeList[indexPath!.row].name
-//            detailView.receivedDept = storeList[indexPath!.row].address
-//            detailView.receivedImage = storeList[indexPath!.row].image as NSData?
-//            detailView.receivedPhone = storeList[indexPath!.row].contents
-//            detailView.receivedCategory = storeList[indexPath!.row].category
-//            //>>detailviewcontrolller에서 정의한 property에 데이터 넣어줌
-//
-//            print("segue to detail")
-//
-//        }
-//    }
-
-
-
 
 }
 
