@@ -14,28 +14,10 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet weak var ImageView: UIImageView!
     @IBOutlet weak var tvContent: UITextView!
-    
-//    let kCharacterBeforReadMore =  20
-//    let kReadMoreText           =  "...더보기"
-//    let kReadLessText           =  "...접기"
-    
-
-//    @IBOutlet weak var tvContent: UILabel!
-
-
-    
     @IBOutlet weak var lblCategory: UILabel!
     @IBOutlet weak var imageLoca: UIImageView!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var contentViewCell: UIView!
-    
-    
-
-    
-    
-    
-    
-
     
     
     override func awakeFromNib() {
