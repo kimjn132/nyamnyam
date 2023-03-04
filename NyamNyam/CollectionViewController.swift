@@ -53,7 +53,6 @@ class CollectionViewController: UICollectionViewController {
       } else {
           let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
           noDataLabel.text = "데이터가 없습니다."
-          noDataLabel.textColor = .black
           noDataLabel.textAlignment = .center
           collectionView.backgroundView = noDataLabel
           return 0

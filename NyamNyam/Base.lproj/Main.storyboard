@@ -805,7 +805,7 @@
             </objects>
             <point key="canvasLocation" x="972" y="2191"/>
         </scene>
-        <!--모아보기-->
+        <!--Collection View Controller-->
         <scene sceneID="zt6-3b-atF">
             <objects>
                 <collectionViewController id="Zh8-dP-n44" customClass="CollectionViewController" customModule="NyamNyam" sceneMemberID="viewController">
