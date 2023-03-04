@@ -112,7 +112,7 @@
             <objects>
                 <tableViewController id="fkQ-lo-yR0" customClass="TableViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="433" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="xh3-CF-HRG">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -216,6 +216,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Main View" id="JVh-rL-pE8">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="0se-ae-oRx">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="dismissModal:" destination="fkQ-lo-yR0" id="Xb9-Qm-RMt"/>
                             </connections>
@@ -499,7 +500,7 @@
             </objects>
             <point key="canvasLocation" x="972" y="2191"/>
         </scene>
-        <!--Collection View-->
+        <!--모아보기-->
         <scene sceneID="zt6-3b-atF">
             <objects>
                 <collectionViewController id="Zh8-dP-n44" customClass="CollectionViewController" customModule="NyamNyam" sceneMemberID="viewController">
@@ -541,7 +542,7 @@
                             </collectionViewCell>
                         </cells>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Collection View" id="lg4-PI-7lO"/>
+                    <navigationItem key="navigationItem" title="모아보기" id="lg4-PI-7lO"/>
                     <connections>
                         <outlet property="cvList" destination="DfD-bR-T10" id="V3L-Gu-4Tb"/>
                         <outlet property="noDataLabel" destination="7jd-4x-1f5" id="IoU-TT-7BB"/>
@@ -917,7 +918,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="YXp-EX-izs"/>
-        <segue reference="g3s-Iw-5LR"/>
+        <segue reference="8TM-xQ-bZ2"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="baseline_apps_black_18pt_1x" width="18" height="18"/>
