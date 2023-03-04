@@ -23,6 +23,12 @@ class CollectionViewController: UICollectionViewController {
 
         cvList.delegate = self
         cvList.dataSource = self
+
+      NotificationCenter.default.addObserver(self, selector: #selector(didDismissTableView), name: NSNotification.Name("TableViewDidDismiss"), object: nil)
+    }
+
+    @objc func didDismissTableView(_ notification: Notification) {
+        selectData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +42,13 @@ class CollectionViewController: UICollectionViewController {
         storeDB.queryDB()
         cvList.reloadData()
     }
+    
+    @objc func didDismissPostCommentNotification(_ noti: Notification) {
+            OperationQueue.main.addOperation {
+                self.cvList.reloadData()
+            }
+
+        }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
       if storeList.count > 0 {

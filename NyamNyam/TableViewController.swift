@@ -10,7 +10,6 @@ import UIKit
 
 
 class TableViewController: UITableViewController {
-
     
     @IBOutlet var tvListView: UITableView!
     
@@ -23,7 +22,6 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("실행")
 
     } //viewDidLoad
     
@@ -53,13 +51,9 @@ class TableViewController: UITableViewController {
     }
     
     @IBAction func dismissModal(_ sender: UIBarButtonItem) {
+        NotificationCenter.default.post(name: NSNotification.Name("TableViewDidDismiss"), object: nil)
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    
-    
-    
     
     func selectData(){
         let storeDB = StoreDB()
