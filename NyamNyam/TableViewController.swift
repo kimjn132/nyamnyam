@@ -50,6 +50,9 @@ class TableViewController: UITableViewController {
         }
     }
     
+    // Date : 2023-03-04
+    // Name : YunHyeon Jeong
+    // Desc : NotificationCenter로 Dismiss를 알림
     @IBAction func dismissModal(_ sender: UIBarButtonItem) {
         NotificationCenter.default.post(name: NSNotification.Name("TableViewDidDismiss"), object: nil)
         dismiss(animated: true, completion: nil)
