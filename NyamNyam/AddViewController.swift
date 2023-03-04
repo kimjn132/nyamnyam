@@ -33,8 +33,6 @@ class AddViewController: UIViewController, UITextViewDelegate{
 
     let photo = UIImagePickerController()   //앨범 이동
     
-//    let ls = ImageInsert()
-    
     var myTag = "한식"
     
     var imageData : NSData? = nil   // 서버로 이미지 등록을 하기 위함
@@ -66,20 +64,22 @@ class AddViewController: UIViewController, UITextViewDelegate{
         
         // 뷰 텍스트 초기화
         tfTitle.text = ""
-        imageView.image = nil
+        imageView.image = UIImage(named: "기타.png")
         tvContent.text = ""
         
         // 뷰 디자인 초기화
-        lblAddress.layer.borderColor = UIColor.systemGray4.cgColor
-        lblAddress.layer.borderWidth = 0.3
-        lblAddress.layer.cornerRadius = 5
+        
+//        lblAddress.layer.borderColor = UIColor.systemGray4.cgColor
+//        lblAddress.layer.borderWidth = 0.3
+//        lblAddress.layer.cornerRadius = 5
         
         tvContent.delegate = self
         tvContent.text = "리뷰를 작성하세요."
         tvContent.textColor = UIColor.lightGray
-        tvContent.layer.borderColor = UIColor.systemGray4.cgColor
-        tvContent.layer.borderWidth = 0.3
-        tvContent.layer.cornerRadius = 5
+//        tvContent.texts
+//        tvContent.layer.borderColor = UIColor.systemGray4.cgColor
+//        tvContent.layer.borderWidth = 0.3
+//        tvContent.layer.cornerRadius = 5
                 
         // 앨범 컨트롤러 딜리게이트 지정
         self.photo.delegate = self
@@ -97,16 +97,19 @@ class AddViewController: UIViewController, UITextViewDelegate{
     }
     
     // tfTitle 수정 시작
-    @IBAction func tfTitleEditingDidBegin(_ sender: UITextField) {
-        tfTitle.layer.borderWidth = 0.5
-        tfTitle.layer.cornerRadius = 5
-        tfTitle.layer.borderColor = UIColor.systemGray5.cgColor
-    }
+//    @IBAction func tfTitleEditingDidBegin(_ sender: UITextField) {
+//        tfTitle.layer.borderWidth = 0.5
+//        tfTitle.layer.cornerRadius = 5
+//        tfTitle.layer.borderColor = UIColor.systemGray5.cgColor
+//
+//    }
+    
     
     // 맛집 카테고리 클릭 버튼
     @IBAction func btnChooseCategory(_ sender: UIButton) {
         
         if indexOfBtns != nil{
+
             if !sender.isSelected {
                 for unselectIndex in radioButtons.indices {
                     radioButtons[unselectIndex].isSelected = false
@@ -121,7 +124,7 @@ class AddViewController: UIViewController, UITextViewDelegate{
             sender.isSelected = true
             indexOfBtns = radioButtons.firstIndex(of: sender)
         }
-        
+
         if indexOfBtns == 0{
             myTag = "한식"
         }else if indexOfBtns == 1{
@@ -132,21 +135,67 @@ class AddViewController: UIViewController, UITextViewDelegate{
             myTag = "일식"
         }else if indexOfBtns == 4{
             myTag = "분식"
-        }else{
+        }else if indexOfBtns == 5{
             myTag = "카페"
+        }else {
+            myTag = "기타"
         }
+        
+//        print("myTag:", myTag, "/ index: ", indexOfBtns)
+        
+        if ((imageView.image == nil) || (imageView.image == UIImage(named: "카페.png"))
+            || (imageView.image == UIImage(named: "한식.png"))
+            || (imageView.image == UIImage(named: "양식.png"))
+            || (imageView.image == UIImage(named: "일식.png"))
+            || (imageView.image == UIImage(named: "중식.png"))
+            || (imageView.image == UIImage(named: "분식.png"))
+            || (imageView.image == UIImage(named: "기타.png"))) {
+            
+            if myTag == "카페"{
+//                print("카페 이미지")
+                imageView.image = UIImage(named: "카페.png")
+            }
+            if myTag == "한식"{
+//                print("카페 이미지")
+                imageView.image = UIImage(named: "한식.png")
+            }
+            if myTag == "양식"{
+//                print("카페 이미지")
+                imageView.image = UIImage(named: "양식.png")
+            }
+            if myTag == "일식"{
+//                print("카페 이미지")
+                imageView.image = UIImage(named: "일식.png")
+            }
+            if myTag == "중식"{
+//                print("카페 이미지")
+                imageView.image = UIImage(named: "중식.png")
+            }
+            if myTag == "분식"{
+//                print("카페 이미지")
+                imageView.image = UIImage(named: "분식.png")
+            }
+            if myTag == "기타"{
+//                print("카페 이미지")
+                imageView.image = UIImage(named: "기타.png")
+            }
+
+        }
+
 
     }//btnChooseCategory
     
     // 이미지 추가 버튼 클릭
     @IBAction func btnImage(_ sender: UIButton) {
         
-        // 맛집 이름을 적어주지 않았으면 텍스트 필드 색을 빨갛게
-        if (tfTitle.text == "") {
-            tfTitle.layer.borderWidth = 0.5
-            tfTitle.layer.cornerRadius = 5
-            tfTitle.layer.borderColor = UIColor.systemRed.cgColor
-        }
+//        // 맛집 이름을 적어주지 않았으면 텍스트 필드 색을 빨갛게
+//        if (tfTitle.text == "") {
+//            tfTitle.layer.borderWidth = 0.5
+//            tfTitle.layer.cornerRadius = 5
+//            tfTitle.layer.borderColor = UIColor.systemRed.cgColor
+//        }
+        
+//        nullCheckDesignTfTitle()
         
         // 권한 alert
         showAlert()
@@ -155,8 +204,70 @@ class AddViewController: UIViewController, UITextViewDelegate{
     
     // 완료 버튼
     @IBAction func btnDone(_ sender: UIBarButtonItem) {
-        // DB에 정보 insert
-        dbInsert()
+        
+        if tfTitle.text!.trimmingCharacters(in: .whitespaces).isEmpty{
+            let testAlert = UIAlertController(title: nil, message: "맛집 이름을 작성해주세요!", preferredStyle: .alert)
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = NSTextAlignment.left
+            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 17.0)!]
+            let messageAttrString = NSMutableAttributedString(string: "맛집 이름을 작성해주세요!", attributes: messageFont)
+            testAlert.setValue(messageAttrString, forKey: "attributedMessage")
+
+            // UIAlertAcrion 설정
+            let actionCancel = UIAlertAction(title: "닫기", style: .cancel)
+            
+            // UIAlertController에 UIAlertAction버튼 추가하기
+            testAlert.addAction(actionCancel)
+            
+            // Alert 띄우기
+            present(testAlert, animated: true)
+            
+        }else if lblAddress.text?.trimmingCharacters(in: .whitespaces) == "+ 버튼을 눌러 위치를 추가하세요."{ // 위치 추가 안하면 Alert
+            // Alert
+            let testAlert = UIAlertController(title: nil, message: "맛집 위치를 추가해주세요!", preferredStyle: .alert)
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = NSTextAlignment.left
+            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 17.0)!]
+            let messageAttrString = NSMutableAttributedString(string: "맛집 위치를 추가해주세요!", attributes: messageFont)
+            testAlert.setValue(messageAttrString, forKey: "attributedMessage")
+
+            // UIAlertAcrion 설정
+            let actionCancel = UIAlertAction(title: "닫기", style: .cancel)
+            
+            // UIAlertController에 UIAlertAction버튼 추가하기
+            testAlert.addAction(actionCancel)
+            
+            // Alert 띄우기
+            present(testAlert, animated: true)
+        }else if (tvContent.text!.trimmingCharacters(in: .whitespaces).isEmpty) || tvContent.text == "리뷰를 작성하세요."{
+            // Alert
+            let testAlert = UIAlertController(title: nil, message: "리뷰를 작성해주세요!", preferredStyle: .alert)
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = NSTextAlignment.left
+            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 17.0)!]
+            let messageAttrString = NSMutableAttributedString(string: "리뷰를 작성해주세요!", attributes: messageFont)
+            testAlert.setValue(messageAttrString, forKey: "attributedMessage")
+
+            // UIAlertAcrion 설정
+            let actionCancel = UIAlertAction(title: "닫기", style: .cancel)
+            
+            // UIAlertController에 UIAlertAction버튼 추가하기
+            testAlert.addAction(actionCancel)
+            
+            // Alert 띄우기
+            present(testAlert, animated: true)
+            
+        }else{
+        
+            // DB에 정보 insert
+            dbInsert()
+            initPage()
+        }
+
+        
 
     }
     
@@ -172,6 +283,8 @@ class AddViewController: UIViewController, UITextViewDelegate{
     
     // + 버튼 눌렀을 때 kakao api를 불러온다.
     @IBAction func btnAddAddress(_ sender: UIButton) {
+        
+//        nullCheckDesignTfTitle()
         
         let nextVC = KakaoZipCodeVC()
         nextVC.modalPresentationStyle = UIModalPresentationStyle.fullScreen
@@ -235,11 +348,10 @@ class AddViewController: UIViewController, UITextViewDelegate{
         }
         
         // 옵저버 등록
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         print("view will appear: \(Message.address)")
-        
         
     }
 
@@ -249,26 +361,25 @@ class AddViewController: UIViewController, UITextViewDelegate{
     @objc func checkBackground(){
     }
     
-    @objc func keyboardUp(notification:NSNotification) {
-        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-           let keyboardRectangle = keyboardFrame.cgRectValue
-       
-            UIView.animate(
-                withDuration: 0.3
-                , animations: {
-                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
-                }
-            )
-        }
-    }
-    
-    @objc func keyboardDown() {
-        self.view.transform = .identity
-    }
+//    @objc func keyboardUp(notification:NSNotification) {
+//        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+//           let keyboardRectangle = keyboardFrame.cgRectValue
+//
+//            UIView.animate(
+//                withDuration: 0.3
+//                , animations: {
+//                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
+//                }
+//            )
+//        }
+//    }
+//
+//    @objc func keyboardDown() {
+//        self.view.transform = .identity
+//    }
 
     
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //
@@ -286,6 +397,16 @@ class AddViewController: UIViewController, UITextViewDelegate{
     
     
     // funcs =========================================================================
+//    func nullCheckDesignTfTitle(){
+//        // 맛집 이름을 적어주지 않았으면 텍스트 필드 색을 빨갛게
+//        if (tfTitle.text == "") {
+//            tfTitle.layer.borderWidth = 0.5
+//            tfTitle.layer.cornerRadius = 5
+//            tfTitle.layer.borderColor = UIColor.systemRed.cgColor
+//        }
+//
+//    }
+    
     // alert
     func showAlert(){
         
@@ -371,8 +492,39 @@ class AddViewController: UIViewController, UITextViewDelegate{
         guard let name = tfTitle.text?.trimmingCharacters(in: .whitespaces) else { return }
         guard let address = lblAddress.text?.trimmingCharacters(in: .whitespaces) else { return }
         guard let content = tvContent.text?.trimmingCharacters(in: .whitespaces) else { return }
-        guard let image = UIImage(data: imageData! as Data) else { return }
-        let data = image.pngData()! as NSData
+        var image : UIImage!
+        var data : NSData!
+        
+        if imageData != nil {
+            image = UIImage(data: imageData! as Data)
+            data = image.pngData()! as NSData
+        }else{ // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
+            
+            if (myTag == "한식"){
+                image = UIImage(named: "한식.png")
+            }
+            if (myTag == "일식"){
+                image = UIImage(named: "일식.png")
+            }
+            if (myTag == "분식"){
+                image = UIImage(named: "분식.png")
+            }
+            if (myTag == "양식"){
+                image = UIImage(named: "양식.png")
+            }
+            if (myTag == "기타"){
+                image = UIImage(named: "기타.png")
+            }
+            if (myTag == "중식"){
+                image = UIImage(named: "중식.png")
+            }
+            
+            data = image.pngData()! as NSData
+        }
+        
+//        data = image!.pngData()! as NSData
+        
+//        let data = image.pngData()! as NSData
 //        let date = Date.now
         
         let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
@@ -381,16 +533,22 @@ class AddViewController: UIViewController, UITextViewDelegate{
         
         if result {
             let resultAlert = UIAlertController(title: "완료", message: "입력이 되었습니다.", preferredStyle: .alert)
-            let onAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in
-                self.navigationController?.popViewController(animated: true)
-            })
+//            let onAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in
+//                self.navigationController?.popViewController(animated: true)
+//            })
+            
+//            let onAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in
+//                self.initPage()
+//            })
+            
+            let onAction = UIAlertAction(title: "OK", style: .default)
             
             resultAlert.addAction(onAction)
             present(resultAlert, animated: true)
             
             //페이지 넘기기
-            guard let nextVC = self.storyboard?.instantiateViewController(identifier: "TableViewController") else {return}
-            self.present(nextVC, animated: true)
+//            guard let nextVC = self.storyboard?.instantiateViewController(identifier: "TableViewController") else {return}
+//            self.present(nextVC, animated: true)
 
         } else {
             let resultAlert = UIAlertController(title: "실패", message: "에러가 발생 되었습니다.", preferredStyle: .alert)
@@ -456,6 +614,52 @@ class AddViewController: UIViewController, UITextViewDelegate{
             tvContent.textColor = UIColor.black
         }
         
+    }
+    
+    // 완료 버튼 클릭시 뷰 초기화
+    func initPage(){
+        
+        tvContent.resignFirstResponder()
+        
+        // 뷰 텍스트 초기화
+        tfTitle.text = ""
+        imageView.image = UIImage(named: "기타.png")
+        tvContent.text = ""
+        lblAddress.text = ""
+        myTag = "기타"
+        radioButtons[0].isSelected = false
+        radioButtons[1].isSelected = false
+        radioButtons[2].isSelected = false
+        radioButtons[3].isSelected = false
+        radioButtons[4].isSelected = false
+        radioButtons[5].isSelected = false
+        radioButtons[6].isSelected = false
+        
+        // 뷰 디자인 초기화
+        
+//        lblAddress.layer.borderColor = UIColor.systemGray4.cgColor
+//        lblAddress.layer.borderWidth = 0.3
+//        lblAddress.layer.cornerRadius = 5
+        
+//        tvContent.delegate = self
+        tvContent.text = "리뷰를 작성하세요."
+        tvContent.textColor = UIColor.lightGray
+        
+        lblAddress.text = " + 버튼을 눌러 위치를 추가하세요."
+        lblAddress.textColor = UIColor.lightGray
+
+//        tvContent.texts
+//        tvContent.layer.borderColor = UIColor.systemGray4.cgColor
+//        tvContent.layer.borderWidth = 0.3
+//        tvContent.layer.cornerRadius = 5
+        
+        tvContent.resignFirstResponder()
+        
+        Message.address = ""
+                
+        // 앨범 컨트롤러 딜리게이트 지정
+//        self.photo.delegate = self
+
     }
 
 }// End

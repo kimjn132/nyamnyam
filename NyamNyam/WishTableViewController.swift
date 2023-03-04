@@ -82,7 +82,7 @@ class WishTableViewController: UITableViewController {
             return 1
         } else {
             let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-            noDataLabel.text = "'+'버튼을 눌러 가고 싶은 맛집을 추가해보세요."
+            noDataLabel.text = "'+' 버튼을 눌러 가고 싶은 맛집을 추가해보세요."
             noDataLabel.textColor = .black
             noDataLabel.textAlignment = .center
             tableView.backgroundView = noDataLabel

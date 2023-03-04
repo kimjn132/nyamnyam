@@ -20,7 +20,7 @@ class WishAddViewController: UIViewController {
     
     var db:OpaquePointer?
     
-    var indexOfBtns: Int?
+    var indexOfBtns: Int? = 0
     
     let ls = ImageInsert()
     
@@ -40,8 +40,9 @@ class WishAddViewController: UIViewController {
         // file만든걸 실행시켜야지 (exec)
         sqlite3_open(fileURL.path(), &db) // open한다
         
+        // 초기화
         imgImage.image = UIImage(named: "sample.jpeg")
-//        tagButtons[0].isSelected = true
+        tagButtons[0].isSelected = true
         
         self.photo.delegate = self
     }
@@ -124,7 +125,7 @@ class WishAddViewController: UIViewController {
     }//openphoto
     
     @IBAction func btnAddress(_ sender: UIButton) {
-        let nextVC = KakaoZipCodeVC()
+        let nextVC = WishKakaoZipCodeVC()
         nextVC.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         present(nextVC, animated: true)
     }
@@ -133,6 +134,7 @@ class WishAddViewController: UIViewController {
     @IBAction func btnSelectTag(_ sender: UIButton) {
         
         if indexOfBtns != nil{
+
             if !sender.isSelected {
                 for unselectIndex in tagButtons.indices {
                     tagButtons[unselectIndex].isSelected = false
@@ -166,9 +168,11 @@ class WishAddViewController: UIViewController {
     
     @IBAction func btnDone(_ sender: UIButton) {
         
-        if lbltitle.text?.trimmingCharacters(in: .whitespaces) != ""{
+        if lbltitle.text?.trimmingCharacters(in: .whitespaces) != "" && lblAddress.text?.trimmingCharacters(in: .whitespaces) != "'+'를 눌러 위치를 추가해주세요."{
             dbInsert()
-        }else if lbltitle.text?.trimmingCharacters(in: .whitespaces) == ""{ // 맛집 텍스트필드 미입력시 Alert
+        }
+        
+        if lbltitle.text?.trimmingCharacters(in: .whitespaces) == ""{ // 맛집 텍스트필드 미입력시 Alert
             // Alert
             let testAlert = UIAlertController(title: nil, message: "맛집 이름을 작성해주세요!", preferredStyle: .alert)
             
@@ -186,8 +190,26 @@ class WishAddViewController: UIViewController {
             
             // Alert 띄우기
             present(testAlert, animated: true)
-        }else{ // tag 미선택시 Alert
+        }
+        
+        if lblAddress.text?.trimmingCharacters(in: .whitespaces) == "'+'를 눌러 위치를 추가해주세요."{ // 위치 추가 안하면 Alert
+            // Alert
+            let testAlert = UIAlertController(title: nil, message: "맛집 위치를 추가해주세요!", preferredStyle: .alert)
             
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = NSTextAlignment.left
+            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 17.0)!]
+            let messageAttrString = NSMutableAttributedString(string: "맛집 위치를 추가해주세요!", attributes: messageFont)
+            testAlert.setValue(messageAttrString, forKey: "attributedMessage")
+
+            // UIAlertAcrion 설정
+            let actionCancel = UIAlertAction(title: "닫기", style: .cancel)
+            
+            // UIAlertController에 UIAlertAction버튼 추가하기
+            testAlert.addAction(actionCancel)
+            
+            // Alert 띄우기
+            present(testAlert, animated: true)
         }
     }
     
@@ -231,7 +253,8 @@ class WishAddViewController: UIViewController {
         resultAlert.addAction(okAction)
         present(resultAlert, animated: true)
         
-        Message.wishaddress = "위치를 추가해주세요."
+        Message.wishaddress = "'+'를 눌러 위치를 추가해주세요."
+        Message.address = ""
     
     }//dbInsert
         
@@ -265,6 +288,7 @@ class WishAddViewController: UIViewController {
         
         super.viewWillDisappear(animated)
         print("viewWillDisappear")
+        Message.wishaddress = "'+'를 눌러 위치를 추가해주세요."
         
     }//viewwillDisappear
     
@@ -286,6 +310,7 @@ class WishAddViewController: UIViewController {
 
         super.viewWillAppear(animated)
 //        address label 채워준다.
+        
         lblAddress.text = Message.wishaddress
         print("view will appear: \(Message.wishaddress)")
 
