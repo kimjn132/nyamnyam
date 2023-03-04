@@ -118,11 +118,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4NB-WB-OfE">
-
-                                                        <rect key="frame" x="0.0" y="18.333333333333258" width="361.33333333333331" height="50"/>
-
                                                         <rect key="frame" x="0.0" y="18.333333333333343" width="361.33333333333331" height="50"/>
-
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dub-oP-X5i">
                                                                 <rect key="frame" x="0.0" y="0.0" width="615" height="50"/>
@@ -529,11 +525,10 @@
             </objects>
             <point key="canvasLocation" x="1897" y="13"/>
         </scene>
-
         <!--리뷰 쓰기-->
         <scene sceneID="77Y-SK-blN">
             <objects>
-                <viewController id="4jG-iZ-W8h" customClass="AddViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddViewController" id="4jG-iZ-W8h" customClass="AddViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tvb-E4-9b2">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -798,7 +793,6 @@
             </objects>
             <point key="canvasLocation" x="972" y="2191"/>
         </scene>
-
         <!--모아보기-->
         <scene sceneID="zt6-3b-atF">
             <objects>
