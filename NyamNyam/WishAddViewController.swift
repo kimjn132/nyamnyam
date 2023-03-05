@@ -394,7 +394,6 @@ class WishAddViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         
         super.viewWillDisappear(animated)
-        print("viewWillDisappear")
         
         if self.isMovingFromParent{
             Message.wishaddress = "'+'를 눌러 위치를 추가해주세요."
@@ -406,7 +405,6 @@ class WishAddViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         
         super.viewDidDisappear(animated)
-        print("viewDidDiappear")
         
         //뷰 컨트롤러 포그라운드, 백그라운드 상태 체크 해제
         NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -422,7 +420,6 @@ class WishAddViewController: UIViewController {
 //        address label 채워준다.
         
         lblAddress.text = Message.wishaddress
-        print("view will appear: \(Message.wishaddress)")
 
     } // viewWillAppear
 
@@ -443,12 +440,12 @@ extension WishAddViewController: UIImagePickerControllerDelegate & UINavigationC
         if let img = info[UIImagePickerController.InfoKey.originalImage]{
             
             // [앨범에서 선택한 사진 정보 확인]
-            print("")
-            print("====================================")
-            print("[A_Image >> imagePickerController() :: 앨범에서 선택한 사진 정보 확인 및 사진 표시 실시]")
-            //print("[사진 정보 :: ", info)
-            print("====================================")
-            print("")
+//            print("")
+//            print("====================================")
+//            print("[A_Image >> imagePickerController() :: 앨범에서 선택한 사진 정보 확인 및 사진 표시 실시]")
+//            //print("[사진 정보 :: ", info)
+//            print("====================================")
+//            print("")
             
             // [이미지 뷰에 앨범에서 선택한 사진 표시 실시]
             imgImage.image = img as? UIImage
@@ -466,11 +463,11 @@ extension WishAddViewController: UIImagePickerControllerDelegate & UINavigationC
     // MARK: [사진, 비디오 선택을 취소했을 때 호출되는 메소드]
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
-        print("")
-        print("===============================")
-        print("[A_Image >> imagePickerControllerDidCancel() :: 사진, 비디오 선택 취소 수행 실시]")
-        print("===============================")
-        print("")
+//        print("")
+//        print("===============================")
+//        print("[A_Image >> imagePickerControllerDidCancel() :: 사진, 비디오 선택 취소 수행 실시]")
+//        print("===============================")
+//        print("")
         
         // 이미지 파커 닫기
         self.dismiss(animated: true, completion: nil)
