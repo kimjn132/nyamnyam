@@ -24,6 +24,10 @@ class AddViewController: UIViewController, UITextViewDelegate{
     @IBOutlet weak var lblReview: UILabel!
     @IBOutlet weak var lblAddress2: UILabel!
     
+    //글자 수 제한 - 60자
+    @IBOutlet weak var countLabel: UILabel!
+    let maxCharacters = 60
+    
     // 한식, 중식, 양식, 분식, 일식, 카페 선택 라디오 버튼
     @IBOutlet var radioButtons: [UIButton]!
     //라디오 버튼 선택 index
@@ -74,6 +78,8 @@ class AddViewController: UIViewController, UITextViewDelegate{
 //        lblAddress.layer.cornerRadius = 5
         
         tvContent.delegate = self
+        //글자 수 제한 countlabel 초기 설정
+        countLabel.text = "\(maxCharacters)/60"
         tvContent.text = "리뷰를 작성하세요."
         tvContent.textColor = UIColor.lightGray
 //        tvContent.texts
@@ -95,6 +101,22 @@ class AddViewController: UIViewController, UITextViewDelegate{
         //self == java의 this
         self.view.endEditing(true)
     }
+    
+    
+    //글자 수 제한 감지
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+            let currentText = tvContent.text ?? ""
+            guard let stringRange = Range(range, in: currentText) else { return false }
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
+            return updatedText.count <= maxCharacters
+        }
+    //글자 수 카운트
+        func textViewDidChange(_ textView: UITextView) {
+            //placeholderLabel.isHidden = !textView.text.isEmpty
+            let currentCount = tvContent.text.count
+            let remainingCount = maxCharacters - currentCount
+            countLabel.text = "\(remainingCount)/60"
+        }
     
     // tfTitle 수정 시작
 //    @IBAction func tfTitleEditingDidBegin(_ sender: UITextField) {
