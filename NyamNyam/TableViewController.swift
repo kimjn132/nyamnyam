@@ -86,7 +86,7 @@ class TableViewController: UITableViewController {
           
             let noDataImg = UIImageView(frame: CGRect(x: 0, y: 250, width: tvListView.bounds.size.width, height: tvListView.bounds.size.height - 600))
             noDataImg.contentMode = .scaleAspectFit
-            noDataImg.image = UIImage(named: "bear")
+            noDataImg.image = UIImage(named: "chuloop")
             noDataView.addSubview(noDataImg)
             
             let noDataLabel = UILabel(frame: CGRect(x: 0, y: 100, width: tvListView.bounds.size.width, height: tvListView.bounds.size.height))
