@@ -11,7 +11,7 @@ import SQLite3
 import AVFoundation
 import Photos
 
-class AddViewController: UIViewController, UITextViewDelegate{
+class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate{
     
     @IBOutlet weak var tfTitle: UITextField!
     @IBOutlet weak var imageView: UIImageView!
@@ -78,10 +78,11 @@ class AddViewController: UIViewController, UITextViewDelegate{
 //        lblAddress.layer.cornerRadius = 5
         
         tvContent.delegate = self
+        tfTitle.delegate = self
         //글자 수 제한 countlabel 초기 설정
         countLabel.text = "\(maxCharacters)/60"
         tvContent.text = "리뷰를 작성하세요."
-        tvContent.textColor = UIColor.lightGray
+        tvContent.textColor = UIColor.systemGray4
 //        tvContent.texts
 //        tvContent.layer.borderColor = UIColor.systemGray4.cgColor
 //        tvContent.layer.borderWidth = 0.3
@@ -102,6 +103,12 @@ class AddViewController: UIViewController, UITextViewDelegate{
         self.view.endEditing(true)
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        // 키보드 내리면서 동작
+        textField.resignFirstResponder()
+        return true
+    }
+
     
     //글자 수 제한 감지
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -366,7 +373,7 @@ class AddViewController: UIViewController, UITextViewDelegate{
             lblAddress.textColor = UIColor.lightGray
         } else {
             lblAddress.text = " \(Message.address)"
-            lblAddress.textColor = UIColor.black
+            lblAddress.textColor = UIColor.secondaryLabel
         }
         
         // 옵저버 등록
@@ -623,7 +630,7 @@ class AddViewController: UIViewController, UITextViewDelegate{
         
         if tvContent.text.isEmpty{
             tvContent.text = "리뷰를 작성하세요."
-            tvContent.textColor = UIColor.lightGray
+            tvContent.textColor = UIColor.systemGray4
         }
         
     }
@@ -631,9 +638,9 @@ class AddViewController: UIViewController, UITextViewDelegate{
     // 2. 사용자가 입력을 시작한 경우 placeholder를 비운다.
     func textViewDidBeginEditing(_ textView: UITextView) {
         
-        if tvContent.textColor == UIColor.lightGray{
+        if tvContent.textColor == UIColor.systemGray4{
             tvContent.text = nil
-            tvContent.textColor = UIColor.black
+            tvContent.textColor = UIColor.secondaryLabel
         }
         
     }
@@ -665,7 +672,7 @@ class AddViewController: UIViewController, UITextViewDelegate{
         
 //        tvContent.delegate = self
         tvContent.text = "리뷰를 작성하세요."
-        tvContent.textColor = UIColor.lightGray
+        tvContent.textColor = UIColor.systemGray4
         
         lblAddress.text = " + 버튼을 눌러 위치를 추가하세요."
         lblAddress.textColor = UIColor.lightGray
