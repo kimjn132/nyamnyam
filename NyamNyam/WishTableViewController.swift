@@ -11,8 +11,7 @@ import SQLite3
 class WishTableViewController: UITableViewController {
     
     @IBOutlet var tvListView: UITableView!
-    var db: OpaquePointer?
-    var wishList : [WishList] = []
+    var wishList : [Wish] = []
     var imageData:NSData? = nil
     
     override func viewDidLoad() {
@@ -20,58 +19,22 @@ class WishTableViewController: UITableViewController {
 
         tvListView.rowHeight = 140
         
-        // SQLite 설정하기
-        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("WishData.sqlite")
-        
-        // 설정한 것 실행(파일 연결)
-        if sqlite3_open(fileURL.path(), &db) != SQLITE_OK{
-            //if error 걸리면
-            print("Error opening database")
-        }
-        
-        //shared preferences를 주로 사용, 고객들 개인 정보를 서버에 안두고 분산하기
-        
-        // Table 만들기
-        if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS wish (wId INTEGER PRIMARY KEY AUTOINCREMENT, wName TEXT, wAddress TEXT, wImage BLOB, wTag TEXT)", nil, nil, nil) != SQLITE_OK{
-            let errMsg = String(cString: sqlite3_errmsg(db)!)
-            print("Error create table : \(errMsg)")
-            return  //에러 나면은 실행 안한다.
-        }
-        
     } // viewDidLoad
     
     override func viewWillAppear(_ animated: Bool) {
         readValues()
-    }
+    } // viewWillAppear
     
     func readValues(){
+        let wishDB = WishDB()
         wishList.removeAll()
         
-        var stmt: OpaquePointer?
-        let queryString = "SELECT * FROM wish order by wId desc"
+        wishDB.delegate = self
         
-        if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
-            let errMsg = String(cString: sqlite3_errmsg(db)!)
-            print("Error preparing select : \(errMsg)")
-            return  //에러 나면은 실행 안한다.
-        }
-        
-        //data 하나씩 불러오기
-        while(sqlite3_step(stmt) == SQLITE_ROW){
-            
-            let id = sqlite3_column_int(stmt, 0)    //id 값 가져오기
-            let wName = String(cString: sqlite3_column_text(stmt, 1))
-            let wAddress = String(cString: sqlite3_column_text(stmt, 2))
-            let wImage = Data(bytes: sqlite3_column_blob(stmt, 3), count: Int(sqlite3_column_bytes(stmt, 3)))
-            let wTag = String(cString: sqlite3_column_text(stmt, 4))
-            
-            //while문 돌면서 studentList에 담는다
-            wishList.append(WishList(wId: Int(id), wName: wName, wAddress: wAddress, wImage: wImage, wTag: wTag))
-        }
-        
-        self.tvListView.reloadData()        // 하단에 numberOfSection , tableView 모두 실행된다.
+        wishDB.queryDB()
+        tvListView.reloadData()
 
-    }
+    } // readValues
 
     // MARK: - Table view data source
 
@@ -100,10 +63,10 @@ class WishTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myWishCell", for: indexPath) as! MyTableViewCell
 
         // Configure the cell...
-        cell.myWishTitle.text = wishList[indexPath.row].wName
-        cell.myWishAddress.text = wishList[indexPath.row].wAddress
-        cell.myWishTag.text = "#\(wishList[indexPath.row].wTag)"
-        cell.myWishImage.image = UIImage(data: wishList[indexPath.row].wImage!)
+        cell.myWishTitle.text = wishList[indexPath.row].name
+        cell.myWishAddress.text = wishList[indexPath.row].address
+        cell.myWishTag.text = "#\(wishList[indexPath.row].category)"
+        cell.myWishImage.image = UIImage(data: wishList[indexPath.row].image!)
         
         return cell
     }
@@ -122,8 +85,27 @@ class WishTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            let id = wishList[indexPath.row].wId
-            deleteAction(id)
+            let wishDB = WishDB()
+            let id = wishList[indexPath.row].id
+            wishDB.delegate = self
+            
+            let result = wishDB.deleteDB(id: id)
+            if result{
+                let resultAlert = UIAlertController(title: "완료", message: "삭제되었습니다.", preferredStyle: .alert)
+                let onAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in
+                    self.navigationController?.popViewController(animated: true)
+                })
+                
+                resultAlert.addAction(onAction)
+                present(resultAlert, animated: true)
+            } else {
+                let resultAlert = UIAlertController(title: "실패", message: "에러가 발생되었습니다.", preferredStyle: .alert)
+                let onAction = UIAlertAction(title: "OK", style: .default)
+                
+                resultAlert.addAction(onAction)
+                present(resultAlert, animated: true)
+            }
+            
             readValues()
             
         } else if editingStyle == .insert {
@@ -131,23 +113,6 @@ class WishTableViewController: UITableViewController {
         }    
     }
     
-    // DB에서 삭제
-    func deleteAction(_ id: Int){
-        
-        var stmt: OpaquePointer?
-       
-        //-1은 한글 때문이다. 한글은 2byte이기 때문에..
-        let queryString = "DELETE FROM wish WHERE wId = ?"
-        
-        sqlite3_prepare(db, queryString, -1, &stmt, nil)
-        
-        
-        sqlite3_bind_int(stmt, 1, Int32(id))
-        
-        sqlite3_step(stmt)
-    }
-    
-
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
@@ -172,8 +137,23 @@ class WishTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         
         
+        let addViewController = segue.destination as! WishAddViewController
+        
+        if segue.identifier == "sgDetail"{
+            let cell = sender as! MyTableViewCell
+            let indexpath = tvListView.indexPath(for: cell)
+            addViewController.sgclicked = true
+            addViewController.sgId = wishList[indexpath!.row].id
+            addViewController.sgTitle = wishList[indexpath!.row].name
+            Message.wishaddress = wishList[indexpath!.row].address
+            addViewController.sgImage = wishList[indexpath!.row].image
+            addViewController.sgTag = wishList[indexpath!.row].category
+            
+        
+        }
+        
     }
     
 
-}
-//
+} // WishTableViewController
+

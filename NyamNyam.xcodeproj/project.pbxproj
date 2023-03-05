@@ -32,8 +32,10 @@
 		688AC9A329ACDF890038965D /* KaKaoAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC9A029ACDF890038965D /* KaKaoAddressViewController.swift */; };
 		688AC9A529ACE03C0038965D /* KakaoZipCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */; };
 		BC2AF5E829B37CD800942180 /* WishKakaoZipCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2AF5E729B37CD800942180 /* WishKakaoZipCode.swift */; };
+		BC6F187E29B4B2A900203E3C /* WishDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6F187D29B4B2A900203E3C /* WishDB.swift */; };
+		BC6F188029B4B40400203E3C /* Wish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6F187F29B4B40400203E3C /* Wish.swift */; };
+		BC6F188229B4BF1400203E3C /* WishExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6F188129B4BF1400203E3C /* WishExtension.swift */; };
 		BC7C44B329B1F7860068EDC5 /* WishAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7C44B029B1F7850068EDC5 /* WishAddViewController.swift */; };
-		BC7C44B429B1F7860068EDC5 /* WishList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7C44B129B1F7850068EDC5 /* WishList.swift */; };
 		BC7C44B529B1F7860068EDC5 /* WishTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7C44B229B1F7850068EDC5 /* WishTableViewController.swift */; };
 		BC7C44B729B1F78D0068EDC5 /* ImageInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7C44B629B1F78D0068EDC5 /* ImageInsert.swift */; };
 		BC7C44B929B26FB00068EDC5 /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7C44B829B26FB00068EDC5 /* MyTableViewCell.swift */; };
@@ -67,8 +69,10 @@
 		688AC9A029ACDF890038965D /* KaKaoAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoAddressViewController.swift; sourceTree = "<group>"; };
 		688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakaoZipCodeVC.swift; sourceTree = "<group>"; };
 		BC2AF5E729B37CD800942180 /* WishKakaoZipCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishKakaoZipCode.swift; sourceTree = "<group>"; };
+		BC6F187D29B4B2A900203E3C /* WishDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishDB.swift; sourceTree = "<group>"; };
+		BC6F187F29B4B40400203E3C /* Wish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wish.swift; sourceTree = "<group>"; };
+		BC6F188129B4BF1400203E3C /* WishExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishExtension.swift; sourceTree = "<group>"; };
 		BC7C44B029B1F7850068EDC5 /* WishAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishAddViewController.swift; sourceTree = "<group>"; };
-		BC7C44B129B1F7850068EDC5 /* WishList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishList.swift; sourceTree = "<group>"; };
 		BC7C44B229B1F7850068EDC5 /* WishTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishTableViewController.swift; sourceTree = "<group>"; };
 		BC7C44B629B1F78D0068EDC5 /* ImageInsert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageInsert.swift; sourceTree = "<group>"; };
 		BC7C44B829B26FB00068EDC5 /* MyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
@@ -90,6 +94,7 @@
 			children = (
 				688AC99C29ACDF430038965D /* Message.swift */,
 				26158E7129ACCB7B0082CE75 /* Store.swift */,
+				BC6F187F29B4B40400203E3C /* Wish.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -98,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				26158E6B29ACC9DE0082CE75 /* StoreDB.swift */,
+				BC6F187D29B4B2A900203E3C /* WishDB.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -140,8 +146,8 @@
 				16A1D93929AF1AC90010C328 /* CollectionViewCell.swift */,
 				16A1D93829AF1AC90010C328 /* CollectionViewController.swift */,
 				BC7C44B029B1F7850068EDC5 /* WishAddViewController.swift */,
-				BC7C44B129B1F7850068EDC5 /* WishList.swift */,
 				BC7C44B229B1F7850068EDC5 /* WishTableViewController.swift */,
+				BC6F188129B4BF1400203E3C /* WishExtension.swift */,
 				BC7C44B629B1F78D0068EDC5 /* ImageInsert.swift */,
 				BC7C44B829B26FB00068EDC5 /* MyTableViewCell.swift */,
 				2669A98D29B4A42800C57EC7 /* UpdateViewController.swift */,
@@ -245,10 +251,11 @@
 				688AC9A329ACDF890038965D /* KaKaoAddressViewController.swift in Sources */,
 				688AC9A229ACDF890038965D /* AddViewController.swift in Sources */,
 				26158E7229ACCB7B0082CE75 /* Store.swift in Sources */,
-				BC7C44B429B1F7860068EDC5 /* WishList.swift in Sources */,
+				BC6F188029B4B40400203E3C /* Wish.swift in Sources */,
 				26A31907298AA0F400681392 /* AppDelegate.swift in Sources */,
 				BC7C44B729B1F78D0068EDC5 /* ImageInsert.swift in Sources */,
 				26A31909298AA0F400681392 /* SceneDelegate.swift in Sources */,
+				BC6F187E29B4B2A900203E3C /* WishDB.swift in Sources */,
 				BC2AF5E829B37CD800942180 /* WishKakaoZipCode.swift in Sources */,
 				26158E7029ACCA170082CE75 /* TableViewCell.swift in Sources */,
 				BC7C44B329B1F7860068EDC5 /* WishAddViewController.swift in Sources */,
@@ -259,6 +266,7 @@
 				16A1D93B29AF1AC90010C328 /* CollectionViewCell.swift in Sources */,
 				688AC9A529ACE03C0038965D /* KakaoZipCodeVC.swift in Sources */,
 				26158E6C29ACC9DE0082CE75 /* StoreDB.swift in Sources */,
+				BC6F188229B4BF1400203E3C /* WishExtension.swift in Sources */,
 				688AC9A129ACDF890038965D /* ReviewViewController.swift in Sources */,
 				2669A98E29B4A42800C57EC7 /* UpdateViewController.swift in Sources */,
 			);
@@ -407,13 +415,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 498J9TKTSM;
+				DEVELOPMENT_TEAM = 5G98P93N97;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NyamNyam/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "츄룹";
 				INFOPLIST_KEY_NSCameraUsageDescription = "게시물 업로드를 위해 카메라 접근 권한이 필요합니다. 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "2게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "1게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -425,7 +433,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.swiftlec.NyamNyam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiftlec.NyamNyam1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -445,8 +453,8 @@
 				INFOPLIST_FILE = NyamNyam/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "츄룹";
 				INFOPLIST_KEY_NSCameraUsageDescription = "게시물 업로드를 위해 카메라 접근 권한이 필요합니다. 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "2게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "1게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

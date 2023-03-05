@@ -15,8 +15,8 @@ class WishAddViewController: UIViewController {
     @IBOutlet weak var lbltitle: UITextField!
     @IBOutlet weak var imgImage: UIImageView!
     @IBOutlet weak var lblAddress: UILabel!
- 
     @IBOutlet var tagButtons: [UIButton]!
+    
     
     var db:OpaquePointer?
     
@@ -24,8 +24,13 @@ class WishAddViewController: UIViewController {
     
     let ls = ImageInsert()
     
-//    let lbAddress = UILabel()
-//    let btnPostcode = UIButton(type: .system)
+    // sgDetail을 통해 넘겨받은 값
+    var sgclicked:Bool = false
+    var sgId:Int?
+    var sgTitle:String?
+    var sgImage:Data?
+    var sgTag:String?
+
     var imageData : NSData? = nil
     let photo = UIImagePickerController() // 앨범 이동
     
@@ -35,17 +40,36 @@ class WishAddViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("WishData.sqlite") // create true해놓으면 앱 뜰때마다 바뀜 in의 마스크는 보안용
         
-        // file만든걸 실행시켜야지 (exec)
-        sqlite3_open(fileURL.path(), &db) // open한다
-        
-        // 초기화
-        imgImage.image = UIImage(named: "한식.png")
-        tagButtons[0].isSelected = true
+        // sgDetail로 화면 넘어온 경우
+        if sgclicked == true {
+            lbltitle.text = sgTitle
+            lblAddress.text = Message.wishaddress
+            imgImage.image = UIImage(data: sgImage!)
+            myTag = sgTag!
+            
+            if sgTag == "한식"{
+                tagButtons[0].isSelected = true
+            }else if sgTag == "중식"{
+                tagButtons[1].isSelected = true
+            }else if sgTag == "양식"{
+                tagButtons[2].isSelected = true
+            }else if sgTag == "일식"{
+                tagButtons[3].isSelected = true
+            }else if sgTag == "분식"{
+                tagButtons[4].isSelected = true
+            }else if sgTag == "카페"{
+                tagButtons[5].isSelected = true
+            }else{
+                tagButtons[6].isSelected = true
+            }
+        }else{ // + barbutton으로 화면 넘어온 경우
+            imgImage.image = UIImage(named: "한식.png")
+            tagButtons[0].isSelected = true
+        }
         
         self.photo.delegate = self
-    }
+    } // viewDidLoad
     
     
     //키보드 내리기
@@ -134,7 +158,7 @@ class WishAddViewController: UIViewController {
     @IBAction func btnSelectTag(_ sender: UIButton) {
         
         if indexOfBtns != nil{
-
+            
             if !sender.isSelected {
                 for unselectIndex in tagButtons.indices {
                     tagButtons[unselectIndex].isSelected = false
@@ -150,26 +174,70 @@ class WishAddViewController: UIViewController {
             indexOfBtns = tagButtons.firstIndex(of: sender)
         }
         
-        if indexOfBtns == 0{
-            myTag = "한식"
-        }else if indexOfBtns == 1{
-            myTag = "중식"
-        }else if indexOfBtns == 2{
-            myTag = "양식"
-        }else if indexOfBtns == 3{
-            myTag = "일식"
-        }else if indexOfBtns == 4{
-            myTag = "분식"
+        if sgclicked {
+            if indexOfBtns == 0{
+                myTag = "한식"
+            }else if indexOfBtns == 1{
+                myTag = "중식"
+            }else if indexOfBtns == 2{
+                myTag = "양식"
+            }else if indexOfBtns == 3{
+                myTag = "일식"
+            }else if indexOfBtns == 4{
+                myTag = "분식"
+            }else if indexOfBtns == 5{
+                myTag = "카페"
+            }else{
+                myTag = "기타"
+            }
         }else{
-            myTag = "카페"
+            if indexOfBtns == 0{
+                myTag = "한식"
+                if imageData == nil{
+                    imgImage.image = UIImage(named: "한식.png")
+                }
+            }else if indexOfBtns == 1{
+                myTag = "중식"
+                if imageData == nil{
+                    imgImage.image = UIImage(named: "중식.png")
+                }
+            }else if indexOfBtns == 2{
+                myTag = "양식"
+                if imageData == nil{
+                    imgImage.image = UIImage(named: "양식.png")
+                }
+            }else if indexOfBtns == 3{
+                myTag = "일식"
+                if imageData == nil{
+                    imgImage.image = UIImage(named: "일식.png")
+                }
+            }else if indexOfBtns == 4{
+                myTag = "분식"
+                if imageData == nil{
+                    imgImage.image = UIImage(named: "분식.png")
+                }
+            }else if indexOfBtns == 5{
+                myTag = "카페"
+                if imageData == nil{
+                    imgImage.image = UIImage(named: "카페.png")
+                }
+            }else{
+                myTag = "기타"
+                if imageData == nil{
+                    imgImage.image = UIImage(named: "기타.png")
+                }
+            }
         }
-        
-    }
+    } // btnSelectTag
     
     @IBAction func btnDone(_ sender: UIButton) {
         
-        if lbltitle.text?.trimmingCharacters(in: .whitespaces) != "" && lblAddress.text?.trimmingCharacters(in: .whitespaces) != "'+'를 눌러 위치를 추가해주세요."{
+        if lbltitle.text?.trimmingCharacters(in: .whitespaces) != "" && lblAddress.text?.trimmingCharacters(in: .whitespaces) != "'+'를 눌러 위치를 추가해주세요." && sgclicked == false{
             dbInsert()
+        }
+        
+        if sgclicked {
+            dbUpdate()
         }
         
         if lbltitle.text?.trimmingCharacters(in: .whitespaces) == ""{ // 맛집 텍스트필드 미입력시 Alert
@@ -215,9 +283,7 @@ class WishAddViewController: UIViewController {
     
     // db에 정보 저장
     func dbInsert(){
-        var stmt: OpaquePointer?
-        // 한글처리 !! <<<
-        let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self) // -1부터 시작지점을 해주면 2글자씩 읽음(한글)
+        let wishDB = WishDB()
         
         let title = lbltitle.text?.trimmingCharacters(in: .whitespaces)
         let address = lblAddress.text?.trimmingCharacters(in: .whitespaces)
@@ -233,30 +299,71 @@ class WishAddViewController: UIViewController {
             data = image!.pngData()! as NSData
         }
         
-        let queryString = "INSERT INTO wish (wName, wAddress, wImage, wTag) VALUES (?,?,?,?)"
+        wishDB.delegate = self
         
-        sqlite3_prepare(db, queryString, -1, &stmt, nil)
+        let result = wishDB.insertDB(name: title!, address: address!, data: data!, category: tag)
         
-        // ?에 data넣기
-        sqlite3_bind_text(stmt , 1, title, -1, SQLITE_TRANSIENT)// 넣을 데이터가 다 text라 bint_text임 아닐경우에는 찾아봐야함
-        sqlite3_bind_text(stmt , 2, address, -1, SQLITE_TRANSIENT)
-        sqlite3_bind_blob(stmt, 3, data.bytes, Int32(Int64(data.length)), SQLITE_TRANSIENT)
-        sqlite3_bind_text(stmt , 4, tag, -1, SQLITE_TRANSIENT)
-        
-        sqlite3_step(stmt)
-        
-        let resultAlert = UIAlertController(title: "결과", message: "입력 되었습니다", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "네, 알겠습니다", style: .default, handler: {ACTION in
-            self.navigationController?.popViewController(animated: true)
-        })
-        
-        resultAlert.addAction(okAction)
-        present(resultAlert, animated: true)
+        if result{
+            let resultAlert = UIAlertController(title: "완료", message: "입력되었습니다", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in
+                self.navigationController?.popViewController(animated: true)
+            })
+            
+            resultAlert.addAction(okAction)
+            present(resultAlert, animated: true)
+        }else {
+            let resultAlert = UIAlertController(title: "실패", message: "에러가 발생되었습니다.", preferredStyle: .alert)
+            let onAction = UIAlertAction(title: "OK", style: .default)
+            
+            resultAlert.addAction(onAction)
+            present(resultAlert, animated: true)
+        }
         
         Message.wishaddress = "'+'를 눌러 위치를 추가해주세요."
-        Message.address = ""
     
     }//dbInsert
+    
+    func dbUpdate(){
+        let wishDB = WishDB()
+        
+        let title = lbltitle.text?.trimmingCharacters(in: .whitespaces)
+        let address = lblAddress.text?.trimmingCharacters(in: .whitespaces)
+        let tag = myTag
+        let wid = sgId!
+        var image : UIImage!
+        var data : NSData!
+        
+        if imageData != nil { // 사용자가 다른 사진을 선택
+            image = UIImage(data: imageData! as Data)
+            data = image!.pngData()! as NSData
+        }else{ // 사용자가 다른 사진을 선택하지 않으면 원래 사진 그대로
+            image = UIImage(data: sgImage!)
+            data = image!.pngData()! as NSData
+        }
+        
+        wishDB.delegate = self
+        
+        let result = wishDB.updateDB(name: title!, address: address!, data: data, category: tag, id: wid)
+        
+        if result{
+            let resultAlert = UIAlertController(title: "완료", message: "수정되었습니다", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in
+                self.navigationController?.popViewController(animated: true)
+            })
+            
+            resultAlert.addAction(okAction)
+            present(resultAlert, animated: true)
+        }else {
+            let resultAlert = UIAlertController(title: "실패", message: "에러가 발생되었습니다.", preferredStyle: .alert)
+            let onAction = UIAlertAction(title: "OK", style: .default)
+            
+            resultAlert.addAction(onAction)
+            present(resultAlert, animated: true)
+        }
+        
+        Message.wishaddress = "'+'를 눌러 위치를 추가해주세요."
+        sgclicked = false
+    }
         
         /*
          // MARK: - Navigation
@@ -287,16 +394,17 @@ class WishAddViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         
         super.viewWillDisappear(animated)
-        print("viewWillDisappear")
-        Message.wishaddress = "'+'를 눌러 위치를 추가해주세요."
         
+        if self.isMovingFromParent{
+            Message.wishaddress = "'+'를 눌러 위치를 추가해주세요."
+            sgclicked = false
+        }
     }//viewwillDisappear
     
     // 뷰 종료 상태
     override func viewDidDisappear(_ animated: Bool) {
         
         super.viewDidDisappear(animated)
-        print("viewDidDiappear")
         
         //뷰 컨트롤러 포그라운드, 백그라운드 상태 체크 해제
         NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -312,9 +420,8 @@ class WishAddViewController: UIViewController {
 //        address label 채워준다.
         
         lblAddress.text = Message.wishaddress
-        print("view will appear: \(Message.wishaddress)")
 
-    }
+    } // viewWillAppear
 
     //포그라운드 및 백그라운드 상태 처리 메소드 작성
     @objc func checkForeground(){
@@ -333,12 +440,12 @@ extension WishAddViewController: UIImagePickerControllerDelegate & UINavigationC
         if let img = info[UIImagePickerController.InfoKey.originalImage]{
             
             // [앨범에서 선택한 사진 정보 확인]
-            print("")
-            print("====================================")
-            print("[A_Image >> imagePickerController() :: 앨범에서 선택한 사진 정보 확인 및 사진 표시 실시]")
-            //print("[사진 정보 :: ", info)
-            print("====================================")
-            print("")
+//            print("")
+//            print("====================================")
+//            print("[A_Image >> imagePickerController() :: 앨범에서 선택한 사진 정보 확인 및 사진 표시 실시]")
+//            //print("[사진 정보 :: ", info)
+//            print("====================================")
+//            print("")
             
             // [이미지 뷰에 앨범에서 선택한 사진 표시 실시]
             imgImage.image = img as? UIImage
@@ -356,11 +463,11 @@ extension WishAddViewController: UIImagePickerControllerDelegate & UINavigationC
     // MARK: [사진, 비디오 선택을 취소했을 때 호출되는 메소드]
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
-        print("")
-        print("===============================")
-        print("[A_Image >> imagePickerControllerDidCancel() :: 사진, 비디오 선택 취소 수행 실시]")
-        print("===============================")
-        print("")
+//        print("")
+//        print("===============================")
+//        print("[A_Image >> imagePickerControllerDidCancel() :: 사진, 비디오 선택 취소 수행 실시]")
+//        print("===============================")
+//        print("")
         
         // 이미지 파커 닫기
         self.dismiss(animated: true, completion: nil)
