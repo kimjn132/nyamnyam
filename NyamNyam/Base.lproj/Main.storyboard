@@ -120,7 +120,7 @@
                                                 <rect key="frame" x="0.0" y="71" width="361.33333333333331" height="50"/>
                                                 <subviews>
                                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4NB-WB-OfE">
-                                                        <rect key="frame" x="0.0" y="18.333333333333258" width="361.33333333333331" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="361.33333333333331" height="50"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dub-oP-X5i">
                                                                 <rect key="frame" x="0.0" y="0.0" width="615" height="50"/>
@@ -569,7 +569,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gsw-9w-6nY">
-                                                <rect key="frame" x="0.0" y="27.333333333333343" width="361" height="200"/>
+                                                <rect key="frame" x="0.0" y="27.333333333333343" width="361" height="199.99999999999997"/>
                                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="Sxl-du-EXd"/>
@@ -819,13 +819,21 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="1" minY="1" maxX="1" maxY="1"/>
                         </collectionViewFlowLayout>
-                        <label key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7jd-4x-1f5">
+                        <stackView key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" id="Rgy-qW-pvK">
                             <rect key="frame" x="0.0" y="-103" width="393" height="852"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chuloop" translatesAutoresizingMaskIntoConstraints="NO" id="P6F-wz-qjq">
+                                    <rect key="frame" x="58.666666666666657" y="0.0" width="276" height="426"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ouT-hC-sqZ">
+                                    <rect key="frame" x="176" y="426" width="41.333333333333343" height="426"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="myCell" id="zbT-ey-Ma5" customClass="CollectionViewCell" customModule="NyamNyam">
                                 <rect key="frame" x="1" y="1" width="128" height="128"/>
@@ -850,13 +858,14 @@
                     <navigationItem key="navigationItem" id="lg4-PI-7lO"/>
                     <connections>
                         <outlet property="cvList" destination="DfD-bR-T10" id="V3L-Gu-4Tb"/>
-                        <outlet property="noDataLabel" destination="7jd-4x-1f5" id="IoU-TT-7BB"/>
+                        <outlet property="noDataImg" destination="P6F-wz-qjq" id="hfz-IM-ohq"/>
+                        <outlet property="noDataLabel" destination="ouT-hC-sqZ" id="f41-ia-cgB"/>
                         <segue destination="VO1-Zn-jcP" kind="presentation" identifier="sgTV" id="xho-0A-9Wt"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9NL-O0-9EJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="972" y="701"/>
+            <point key="canvasLocation" x="971.7557251908396" y="700.70422535211276"/>
         </scene>
         <!--Wish Table View Controller-->
         <scene sceneID="M9X-TO-2Sh">
@@ -1225,6 +1234,7 @@
         <image name="baseline_loyalty_black_18pt_1x" width="18" height="18"/>
         <image name="baseline_queue_black_18pt_1x" width="18" height="18"/>
         <image name="camera.fill" catalog="system" width="128" height="93"/>
+        <image name="chuloop" width="276" height="422"/>
         <image name="heart.circle.fill" catalog="system" width="128" height="123"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="sample.jpeg" width="512" height="512"/>

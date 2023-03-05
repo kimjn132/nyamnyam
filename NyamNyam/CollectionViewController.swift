@@ -14,6 +14,7 @@ class CollectionViewController: UICollectionViewController {
     
     @IBOutlet var cvList: UICollectionView! // CollectionView
     @IBOutlet weak var noDataLabel: UILabel! // 저장된 사진이 없을 경우 나타낼 Label
+    @IBOutlet weak var noDataImg: UIImageView! // 저장된 사진이 없을 경우 나타낼 ImgView
     
     var storeList: [Store] = [] // DB
     var selectedId: Int? // Modal에 넘겨줄 ID
@@ -45,19 +46,28 @@ class CollectionViewController: UICollectionViewController {
         cvList.reloadData()
     }
     
-    // 데이터가 없을 시 Label을 보여주고 있으면 Data를 보여줌
+    // 데이터가 없을 시 Label과 ImageView를 보여주고 있으면 Data를 보여줌
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
       if storeList.count > 0 {
           collectionView.backgroundView = nil
           return 1
       } else {
-          let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
-          noDataLabel.text = "데이터가 없습니다."
+          let noDataView = UIView(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
+        
+          let noDataImg = UIImageView(frame: CGRect(x: 0, y: 250, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height - 600))
+          noDataImg.contentMode = .scaleAspectFit
+          noDataImg.image = UIImage(named: "chuloop")
+          noDataView.addSubview(noDataImg)
+          
+          let noDataLabel = UILabel(frame: CGRect(x: 0, y: 100, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
+          noDataLabel.text = "저장된 사진이 없습니다"
           noDataLabel.textAlignment = .center
-          collectionView.backgroundView = noDataLabel
+          noDataView.addSubview(noDataLabel)
+          
+          collectionView.backgroundView = noDataView
           return 0
       }
-    }
+  }
     
     // 전체 CollectionView Cell의 개수
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
