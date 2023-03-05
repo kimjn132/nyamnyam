@@ -178,6 +178,7 @@ class WishTableViewController: UITableViewController {
             let cell = sender as! MyTableViewCell
             let indexpath = tvListView.indexPath(for: cell)
             addViewController.sgclicked = true
+            addViewController.sgId = wishList[indexpath!.row].wId
             addViewController.sgTitle = wishList[indexpath!.row].wName
             Message.wishaddress = wishList[indexpath!.row].wAddress
             addViewController.sgImage = wishList[indexpath!.row].wImage
