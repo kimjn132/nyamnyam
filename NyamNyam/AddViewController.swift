@@ -192,7 +192,6 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
             
         }
 
-
     }//btnChooseCategory
     
     // 이미지 추가 버튼 클릭
@@ -268,8 +267,6 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
             initPage()
         }
 
-        
-
     }
     
 //    @IBAction func btnDone(_ sender: UIButton) {
@@ -290,8 +287,6 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         present(nextVC, animated: true)
         
     }//btnAddAddress
-    
-    
 
     // objc funcs ===================================================
     //포그라운드 및 백그라운드 상태 처리 메소드 작성
@@ -535,8 +530,9 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         
         tvContent.resignFirstResponder()
         
-        // 뷰 텍스트 초기화
+        // 뷰 초기화
         tfTitle.text = ""
+        imageData = nil
         imageView.image = UIImage(named: "기타.png")
         tvContent.text = ""
         lblAddress.text = ""
