@@ -55,7 +55,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         
 //        editViewController.textMessage = tfMessage.text!
 //        editViewController.isOn = isOn
-//        //연결시키기
+//        //연결시ㅗ기
 //        editViewController.delegate = self
         
 //    }
@@ -95,19 +95,31 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         // 카테고리 버튼 중 하나 기본 선택
 //        radioButtons[0].isSelected = true
         
+        // ScrollView에서 키보드 내리기
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:))))
+        
     }//viewDidLoad
     
-    //키보드 내리기
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //self == java의 this
-        self.view.endEditing(true)
+    // 터치가 발생할때 핸들러 캐치
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            view.endEditing(true) // todo...
+        }
+        sender.cancelsTouchesInView = false
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        // 키보드 내리면서 동작
-        textField.resignFirstResponder()
-        return true
-    }
+        
+//    //키보드 내리기 - ScrollView에서는 작동 안 됨!
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        //self == java의 this
+//        self.view.endEditing(true)
+//    }
+    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+//        // 키보드 내리면서 동작
+//        textField.resignFirstResponder()
+//        return true
+//    }
 
     
     //글자 수 제한 감지
@@ -403,9 +415,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
 //        }
 //    }
 //
-//    @objc func keyboardDown() {
-//        self.view.transform = .identity
-//    }
+
 
     
     // MARK: - Navigation
