@@ -79,16 +79,24 @@ class TableViewController: UITableViewController {
     // Table column 수
     override func numberOfSections(in tableView: UITableView) -> Int {
         if storeList.count > 0 {
-                  tableView.backgroundView = nil
-                  return 1
-              } else {
-                  let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-                  noDataLabel.text = "데이터가 없습니다."
-                  noDataLabel.textColor = .black
-                  noDataLabel.textAlignment = .center
-                  tableView.backgroundView = noDataLabel
-                  return 0
-              }
+            tvListView.backgroundView = nil
+            return 1
+        } else {
+            let noDataView = UIView(frame: CGRect(x: 0, y: 0, width: tvListView.bounds.size.width, height: tvListView.bounds.size.height))
+          
+            let noDataImg = UIImageView(frame: CGRect(x: 0, y: 250, width: tvListView.bounds.size.width, height: tvListView.bounds.size.height - 600))
+            noDataImg.contentMode = .scaleAspectFit
+            noDataImg.image = UIImage(named: "bear")
+            noDataView.addSubview(noDataImg)
+            
+            let noDataLabel = UILabel(frame: CGRect(x: 0, y: 100, width: tvListView.bounds.size.width, height: tvListView.bounds.size.height))
+            noDataLabel.text = "저장된 맛집이 없습니다"
+            noDataLabel.textAlignment = .center
+            noDataView.addSubview(noDataLabel)
+            
+            tvListView.backgroundView = noDataView
+            return 0
+        }
 
     }
 
