@@ -1000,7 +1000,7 @@
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="T4h-DR-Lst">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="한식.png" translatesAutoresizingMaskIntoConstraints="NO" id="T4h-DR-Lst">
                                                 <rect key="frame" x="0.0" y="28" width="361" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                                 <constraints>
@@ -1240,7 +1240,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="YXp-EX-izs"/>
+        <segue reference="CwD-2O-9gs"/>
         <segue reference="g3s-Iw-5LR"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -1253,7 +1253,7 @@
         <image name="chuloop" width="276" height="422"/>
         <image name="heart.circle.fill" catalog="system" width="128" height="123"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="sample.jpeg" width="512" height="512"/>
+        <image name="한식.png" width="650" height="450"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
