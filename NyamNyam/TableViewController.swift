@@ -109,6 +109,7 @@ class TableViewController: UITableViewController {
     
     //셀 정의
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as! TableViewCell
 
 
@@ -187,10 +188,45 @@ class TableViewController: UITableViewController {
     */
 
     
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "sgDetail"{
+            let cell = sender as! UITableViewCell
+            let indexPath = self.tvListView.indexPath(for: cell)
+            if let navController = segue.destination as? UINavigationController,
+               let detailView = navController.topViewController as? UpdateViewController{
+                
+                detailView.receivedName = storeList[indexPath!.row].name
+                detailView.receivedAddress = storeList[indexPath!.row].address
+                detailView.receivedImage = storeList[indexPath!.row].image as NSData?
+                detailView.receivedContent = storeList[indexPath!.row].contents
+                detailView.receivedCategory = storeList[indexPath!.row].category
+                //>>detailviewcontrolller에서 정의한 property에 데이터 넣어줌
+                
+                print("segue to detail")
+                
+            }else if let detailView = segue.destination as? UpdateViewController{
+                detailView.receivedName = storeList[indexPath!.row].name
+                detailView.receivedAddress = storeList[indexPath!.row].address
+                detailView.receivedImage = storeList[indexPath!.row].image as NSData?
+                detailView.receivedContent = storeList[indexPath!.row].contents
+                detailView.receivedCategory = storeList[indexPath!.row].category
+                //>>detailviewcontrolller에서 정의한 property에 데이터 넣어줌
+                
+                print("segue to detail")
+            }
+            
+            
+            
+        }
+        
+    }
 }
 
 extension TableViewController: StoreModelProtocol {

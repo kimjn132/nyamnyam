@@ -126,7 +126,7 @@ class StoreDB {
     
     
     
-    func updateDB(name: String, address: String, content: String, category: String, id: Int) -> Bool {
+    func updateDB(name: String, address: String, data: AnyObject, content: String, category: String, id: Int) -> Bool {
         var stmt: OpaquePointer?
         let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
         
@@ -136,9 +136,10 @@ class StoreDB {
         
         sqlite3_bind_text(stmt, 1, name, -1, SQLITE_TRANSIENT)
         sqlite3_bind_text(stmt, 2, address, -1, SQLITE_TRANSIENT)
-        sqlite3_bind_text(stmt, 3, content, -1, SQLITE_TRANSIENT)
-        sqlite3_bind_text(stmt, 4, category, -1, SQLITE_TRANSIENT)
-        sqlite3_bind_int(stmt, 5, Int32(id))
+        sqlite3_bind_blob(stmt, 3, data.bytes, Int32(Int64(data.length)), SQLITE_TRANSIENT)
+        sqlite3_bind_text(stmt, 4, content, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(stmt, 5, category, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_int(stmt, 6, Int32(id))
         
         if sqlite3_step(stmt) == SQLITE_DONE {
             return true
