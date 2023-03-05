@@ -172,6 +172,21 @@ class WishTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         
         
+        let addViewController = segue.destination as! WishAddViewController
+        
+        if segue.identifier == "sgDetail"{
+            let cell = sender as! MyTableViewCell
+            let indexpath = tvListView.indexPath(for: cell)
+            addViewController.sgclicked = true
+            addViewController.sgId = wishList[indexpath!.row].wId
+            addViewController.sgTitle = wishList[indexpath!.row].wName
+            Message.wishaddress = wishList[indexpath!.row].wAddress
+            addViewController.sgImage = wishList[indexpath!.row].wImage
+            addViewController.sgTag = wishList[indexpath!.row].wTag
+            
+        
+        }
+        
     }
     
 
