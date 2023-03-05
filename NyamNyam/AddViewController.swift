@@ -18,28 +18,25 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
     @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet weak var tvContent: UITextView!
     
-    // * 필수 입력 설명하는 라벨들
-    @IBOutlet weak var lblImage: UILabel!
-    @IBOutlet weak var lblCategory: UILabel!
-    @IBOutlet weak var lblReview: UILabel!
-    @IBOutlet weak var lblAddress2: UILabel!
-    
-    //글자 수 제한 - 60자
+    // textView 글자 수 제한 - 60자
     @IBOutlet weak var countLabel: UILabel!
     let maxCharacters = 60
     
-    // 한식, 중식, 양식, 분식, 일식, 카페 선택 라디오 버튼
+    //"한식", "중식", "양식", "일식", "분식", "카페", "기타" 선택 라디오 버튼
     @IBOutlet var radioButtons: [UIButton]!
-    //라디오 버튼 선택 index
+    let categories = ["한식", "중식", "양식", "일식", "분식", "카페", "기타"]
+    // 라디오 버튼 선택 index
     var indexOfBtns: Int?
+    // 디폴트 태그: 기타
+    var myTag = "기타"
     
-    var db: OpaquePointer?
+//    var db: OpaquePointer?
 
     let photo = UIImagePickerController()   //앨범 이동
     
-    var myTag = "한식"
-    
     var imageData : NSData? = nil   // 서버로 이미지 등록을 하기 위함
+    
+    let notiCenter = NotificationCenter.default
     
     //segue를 통해 Done 버튼 클릭시 메인 피드로 이동
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -60,6 +57,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         
 //    }
     
+    // override funcs ================================================
     override func viewDidLoad() {
         
         print("viewDidLoad")
@@ -69,82 +67,81 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         // 뷰 텍스트 초기화
         tfTitle.text = ""
         imageView.image = UIImage(named: "기타.png")
-        tvContent.text = ""
-        
-        // 뷰 디자인 초기화
-        
-//        lblAddress.layer.borderColor = UIColor.systemGray4.cgColor
-//        lblAddress.layer.borderWidth = 0.3
-//        lblAddress.layer.cornerRadius = 5
-        
-        tvContent.delegate = self
-        tfTitle.delegate = self
-        //글자 수 제한 countlabel 초기 설정
-        countLabel.text = "\(maxCharacters)/60"
         tvContent.text = "리뷰를 작성하세요."
         tvContent.textColor = UIColor.systemGray4
-//        tvContent.texts
-//        tvContent.layer.borderColor = UIColor.systemGray4.cgColor
-//        tvContent.layer.borderWidth = 0.3
-//        tvContent.layer.cornerRadius = 5
-                
-        // 앨범 컨트롤러 딜리게이트 지정
+        
+        //글자 수 제한 countlabel 초기 설정
+        countLabel.text = "\(maxCharacters)/60"
+        
+        // 딜리게이트 지정
         self.photo.delegate = self
-        
-        
+        tvContent.delegate = self
+        tfTitle.delegate = self
+
         // 카테고리 버튼 중 하나 기본 선택
 //        radioButtons[0].isSelected = true
         
-        // ScrollView에서 키보드 내리기
+        // ScrollView에서 화면 터치시 키보드 내리기
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:))))
         
     }//viewDidLoad
     
-    // 터치가 발생할때 핸들러 캐치
-    @objc func handleTap(sender: UITapGestureRecognizer) {
-        if sender.state == .ended {
-            view.endEditing(true) // todo...
+    // 뷰 화면 표시
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        // 뷰 컨트롤러 포그라운드, 백그라운드 상태 체크 설정 실시
+        NotificationCenter.default.addObserver(self, selector: #selector(checkForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(checkBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        
+        // 포그라운드 처리 실시
+        checkForeground()
+        
+    }//viewDidAppear
+    
+    // 뷰 정지 상태
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        print("viewWillDisappear")
+        
+    }//viewwillDisappear
+    
+    // 뷰 종료 상태
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        super.viewDidDisappear(animated)
+        print("viewDidDiappear")
+        
+        //뷰 컨트롤러 포그라운드, 백그라운드 상태 체크 해제
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
+        
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }//viewDiddisappear
+    
+    // viewWillAppear: 다른 화면에서 다시 올 때 실행된다.
+    // kakao api로 가져온 address를 라벨로 띄워준다.
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        // address label 채워준다.
+        if Message.address.isEmpty {
+            lblAddress.text = " + 버튼을 눌러 위치를 추가하세요."
+            lblAddress.textColor = UIColor.lightGray
+        } else {
+            lblAddress.text = " \(Message.address)"
+            lblAddress.textColor = UIColor.secondaryLabel
         }
-        sender.cancelsTouchesInView = false
+        
     }
     
         
-//    //키보드 내리기 - ScrollView에서는 작동 안 됨!
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        //self == java의 this
-//        self.view.endEditing(true)
-//    }
-    
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-//        // 키보드 내리면서 동작
-//        textField.resignFirstResponder()
-//        return true
-//    }
-
-    
-    //글자 수 제한 감지
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-            let currentText = tvContent.text ?? ""
-            guard let stringRange = Range(range, in: currentText) else { return false }
-            let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
-            return updatedText.count <= maxCharacters
-        }
-    //글자 수 카운트
-        func textViewDidChange(_ textView: UITextView) {
-            //placeholderLabel.isHidden = !textView.text.isEmpty
-            let currentCount = tvContent.text.count
-            let remainingCount = maxCharacters - currentCount
-            countLabel.text = "\(remainingCount)/60"
-        }
-    
-    // tfTitle 수정 시작
-//    @IBAction func tfTitleEditingDidBegin(_ sender: UITextField) {
-//        tfTitle.layer.borderWidth = 0.5
-//        tfTitle.layer.cornerRadius = 5
-//        tfTitle.layer.borderColor = UIColor.systemGray5.cgColor
-//
-//    }
-    
+    // @IBAction funcs ==================================================
     
     // 맛집 카테고리 클릭 버튼
     @IBAction func btnChooseCategory(_ sender: UIButton) {
@@ -165,26 +162,21 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
             sender.isSelected = true
             indexOfBtns = radioButtons.firstIndex(of: sender)
         }
-
-        if indexOfBtns == 0{
-            myTag = "한식"
-        }else if indexOfBtns == 1{
-            myTag = "중식"
-        }else if indexOfBtns == 2{
-            myTag = "양식"
-        }else if indexOfBtns == 3{
-            myTag = "일식"
-        }else if indexOfBtns == 4{
-            myTag = "분식"
-        }else if indexOfBtns == 5{
-            myTag = "카페"
-        }else {
-            myTag = "기타"
+        
+        // myTag에 선택한 카테고리 버튼 값 넣어주기
+        var i = 0
+        for category in categories {
+            if indexOfBtns == i{
+                myTag = category
+//                print("index:", i, "/category", category)
+            }
+            i += 1
         }
         
-//        print("myTag:", myTag, "/ index: ", indexOfBtns)
-        
-        if ((imageView.image == nil) || (imageView.image == UIImage(named: "카페.png"))
+        // imageview에 들어간 image가 없거나 디폴트 이미지일 경우 카테고리 버튼을 눌렀을 때 카테고리에 맞는 디폴트 이미지로 바뀜
+        // 사용자가 직접 넣은 이미지라면 바뀌지 않는다.
+        if ((imageView.image == nil)
+            || (imageView.image == UIImage(named: "카페.png"))
             || (imageView.image == UIImage(named: "한식.png"))
             || (imageView.image == UIImage(named: "양식.png"))
             || (imageView.image == UIImage(named: "일식.png"))
@@ -192,35 +184,12 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
             || (imageView.image == UIImage(named: "분식.png"))
             || (imageView.image == UIImage(named: "기타.png"))) {
             
-            if myTag == "카페"{
-//                print("카페 이미지")
-                imageView.image = UIImage(named: "카페.png")
+            for category in categories {
+                if myTag == category{
+                    imageView.image = UIImage(named: category + ".png")
+                }
             }
-            if myTag == "한식"{
-//                print("카페 이미지")
-                imageView.image = UIImage(named: "한식.png")
-            }
-            if myTag == "양식"{
-//                print("카페 이미지")
-                imageView.image = UIImage(named: "양식.png")
-            }
-            if myTag == "일식"{
-//                print("카페 이미지")
-                imageView.image = UIImage(named: "일식.png")
-            }
-            if myTag == "중식"{
-//                print("카페 이미지")
-                imageView.image = UIImage(named: "중식.png")
-            }
-            if myTag == "분식"{
-//                print("카페 이미지")
-                imageView.image = UIImage(named: "분식.png")
-            }
-            if myTag == "기타"{
-//                print("카페 이미지")
-                imageView.image = UIImage(named: "기타.png")
-            }
-
+            
         }
 
 
@@ -228,15 +197,6 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
     
     // 이미지 추가 버튼 클릭
     @IBAction func btnImage(_ sender: UIButton) {
-        
-//        // 맛집 이름을 적어주지 않았으면 텍스트 필드 색을 빨갛게
-//        if (tfTitle.text == "") {
-//            tfTitle.layer.borderWidth = 0.5
-//            tfTitle.layer.cornerRadius = 5
-//            tfTitle.layer.borderColor = UIColor.systemRed.cgColor
-//        }
-        
-//        nullCheckDesignTfTitle()
         
         // 권한 alert
         showAlert()
@@ -316,7 +276,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
 //
 //        // DB에 정보 insert
 //        dbInsert()
-//
+//     // 이렇게 넘어가면 탭바가 없어짐
 ////        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "TableViewController") else {return}
 ////        self.present(nextVC, animated: true)
 //
@@ -325,100 +285,48 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
     // + 버튼 눌렀을 때 kakao api를 불러온다.
     @IBAction func btnAddAddress(_ sender: UIButton) {
         
-//        nullCheckDesignTfTitle()
-        
         let nextVC = KakaoZipCodeVC()
         nextVC.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         present(nextVC, animated: true)
         
     }//btnAddAddress
     
-    // ===================================================================================================================================================
-    // override funcs ====================================================================================================================================
     
-    // 뷰 화면 표시
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        
-        // 뷰 컨트롤러 포그라운드, 백그라운드 상태 체크 설정 실시
-        NotificationCenter.default.addObserver(self, selector: #selector(checkForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(checkBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        
-        // 포그라운드 처리 실시
-        checkForeground()
-        
-    }//viewDidAppear
-    
-    // 뷰 정지 상태
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        super.viewWillDisappear(animated)
-        print("viewWillDisappear")
-        
-    }//viewwillDisappear
-    
-    // 뷰 종료 상태
-    override func viewDidDisappear(_ animated: Bool) {
-        
-        super.viewDidDisappear(animated)
-        print("viewDidDiappear")
-        
-        //뷰 컨트롤러 포그라운드, 백그라운드 상태 체크 해제
-        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
-        
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-    }//viewDiddisappear
-    
-    // viewWillAppear: 다른 화면에서 다시 올 때 실행된다.
-    // kakao api로 가져온 address를 라벨로 띄워준다.
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        
-        // address label 채워준다.
-        if Message.address.isEmpty {
-            lblAddress.text = " + 버튼을 눌러 위치를 추가하세요."
-            lblAddress.textColor = UIColor.lightGray
-        } else {
-            lblAddress.text = " \(Message.address)"
-            lblAddress.textColor = UIColor.secondaryLabel
-        }
-        
-        // 옵저버 등록
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        print("view will appear: \(Message.address)")
-        
-    }
 
+    // objc funcs ===================================================
     //포그라운드 및 백그라운드 상태 처리 메소드 작성
     @objc func checkForeground(){
     }
     @objc func checkBackground(){
     }
     
-//    @objc func keyboardUp(notification:NSNotification) {
-//        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-//           let keyboardRectangle = keyboardFrame.cgRectValue
-//
-//            UIView.animate(
-//                withDuration: 0.3
-//                , animations: {
-//                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
-//                }
-//            )
-//        }
-//    }
-//
+    // 터치가 발생할 때 핸들러 캐치 - 화면 터치시 키보드 내리기
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            view.endEditing(true) // todo...
+        }
+        sender.cancelsTouchesInView = false
+    }
+    
+    //textView 선택시 키보드가 올라가는 만큼 화면 올리기
+    @objc func keyboardUp(notification:NSNotification) {
+        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+           let keyboardRectangle = keyboardFrame.cgRectValue
 
-
+            UIView.animate(
+                withDuration: 0.3
+                , animations: {
+                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
+                }
+            )
+        }
+    }
+    @objc func keyboardDown() {
+        self.view.transform = .identity
+    }
     
     // MARK: - Navigation
+    // segue로 넘어갈 때 해제
     // In a storyboard-based application, you will often want to do a little preparation before navigation
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //
@@ -436,17 +344,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
     
     
     // funcs =========================================================================
-//    func nullCheckDesignTfTitle(){
-//        // 맛집 이름을 적어주지 않았으면 텍스트 필드 색을 빨갛게
-//        if (tfTitle.text == "") {
-//            tfTitle.layer.borderWidth = 0.5
-//            tfTitle.layer.cornerRadius = 5
-//            tfTitle.layer.borderColor = UIColor.systemRed.cgColor
-//        }
-//
-//    }
-    
-    // alert
+    // 사진 alert-----
     func showAlert(){
         
         let alert = UIAlertController(title: "Select One", message: nil, preferredStyle: .actionSheet)
@@ -487,7 +385,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
 
     }//showAlert
     
-    // 카메라 권한
+    // 카메라 권한 -----
     func checkCameraPermission(){
         
         AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
@@ -500,7 +398,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         
     }// checkCameraPermission
     
-    // 카메라 열기
+    // 카메라 열기 -----
     func openCamera(){
         
         self.photo.sourceType = .camera
@@ -508,7 +406,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         
     }//openCamera
     
-    // 앨범 열기
+    // 앨범 열기 -----
     func openPhoto(){
         
         DispatchQueue.main.async {
@@ -519,7 +417,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         
     }//openphoto
     
-    // db에 정보 저장
+    // db에 정보 저장 -----
     func dbInsert(){
         
         print("insert")
@@ -537,55 +435,28 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         if imageData != nil {
             image = UIImage(data: imageData! as Data)
             data = image.pngData()! as NSData
-        }else{ // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
-            
-            if (myTag == "한식"){
-                image = UIImage(named: "한식.png")
-            }
-            if (myTag == "일식"){
-                image = UIImage(named: "일식.png")
-            }
-            if (myTag == "분식"){
-                image = UIImage(named: "분식.png")
-            }
-            if (myTag == "양식"){
-                image = UIImage(named: "양식.png")
-            }
-            if (myTag == "기타"){
-                image = UIImage(named: "기타.png")
-            }
-            if (myTag == "중식"){
-                image = UIImage(named: "중식.png")
+        }else{
+            // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
+            for category in categories {
+                if myTag == category{
+                    image = UIImage(named: category + ".png")
+                }
             }
             
             data = image.pngData()! as NSData
         }
-        
-//        data = image!.pngData()! as NSData
-        
-//        let data = image.pngData()! as NSData
-//        let date = Date.now
-        
+                
         let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
-        
-//        let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
-        
+                
         if result {
             let resultAlert = UIAlertController(title: "완료", message: "입력이 되었습니다.", preferredStyle: .alert)
-//            let onAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in
-//                self.navigationController?.popViewController(animated: true)
-//            })
-            
-//            let onAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in
-//                self.initPage()
-//            })
-            
+
             let onAction = UIAlertAction(title: "OK", style: .default)
             
             resultAlert.addAction(onAction)
             present(resultAlert, animated: true)
             
-            //페이지 넘기기
+//            //페이지 넘기기
 //            guard let nextVC = self.storyboard?.instantiateViewController(identifier: "TableViewController") else {return}
 //            self.present(nextVC, animated: true)
 
@@ -597,43 +468,25 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
             present(resultAlert, animated: true)
         }
         
-        // DB Delegate로 수정
-//        var stmt: OpaquePointer?
-//        let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
-//
-//        let tag = myTag
-//        let name = tfTitle.text?.trimmingCharacters(in: .whitespaces)
-//        let address = lblAddress.text?.trimmingCharacters(in: .whitespaces)
-//        let content = tvContent.text?.trimmingCharacters(in: .whitespaces)
-//        let image = UIImage(data: imageData! as Data)
-//        let data = image!.pngData()! as NSData
-//
-//        //-1은 한글 때문이다. 한글은 2byte이기 때문에..
-//        let queryString = "INSERT INTO store (sName, sAddress, sImage, sContents, sCategory) VALUES (?,?,?,?,?)"
-//
-////        CREATE TABLE IF NOT EXISTS store (sid INTEGER PRIMARY KEY AUTOINCREMENT, sName TEXT, sAddress TEXT, sImage BLOB, sContents TEXT)
-//
-//        sqlite3_prepare(db, queryString, -1, &stmt, nil)
-//
-//        sqlite3_bind_text(stmt, 1, name, -1, SQLITE_TRANSIENT)
-//        sqlite3_bind_text(stmt, 2, address, -1, SQLITE_TRANSIENT)
-//        sqlite3_bind_blob(stmt, 3, data.bytes, Int32(Int64(data.length)), SQLITE_TRANSIENT)
-//        sqlite3_bind_text(stmt, 4, content, -1, SQLITE_TRANSIENT)
-//        sqlite3_bind_text(stmt , 5, tag, -1, SQLITE_TRANSIENT)
-//
-//        sqlite3_step(stmt)
-//
-//        let resultAlert = UIAlertController(title: "결과", message: "입력되었습니다", preferredStyle: .alert)
-//        let okAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in self.navigationController?.popViewController(animated: true)})
-//
-//        resultAlert.addAction(okAction)
-//        present(resultAlert, animated: true)
-//
-//        print("성공")
-//        print(data)
-
     }//dbInsert
-
+    
+//    // return 클릭 시 포커스 해제
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//            tfTitle.resignFirstResponder()
+//            return true
+//    }
+    
+//    func textViewShouldReturn(_ textView: UITextView) -> Bool {
+//            tvContent.resignFirstResponder()
+//            return true
+//    }
+    
+    
+    @IBAction func tfTitleEditingDidBegin(_ sender: UITextField) {
+        // 키보드 올리면서 화면까지 올리는 옵저버 제거
+        notiCenter.removeObserver(self)
+    }
+    
     // textview 디자인 함수들 -----
     // 1. textview에 입력된 글이 없을 시 placeholder를 띄운다.
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -643,7 +496,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
             tvContent.textColor = UIColor.systemGray4
         }
         
-    }
+    }//textViewDidEndEditing
     
     // 2. 사용자가 입력을 시작한 경우 placeholder를 비운다.
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -653,6 +506,28 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
             tvContent.textColor = UIColor.secondaryLabel
         }
         
+        // 옵저버 등록 - textview 클릭시 키보드만큼 화면이 올라가도록
+        notiCenter.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notiCenter.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+//        print("view will appear: \(Message.address)")
+        
+    }//textViewDidBeginEditing
+    
+    //textview 글자 수 제한 감지
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+            let currentText = tvContent.text ?? ""
+            guard let stringRange = Range(range, in: currentText) else { return false }
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
+            return updatedText.count <= maxCharacters
+    }
+    
+    //textview 글자 수 카운트
+    func textViewDidChange(_ textView: UITextView) {
+        //placeholderLabel.isHidden = !textView.text.isEmpty
+        let currentCount = tvContent.text.count
+        let remainingCount = maxCharacters - currentCount
+        countLabel.text = "\(remainingCount)/60"
     }
     
     // 완료 버튼 클릭시 뷰 초기화
@@ -674,23 +549,12 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         radioButtons[5].isSelected = false
         radioButtons[6].isSelected = false
         
-        // 뷰 디자인 초기화
-        
-//        lblAddress.layer.borderColor = UIColor.systemGray4.cgColor
-//        lblAddress.layer.borderWidth = 0.3
-//        lblAddress.layer.cornerRadius = 5
-        
 //        tvContent.delegate = self
         tvContent.text = "리뷰를 작성하세요."
         tvContent.textColor = UIColor.systemGray4
         
         lblAddress.text = " + 버튼을 눌러 위치를 추가하세요."
         lblAddress.textColor = UIColor.lightGray
-
-//        tvContent.texts
-//        tvContent.layer.borderColor = UIColor.systemGray4.cgColor
-//        tvContent.layer.borderWidth = 0.3
-//        tvContent.layer.cornerRadius = 5
         
         tvContent.resignFirstResponder()
         
@@ -747,43 +611,3 @@ extension AddViewController: UIImagePickerControllerDelegate & UINavigationContr
     }
     
 }// extension
-
-//extension AddViewController: DoneDelegate{
-//
-//
-//    func didContentsAddDone(_ controller: TableViewController) {
-////        func dbInsert(){
-//        print("dbInsert")
-//
-//            // DB 인스턴스 만들기
-//            let storeDB = StoreDB()
-//
-//            let tag = myTag
-//            guard let name = tfTitle.text?.trimmingCharacters(in: .whitespaces) else { return }
-//            guard let address = lblAddress.text?.trimmingCharacters(in: .whitespaces) else { return }
-//            guard let content = tvContent.text?.trimmingCharacters(in: .whitespaces) else { return }
-//            guard let image = UIImage(data: imageData! as Data) else { return }
-//            let data = image.pngData()! as NSData
-//
-//            let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
-//
-//
-//            if result {
-//                let resultAlert = UIAlertController(title: "완료", message: "입력이 되었습니다.", preferredStyle: .alert)
-//                let onAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in
-//                    self.navigationController?.popViewController(animated: true)
-//                })
-//
-//                resultAlert.addAction(onAction)
-//                present(resultAlert, animated: true)
-//            } else {
-//                let resultAlert = UIAlertController(title: "실패", message: "에러가 발생 되었습니다.", preferredStyle: .alert)
-//                let onAction = UIAlertAction(title: "OK", style: .default)
-//
-//                resultAlert.addAction(onAction)
-//                present(resultAlert, animated: true)
-//            }
-//        }
-//
-//}//ViewController: DoneDelegate
-//
