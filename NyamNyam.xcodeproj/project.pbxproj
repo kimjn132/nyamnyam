@@ -416,8 +416,8 @@
 				INFOPLIST_FILE = NyamNyam/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "츄룹";
 				INFOPLIST_KEY_NSCameraUsageDescription = "게시물 업로드를 위해 카메라 접근 권한이 필요합니다. 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "2게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "1게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -449,8 +449,8 @@
 				INFOPLIST_FILE = NyamNyam/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "츄룹";
 				INFOPLIST_KEY_NSCameraUsageDescription = "게시물 업로드를 위해 카메라 접근 권한이 필요합니다. 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "2게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "1게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시물 업로드를 위해 앨범 접근 권한이 필요합니다. 허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
