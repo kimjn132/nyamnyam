@@ -63,8 +63,10 @@ class WishAddViewController: UIViewController {
                 tagButtons[3].isSelected = true
             }else if sgTag == "분식"{
                 tagButtons[4].isSelected = true
-            }else{
+            }else if sgTag == "카페"{
                 tagButtons[5].isSelected = true
+            }else{
+                tagButtons[6].isSelected = true
             }
         }else{ // + barbutton으로 화면 넘어온 경우
             imgImage.image = UIImage(named: "한식.png")
@@ -179,16 +181,39 @@ class WishAddViewController: UIViewController {
         
         if indexOfBtns == 0{
             myTag = "한식"
+            if imageData == nil{
+                imgImage.image = UIImage(named: "한식.png")
+            }
         }else if indexOfBtns == 1{
             myTag = "중식"
+            if imageData == nil{
+                imgImage.image = UIImage(named: "중식.png")
+            }
         }else if indexOfBtns == 2{
             myTag = "양식"
+            if imageData == nil{
+                imgImage.image = UIImage(named: "양식.png")
+            }
         }else if indexOfBtns == 3{
             myTag = "일식"
+            if imageData == nil{
+                imgImage.image = UIImage(named: "일식.png")
+            }
         }else if indexOfBtns == 4{
             myTag = "분식"
-        }else{
+            if imageData == nil{
+                imgImage.image = UIImage(named: "분식.png")
+            }
+        }else if indexOfBtns == 5{
             myTag = "카페"
+            if imageData == nil{
+                imgImage.image = UIImage(named: "카페.png")
+            }
+        }else{
+            myTag = "기타"
+            if imageData == nil{
+                imgImage.image = UIImage(named: "기타.png")
+            }
         }
         
     }
@@ -364,7 +389,9 @@ class WishAddViewController: UIViewController {
         
         super.viewWillDisappear(animated)
         print("viewWillDisappear")
-        Message.wishaddress = "'+'를 눌러 위치를 추가해주세요."
+        if sgclicked == false{
+            Message.wishaddress = "'+'를 눌러 위치를 추가해주세요."
+        }
         
     }//viewwillDisappear
     
