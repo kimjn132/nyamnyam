@@ -25,6 +25,7 @@ class WishAddViewController: UIViewController {
     
     // sgDetail을 통해 넘겨받은 값
     var sgclicked:Bool = false
+    var sgId:Int?
     var sgTitle:String?
     var sgImage:Data?
     var sgTag:String?
@@ -50,6 +51,7 @@ class WishAddViewController: UIViewController {
             lbltitle.text = sgTitle
             lblAddress.text = Message.wishaddress
             imgImage.image = UIImage(data: sgImage!)
+            myTag = sgTag!
             
             if sgTag == "한식"{
                 tagButtons[0].isSelected = true
@@ -193,8 +195,12 @@ class WishAddViewController: UIViewController {
     
     @IBAction func btnDone(_ sender: UIButton) {
         
-        if lbltitle.text?.trimmingCharacters(in: .whitespaces) != "" && lblAddress.text?.trimmingCharacters(in: .whitespaces) != "'+'를 눌러 위치를 추가해주세요."{
+        if lbltitle.text?.trimmingCharacters(in: .whitespaces) != "" && lblAddress.text?.trimmingCharacters(in: .whitespaces) != "'+'를 눌러 위치를 추가해주세요." && sgclicked == false{
             dbInsert()
+        }
+        
+        if sgclicked {
+            dbUpdate()
         }
         
         if lbltitle.text?.trimmingCharacters(in: .whitespaces) == ""{ // 맛집 텍스트필드 미입력시 Alert
@@ -282,6 +288,51 @@ class WishAddViewController: UIViewController {
         Message.address = ""
     
     }//dbInsert
+    
+    func dbUpdate(){
+        var stmt: OpaquePointer?
+        // 한글처리 !! <<<
+        let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self) // -1부터 시작지점을 해주면 2글자씩 읽음(한글)
+        
+        let title = lbltitle.text?.trimmingCharacters(in: .whitespaces)
+        let address = lblAddress.text?.trimmingCharacters(in: .whitespaces)
+        let tag = myTag
+        let wid = sgId!
+        var image : UIImage!
+        var data : NSData!
+        
+        if imageData != nil { // 사용자가 다른 사진을 선택
+            image = UIImage(data: imageData! as Data)
+            data = image!.pngData()! as NSData
+        }else{ // 사용자가 다른 사진을 선택하지 않으면 원래 사진 그대로
+            image = UIImage(data: sgImage!)
+            data = image!.pngData()! as NSData
+        }
+        
+        let queryString = "UPDATE wish SET wName = ?, wAddress = ?, wImage = ?, wTag = ? WHERE wid = ?"
+        
+        sqlite3_prepare(db, queryString, -1, &stmt, nil)
+        
+        // ?에 data넣기
+        sqlite3_bind_text(stmt , 1, title, -1, SQLITE_TRANSIENT)// 넣을 데이터가 다 text라 bint_text임 아닐경우에는 찾아봐야함
+        sqlite3_bind_text(stmt , 2, address, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_blob(stmt, 3, data.bytes, Int32(Int64(data.length)), SQLITE_TRANSIENT)
+        sqlite3_bind_text(stmt , 4, tag, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_int(stmt, 5, Int32(wid))
+        
+        sqlite3_step(stmt)
+        
+        let resultAlert = UIAlertController(title: "결과", message: "수정 되었습니다", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "네, 알겠습니다", style: .default, handler: {ACTION in
+            self.navigationController?.popViewController(animated: true)
+        })
+        
+        resultAlert.addAction(okAction)
+        present(resultAlert, animated: true)
+        
+        Message.wishaddress = "'+'를 눌러 위치를 추가해주세요."
+        sgclicked = false
+    }
         
         /*
          // MARK: - Navigation
