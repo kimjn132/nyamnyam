@@ -1076,10 +1076,10 @@
                                                 <rect key="frame" x="0.0" y="18.333333333333258" width="361" height="50"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HwE-PG-tmx">
-                                                        <rect key="frame" x="0.0" y="0.0" width="546" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="630" height="50"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Zel-yK-Wt8">
-                                                                <rect key="frame" x="0.0" y="0.0" width="525" height="34.333333333333336"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="615" height="34.333333333333336"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bhp-0o-bD3">
                                                                         <rect key="frame" x="0.0" y="0.0" width="75" height="34.333333333333336"/>
@@ -1150,12 +1150,23 @@
                                                                             <action selector="btnSelectTag:" destination="kyY-bp-FJk" eventType="touchUpInside" id="vMc-AV-1yY"/>
                                                                         </connections>
                                                                     </button>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ST-Ab-7HN">
+                                                                        <rect key="frame" x="540" y="0.0" width="75" height="34.333333333333336"/>
+                                                                        <color key="tintColor" systemColor="tintColor"/>
+                                                                        <state key="normal" title="Button"/>
+                                                                        <buttonConfiguration key="configuration" style="gray" title="기타">
+                                                                            <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </buttonConfiguration>
+                                                                        <connections>
+                                                                            <action selector="btnSelectTag:" destination="kyY-bp-FJk" eventType="touchUpInside" id="ZKX-uv-fMC"/>
+                                                                        </connections>
+                                                                    </button>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="546" id="SYc-hI-Faa"/>
+                                                            <constraint firstAttribute="width" constant="630" id="SYc-hI-Faa"/>
                                                             <constraint firstAttribute="height" constant="50" id="his-Xp-10B"/>
                                                         </constraints>
                                                     </view>
@@ -1212,6 +1223,7 @@
                         <outletCollection property="tagButtons" destination="sZY-D2-bcx" collectionClass="NSMutableArray" id="cHj-xb-STU"/>
                         <outletCollection property="tagButtons" destination="JBD-Uk-Uw8" collectionClass="NSMutableArray" id="5Qg-Vw-shu"/>
                         <outletCollection property="tagButtons" destination="u1t-91-3PA" collectionClass="NSMutableArray" id="Fhw-nv-RE3"/>
+                        <outletCollection property="tagButtons" destination="1ST-Ab-7HN" collectionClass="NSMutableArray" id="6a4-Cp-q5e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jcj-W2-gVg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
