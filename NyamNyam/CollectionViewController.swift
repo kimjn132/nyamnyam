@@ -13,8 +13,6 @@ private let reuseIdentifier = "Cell"
 class CollectionViewController: UICollectionViewController {
     
     @IBOutlet var cvList: UICollectionView! // CollectionView
-    @IBOutlet weak var noDataLabel: UILabel! // 저장된 사진이 없을 경우 나타낼 Label
-    @IBOutlet weak var noDataImg: UIImageView! // 저장된 사진이 없을 경우 나타낼 ImgView
     
     var storeList: [Store] = [] // DB
     var selectedId: Int? // Modal에 넘겨줄 ID
@@ -54,9 +52,9 @@ class CollectionViewController: UICollectionViewController {
       } else {
           let noDataView = UIView(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
         
-          let noDataImg = UIImageView(frame: CGRect(x: 0, y: 250, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height - 600))
+          let noDataImg = UIImageView(frame: CGRect(x: 0, y: 280, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height - 650))
           noDataImg.contentMode = .scaleAspectFit
-          noDataImg.image = UIImage(named: "chuloop")
+          noDataImg.image = UIImage(named: "bear")
           noDataView.addSubview(noDataImg)
           
           let noDataLabel = UILabel(frame: CGRect(x: 0, y: 100, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
