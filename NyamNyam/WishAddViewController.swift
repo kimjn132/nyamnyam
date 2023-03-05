@@ -17,6 +17,7 @@ class WishAddViewController: UIViewController {
     @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet var tagButtons: [UIButton]!
     
+    
     var db:OpaquePointer?
     
     var indexOfBtns: Int? = 0
@@ -389,9 +390,12 @@ class WishAddViewController: UIViewController {
         
         super.viewWillDisappear(animated)
         print("viewWillDisappear")
-        if sgclicked == false{
+        
+        if self.isMovingFromParent{
             Message.wishaddress = "'+'를 눌러 위치를 추가해주세요."
+            sgclicked = false
         }
+        
         
     }//viewwillDisappear
     
