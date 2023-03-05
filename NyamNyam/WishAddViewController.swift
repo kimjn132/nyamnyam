@@ -15,7 +15,6 @@ class WishAddViewController: UIViewController {
     @IBOutlet weak var lbltitle: UITextField!
     @IBOutlet weak var imgImage: UIImageView!
     @IBOutlet weak var lblAddress: UILabel!
- 
     @IBOutlet var tagButtons: [UIButton]!
     
     var db:OpaquePointer?
@@ -23,6 +22,12 @@ class WishAddViewController: UIViewController {
     var indexOfBtns: Int? = 0
     
     let ls = ImageInsert()
+    
+    // sgDetail을 통해 넘겨받은 값
+    var sgclicked:Bool = false
+    var sgTitle:String?
+    var sgImage:Data?
+    var sgTag:String?
     
 //    let lbAddress = UILabel()
 //    let btnPostcode = UIButton(type: .system)
@@ -40,9 +45,29 @@ class WishAddViewController: UIViewController {
         // file만든걸 실행시켜야지 (exec)
         sqlite3_open(fileURL.path(), &db) // open한다
         
-        // 초기화
-        imgImage.image = UIImage(named: "한식.png")
-        tagButtons[0].isSelected = true
+        // sgDetail로 화면 넘어온 경우
+        if sgclicked == true {
+            lbltitle.text = sgTitle
+            lblAddress.text = Message.wishaddress
+            imgImage.image = UIImage(data: sgImage!)
+            
+            if sgTag == "한식"{
+                tagButtons[0].isSelected = true
+            }else if sgTag == "중식"{
+                tagButtons[1].isSelected = true
+            }else if sgTag == "양식"{
+                tagButtons[2].isSelected = true
+            }else if sgTag == "일식"{
+                tagButtons[3].isSelected = true
+            }else if sgTag == "분식"{
+                tagButtons[4].isSelected = true
+            }else{
+                tagButtons[5].isSelected = true
+            }
+        }else{ // + barbutton으로 화면 넘어온 경우
+            imgImage.image = UIImage(named: "한식.png")
+            tagButtons[0].isSelected = true
+        }
         
         self.photo.delegate = self
     }

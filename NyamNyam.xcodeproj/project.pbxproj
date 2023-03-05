@@ -31,6 +31,7 @@
 		688AC9A329ACDF890038965D /* KaKaoAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC9A029ACDF890038965D /* KaKaoAddressViewController.swift */; };
 		688AC9A529ACE03C0038965D /* KakaoZipCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */; };
 		BC2AF5E829B37CD800942180 /* WishKakaoZipCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2AF5E729B37CD800942180 /* WishKakaoZipCode.swift */; };
+		BC6F187C29B47E8D00203E3C /* EditDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6F187B29B47E8D00203E3C /* EditDelegate.swift */; };
 		BC7C44B329B1F7860068EDC5 /* WishAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7C44B029B1F7850068EDC5 /* WishAddViewController.swift */; };
 		BC7C44B429B1F7860068EDC5 /* WishList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7C44B129B1F7850068EDC5 /* WishList.swift */; };
 		BC7C44B529B1F7860068EDC5 /* WishTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7C44B229B1F7850068EDC5 /* WishTableViewController.swift */; };
@@ -65,6 +66,7 @@
 		688AC9A029ACDF890038965D /* KaKaoAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoAddressViewController.swift; sourceTree = "<group>"; };
 		688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakaoZipCodeVC.swift; sourceTree = "<group>"; };
 		BC2AF5E729B37CD800942180 /* WishKakaoZipCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishKakaoZipCode.swift; sourceTree = "<group>"; };
+		BC6F187B29B47E8D00203E3C /* EditDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDelegate.swift; sourceTree = "<group>"; };
 		BC7C44B029B1F7850068EDC5 /* WishAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishAddViewController.swift; sourceTree = "<group>"; };
 		BC7C44B129B1F7850068EDC5 /* WishList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishList.swift; sourceTree = "<group>"; };
 		BC7C44B229B1F7850068EDC5 /* WishTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishTableViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				26A31906298AA0F400681392 /* AppDelegate.swift */,
 				26A31908298AA0F400681392 /* SceneDelegate.swift */,
 				26A3190C298AA0F400681392 /* Main.storyboard */,
+				BC6F187B29B47E8D00203E3C /* EditDelegate.swift */,
 				26A3190F298AA0F500681392 /* Assets.xcassets */,
 				26A31911298AA0F500681392 /* LaunchScreen.storyboard */,
 				26A31914298AA0F500681392 /* Info.plist */,
@@ -240,6 +243,7 @@
 			files = (
 				16A1D93A29AF1AC90010C328 /* CollectionViewController.swift in Sources */,
 				688AC9A329ACDF890038965D /* KaKaoAddressViewController.swift in Sources */,
+				BC6F187C29B47E8D00203E3C /* EditDelegate.swift in Sources */,
 				688AC9A229ACDF890038965D /* AddViewController.swift in Sources */,
 				26158E7229ACCB7B0082CE75 /* Store.swift in Sources */,
 				BC7C44B429B1F7860068EDC5 /* WishList.swift in Sources */,
