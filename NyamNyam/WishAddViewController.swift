@@ -41,7 +41,7 @@ class WishAddViewController: UIViewController {
         sqlite3_open(fileURL.path(), &db) // open한다
         
         // 초기화
-        imgImage.image = UIImage(named: "sample.jpeg")
+        imgImage.image = UIImage(named: "한식.png")
         tagButtons[0].isSelected = true
         
         self.photo.delegate = self
@@ -229,7 +229,7 @@ class WishAddViewController: UIViewController {
             image = UIImage(data: imageData! as Data)
             data = image!.pngData()! as NSData
         }else{ // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
-            image = UIImage(named: "sample.jpeg")
+            image = UIImage(named: "한식.png")
             data = image!.pngData()! as NSData
         }
         
