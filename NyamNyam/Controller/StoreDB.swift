@@ -130,7 +130,7 @@ class StoreDB {
         var stmt: OpaquePointer?
         let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
         
-        let queryString = "UPDATE store SET sName=?, sAddress=?, sContents=?, sCategory=? where sid=?"
+        let queryString = "UPDATE store SET sName=?, sAddress=?, sImage=?, sContents=?, sCategory=? where sid=?"
         
         sqlite3_prepare(db, queryString, -1, &stmt, nil)
         
