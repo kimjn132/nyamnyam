@@ -91,7 +91,7 @@ class TableViewController: UITableViewController {
             noDataView.addSubview(noDataImg)
             
             let noDataLabel = UILabel(frame: CGRect(x: 0, y: 100, width: tvListView.bounds.size.width, height: tvListView.bounds.size.height))
-            noDataLabel.text = "저장된 맛집이 없습니다"
+            noDataLabel.text = "방문했던 맛집이 없어요!"
             noDataLabel.textAlignment = .center
             noDataView.addSubview(noDataLabel)
             
@@ -212,36 +212,8 @@ class TableViewController: UITableViewController {
             detailView.receivedCategory = storeList[indexPath!.row].category
             //>>detailviewcontrolller에서 정의한 property에 데이터 넣어줌
             
-            print("segue to detail")
-        }
-        
-//        if segue.identifier == "sgDetail"{
-//            let cell = sender as! UITableViewCell
-//            let indexPath = self.tvListView.indexPath(for: cell)
-//            if let navController = segue.destination as? UINavigationController,
-//               let detailView = navController.topViewController as? UpdateViewController{
-//
-//                detailView.receivedName = storeList[indexPath!.row].name
-//                detailView.receivedAddress = storeList[indexPath!.row].address
-//                detailView.receivedImage = storeList[indexPath!.row].image as NSData?
-//                detailView.receivedContent = storeList[indexPath!.row].contents
-//                detailView.receivedCategory = storeList[indexPath!.row].category
-//                //>>detailviewcontrolller에서 정의한 property에 데이터 넣어줌
-//
-//                print("segue to detail")
-//
-//            }else if let detailView = segue.destination as? UpdateViewController{
-//                detailView.receivedName = storeList[indexPath!.row].name
-//                detailView.receivedAddress = storeList[indexPath!.row].address
-//                detailView.receivedImage = storeList[indexPath!.row].image as NSData?
-//                detailView.receivedContent = storeList[indexPath!.row].contents
-//                detailView.receivedCategory = storeList[indexPath!.row].category
-//                //>>detailviewcontrolller에서 정의한 property에 데이터 넣어줌
-//
-//                print("segue to detail")
-//            }
-//
             
+        }
             
         }
         
