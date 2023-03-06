@@ -461,7 +461,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
                     image = UIImage(named: category + ".png")
                     imageName = category + ".png"
                     
-                    print("이미지 이름:", imageName)
+//                    print("이미지 이름:", imageName)
                 }
             }
             

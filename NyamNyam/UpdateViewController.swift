@@ -31,7 +31,6 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var radioButtons: [UIButton]!
     //라디오 버튼 선택 index
     var indexOfBtns: Int?
-    let categories = ["한식", "중식", "양식", "일식", "분식", "카페", "기타"]
     
     var db:OpaquePointer?
     
