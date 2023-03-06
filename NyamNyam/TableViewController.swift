@@ -91,7 +91,7 @@ class TableViewController: UITableViewController {
             noDataView.addSubview(noDataImg)
             
             let noDataLabel = UILabel(frame: CGRect(x: 0, y: 100, width: tvListView.bounds.size.width, height: tvListView.bounds.size.height))
-            noDataLabel.text = "저장된 맛집이 없습니다"
+            noDataLabel.text = "방문했던 맛집이 없어요!"
             noDataLabel.textAlignment = .center
             noDataView.addSubview(noDataLabel)
             

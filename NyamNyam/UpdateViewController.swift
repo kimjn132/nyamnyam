@@ -38,8 +38,8 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     
     var imageData : NSData? = nil   // 서버로 이미지 등록을 하기 위함
     
-    
-    
+    // 키보드 올라가는 것 감지
+    let notiCenter = NotificationCenter.default
     
     
     
@@ -620,7 +620,26 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             tvContent.text = nil
             tvContent.textColor = UIColor.black
         }
-        
+        // 옵저버 등록 - textview 클릭시 키보드만큼 화면이 올라가도록
+        notiCenter.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notiCenter.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    //textView 선택시 키보드가 올라가는 만큼 화면 올리기
+    @objc func keyboardUp(notification:NSNotification) {
+        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+           let keyboardRectangle = keyboardFrame.cgRectValue
+
+            UIView.animate(
+                withDuration: 0.3
+                , animations: {
+                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
+                }
+            )
+        }
+    }
+    @objc func keyboardDown() {
+        self.view.transform = .identity
     }
     
     // 완료 버튼 클릭시 뷰 초기화
