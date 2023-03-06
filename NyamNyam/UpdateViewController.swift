@@ -24,7 +24,6 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     let maxCharacters = 60
     
     
-    
     // 한식, 중식, 양식, 분식, 일식, 카페 선택 라디오 버튼
     @IBOutlet var radioButtons: [UIButton]!
     //라디오 버튼 선택 index
@@ -67,7 +66,9 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         tvContent.delegate = self
         //글자 수 제한 countlabel 초기 설정
-        //countLabel.text = "\(maxCharacters)/60"
+        
+        
+        countLabel.text = "\(maxCharacters)/60"
         
        
 
