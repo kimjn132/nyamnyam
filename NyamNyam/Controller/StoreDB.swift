@@ -43,7 +43,7 @@ class StoreDB {
         
         
         // Table 만들기
-        if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS store (sid INTEGER PRIMARY KEY AUTOINCREMENT, sName TEXT, sAddress TEXT, sImage BLOB, sContents TEXT, sCategory TEXT, sDate TEXT)", nil, nil, nil) != SQLITE_OK{
+        if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS store (sid INTEGER PRIMARY KEY AUTOINCREMENT, sName TEXT, sAddress TEXT, sImage BLOB, sContents TEXT, sCategory TEXT, sDate TEXT, sImageName)", nil, nil, nil) != SQLITE_OK{
             let errMsg = String(cString: sqlite3_errmsg(db)!)
             print("Error create table : \(errMsg)")
             return  //에러 나면은 실행 안한다.
@@ -52,7 +52,7 @@ class StoreDB {
     
     
     
-    func insertDB(name: String, address: String, data: AnyObject, content: String, category: String) -> Bool {
+    func insertDB(name: String, address: String, data: AnyObject, content: String, category: String, imageName: String) -> Bool {
         
         let calendar = Calendar(identifier: .gregorian)
         let timeZone = TimeZone(identifier: "Asia/Seoul")
@@ -65,12 +65,10 @@ class StoreDB {
 
         let sDate = dateFormatter.string(from: myDate)
         
-        
-        
         var stmt: OpaquePointer?
         let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
         
-        let queryString = "INSERT INTO store (sName, sAddress, sImage, sContents, sCategory, sDate) VALUES (?,?,?,?,?,?)"
+        let queryString = "INSERT INTO store (sName, sAddress, sImage, sContents, sCategory, sDate, sImageName) VALUES (?,?,?,?,?,?,?)"
         
         sqlite3_prepare(db, queryString, -1, &stmt, nil)
         sqlite3_bind_text(stmt, 1, name, -1, SQLITE_TRANSIENT)
@@ -79,6 +77,7 @@ class StoreDB {
         sqlite3_bind_text(stmt, 4, content, -1, SQLITE_TRANSIENT)
         sqlite3_bind_text(stmt, 5, category, -1, SQLITE_TRANSIENT)
         sqlite3_bind_text(stmt, 6, sDate, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(stmt, 7, imageName, -1, SQLITE_TRANSIENT)
             
         if sqlite3_step(stmt) == SQLITE_DONE {
             return true
@@ -109,12 +108,11 @@ class StoreDB {
             let content = String(cString: sqlite3_column_text(stmt, 4))
             let category = String(cString: sqlite3_column_text(stmt, 5))
             let date = String(cString: sqlite3_column_text(stmt, 6))
-
-
+            let imageName = String(cString: sqlite3_column_text(stmt, 7))
 
             //while문 돌면서 studentList에 담는다
             // image는 Data 타입으로 보내줌
-            storeList.append(Store(id: Int(id), name: name, address: address, image: image, contents: content, category: category, date: date))
+            storeList.append(Store(id: Int(id), name: name, address: address, image: image, contents: content, category: category, date: date, imageName: imageName))
 
         }
 
@@ -126,11 +124,11 @@ class StoreDB {
     
     
     
-    func updateDB(name: String, address: String, data: AnyObject, content: String, category: String, id: Int) -> Bool {
+    func updateDB(name: String, address: String, data: AnyObject, content: String, category: String, id: Int, imageName: String) -> Bool {
         var stmt: OpaquePointer?
         let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
         
-        let queryString = "UPDATE store SET sName=?, sAddress=?, sImage=?, sContents=?, sCategory=? where sid=?"
+        let queryString = "UPDATE store SET sName=?, sAddress=?, sImage=?, sContents=?, sCategory=?, sImageName=? where sid=?"
         
         sqlite3_prepare(db, queryString, -1, &stmt, nil)
         
@@ -139,7 +137,9 @@ class StoreDB {
         sqlite3_bind_blob(stmt, 3, data.bytes, Int32(Int64(data.length)), SQLITE_TRANSIENT)
         sqlite3_bind_text(stmt, 4, content, -1, SQLITE_TRANSIENT)
         sqlite3_bind_text(stmt, 5, category, -1, SQLITE_TRANSIENT)
-        sqlite3_bind_int(stmt, 6, Int32(id))
+        
+        sqlite3_bind_text(stmt, 6, imageName, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_int(stmt, 7, Int32(id))
         
         if sqlite3_step(stmt) == SQLITE_DONE {
             return true

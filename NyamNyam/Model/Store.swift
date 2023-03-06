@@ -16,8 +16,9 @@ class Store{
     var contents: String
     var category: String
     var date: String
+    var imageName: String
     
-    init(id: Int, name: String, address: String, image: Data? = nil, contents: String, category: String, date: String) {
+    init(id: Int, name: String, address: String, image: Data? = nil, contents: String, category: String, date: String, imageName: String) {
         self.id = id
         self.name = name
         self.address = address
@@ -25,5 +26,7 @@ class Store{
         self.contents = contents
         self.category = category
         self.date = date
+        self.imageName = imageName
+        
     }
 }

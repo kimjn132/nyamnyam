@@ -538,15 +538,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="JVh-rL-pE8">
-                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="0se-ae-oRx">
-                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="dismissModal:" destination="fkQ-lo-yR0" id="Xb9-Qm-RMt"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="x6g-A1-69g"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="JVh-rL-pE8"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tvListView" destination="xh3-CF-HRG" id="F41-WU-HXd"/>

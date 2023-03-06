@@ -30,6 +30,8 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var radioButtons: [UIButton]!
     //라디오 버튼 선택 index
     var indexOfBtns: Int?
+    let categories = ["한식", "중식", "양식", "일식", "분식", "카페", "기타"]
+    
     var db:OpaquePointer?
     
     let photo = UIImagePickerController()   //앨범 이동
@@ -37,12 +39,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     var myTag = "한식"
     
     var imageData : NSData? = nil   // 서버로 이미지 등록을 하기 위함
-    
-    
-    
-    
-    
-    
+        
     //prepared 안 쓰려면 message 사용(segue 사용할 때 message가 좋다. 보안상)
     var receivedId = 0
     var receivedName = ""
@@ -50,13 +47,14 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     var receivedImage: NSData?
     var receivedContent = ""
     var receivedCategory = ""
-    
+    var receivedImageName = ""
     
     
     
     override func viewDidLoad() {
         
         print("viewDidLoad")
+        print("imgname:", receivedImageName)
         
         super.viewDidLoad()
         
@@ -102,17 +100,10 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
                 radioButtons[6].isSelected = true
 
             }
-       
-       
-
-                
+                       
         // 앨범 컨트롤러 딜리게이트 지정
         self.photo.delegate = self
-        
-    
-        
-       
-        
+                
     }//viewDidLoad
     
     
@@ -178,15 +169,23 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             myTag = "기타"
         }
         
-//        print("myTag:", myTag, "/ index: ", indexOfBtns)
+        print("receivedImageName:", receivedImageName)
         
-        if ((imageView.image == nil) || (imageView.image == UIImage(named: "카페.png"))
+        if ((imageView.image == nil)
+            || (imageView.image == UIImage(named: "카페.png"))
             || (imageView.image == UIImage(named: "한식.png"))
             || (imageView.image == UIImage(named: "양식.png"))
             || (imageView.image == UIImage(named: "일식.png"))
             || (imageView.image == UIImage(named: "중식.png"))
             || (imageView.image == UIImage(named: "분식.png"))
-            || (imageView.image == UIImage(named: "기타.png"))) {
+            || (imageView.image == UIImage(named: "기타.png"))
+            || (receivedImageName == "카페.png")
+            || (receivedImageName == "한식.png")
+            || (receivedImageName == "양식.png")
+            || (receivedImageName == "일식.png")
+            || (receivedImageName == "중식.png")
+            || (receivedImageName == "분식.png")
+            || (receivedImageName == "기타.png")) {
             
             if myTag == "카페"{
 //                print("카페 이미지")
@@ -218,7 +217,8 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             }
 
         }
-
+        
+        receivedImageName = ""
 
     }//btnChooseCategory
     
@@ -559,28 +559,54 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         guard let content = tvContent.text?.trimmingCharacters(in: .whitespaces) else { return }
         var image : UIImage!
         var data : NSData!
+        var imageName : String!
         
-        if imageData != nil { // 사용자가 다른 사진을 선택
+//        if imageData != nil { // 사용자가 다른 사진을 선택
+//            image = UIImage(data: imageData! as Data)
+//            data = image!.pngData()! as NSData
+//            imageName = "img"
+//        }else{ // 사용자가 다른 사진을 선택하지 않으면 원래 사진 그대로
+//            image = UIImage(data: receivedImage! as Data)
+////            imageName
+//            data = image!.pngData()! as NSData
+//        }
+        
+        if imageData != nil {
+
+            print("요기")
             image = UIImage(data: imageData! as Data)
-            data = image!.pngData()! as NSData
-        }else{ // 사용자가 다른 사진을 선택하지 않으면 원래 사진 그대로
-            image = UIImage(data: receivedImage! as Data)
-            data = image!.pngData()! as NSData
+            data = image.pngData()! as NSData
+            imageName = "img"
+
+        }else{
+            // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
+            for category in categories {
+                if myTag == category{
+                    print("조기")
+                    image = UIImage(named: category + ".png")
+                    imageName = category + ".png"
+
+//                    print("이미지 이름:", imageName)
+                }
+            }
+
+            data = image.pngData()! as NSData
         }
+
         
 //        data = image!.pngData()! as NSData
         
 //        let data = image.pngData()! as NSData
 //        let date = Date.now
         
-        print(tag)
-        print("아니!")
-        print(receivedId)
+//        print(tag)
+//        print("아니!")
+//        print(receivedId)
         
         
         storeDB.delegate = self
         
-        let result = storeDB.updateDB(name: name, address: address, data: data, content: content, category: tag, id: receivedId)
+        let result = storeDB.updateDB(name: name, address: address, data: data, content: content, category: tag, id: receivedId, imageName: imageName)
         print(result)
 //        let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
         
