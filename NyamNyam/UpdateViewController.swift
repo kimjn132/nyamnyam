@@ -89,24 +89,24 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     //        countLabel.text = "\(maxCharacters)/60"
             
             
-            // 카테고리 버튼 기존 데이터 선택된 상태로 보여짐
-            switch myTag {
-            case "한식":
-                radioButtons[0].isSelected = true
-            case "중식":
-                radioButtons[1].isSelected = true
-            case "양식":
-                radioButtons[2].isSelected = true
-            case "일식":
-                radioButtons[3].isSelected = true
-            case "분식":
-                radioButtons[4].isSelected = true
-            case "카페":
-                radioButtons[5].isSelected = true
-            default:
-                radioButtons[6].isSelected = true
-
-            }
+//            // 카테고리 버튼 기존 데이터 선택된 상태로 보여짐
+//            switch myTag {
+//            case "한식":
+//                radioButtons[0].isSelected = true
+//            case "중식":
+//                radioButtons[1].isSelected = true
+//            case "양식":
+//                radioButtons[2].isSelected = true
+//            case "일식":
+//                radioButtons[3].isSelected = true
+//            case "분식":
+//                radioButtons[4].isSelected = true
+//            case "카페":
+//                radioButtons[5].isSelected = true
+//            default:
+//                radioButtons[6].isSelected = true
+//
+//            }
                        
 
         // 앨범 컨트롤러 딜리게이트 지정
@@ -529,28 +529,16 @@ print(count2)
             imageName = "img"
 
         }else{
-            // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
-            for category in categories {
-                if myTag == category{
-                    print("조기")
-                    image = UIImage(named: category + ".png")
-                    imageName = category + ".png"
+            
+            image = UIImage(data: receivedImage! as Data)
 
-//                    print("이미지 이름:", imageName)
-                }
-            }
+            data = image!.pngData()! as NSData
+            imageName = "img"
 
-            data = image.pngData()! as NSData
         }
 
         
-//        data = image!.pngData()! as NSData
-        
-//        let data = image.pngData()! as NSData
-//        let date = Date.now
-        
 
-        
         
         storeDB.delegate = self
         

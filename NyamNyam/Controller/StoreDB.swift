@@ -38,7 +38,7 @@ class StoreDB {
         
         
         // Table 만들기
-        if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS store (sid INTEGER PRIMARY KEY AUTOINCREMENT, sName TEXT, sAddress TEXT, sImage BLOB, sContents TEXT, sCategory TEXT, sDate TEXT, sImageName)", nil, nil, nil) != SQLITE_OK{
+        if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS store (sid INTEGER PRIMARY KEY AUTOINCREMENT, sName TEXT, sAddress TEXT, sImage BLOB, sContents TEXT, sCategory TEXT, sDate TEXT, sImageName TEXT)", nil, nil, nil) != SQLITE_OK{
             let errMsg = String(cString: sqlite3_errmsg(db)!)
             print("Error create table : \(errMsg)")
 
