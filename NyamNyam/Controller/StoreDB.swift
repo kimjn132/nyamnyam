@@ -27,15 +27,10 @@ class StoreDB {
         // SQLite 설정하기
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("StoreData.sqlite")
         
-        // 설정한 것 실행(파일 연결)
-        // percentEncoded: url이 정상적으로 불러와지면 string으로 만들어줌, 정상적으로 안 불러와지면 nil로 받아줌
-//        if sqlite3_open(fileURL.path(percentEncoded: true), &db) != SQLITE_OK{
-//            //if error 걸리면
-//            print("Error opening database")
-//        }
+       
         if let percentEncodedPath = fileURL.path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
             if sqlite3_open(percentEncodedPath, &db) != SQLITE_OK {
-                print("Error opening database")
+                
             }
         }
         
@@ -46,6 +41,7 @@ class StoreDB {
         if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS store (sid INTEGER PRIMARY KEY AUTOINCREMENT, sName TEXT, sAddress TEXT, sImage BLOB, sContents TEXT, sCategory TEXT, sDate TEXT, sImageName)", nil, nil, nil) != SQLITE_OK{
             let errMsg = String(cString: sqlite3_errmsg(db)!)
             print("Error create table : \(errMsg)")
+
             return  //에러 나면은 실행 안한다.
         }
     }//init
@@ -91,11 +87,11 @@ class StoreDB {
     
     func queryDB() {
         var stmt: OpaquePointer?
-        let queryString = "SELECT * FROM store"
+        let queryString = "SELECT * FROM store order by sDate DESC"
         
         if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
-            let errMsg = String(cString: sqlite3_errmsg(db)!)
-            print("Error preparing select : \(errMsg)")
+           // let errMsg = String(cString: sqlite3_errmsg(db)!)
+            
             return  //에러 나면은 실행 안한다.
         }
         
