@@ -6,12 +6,12 @@
 //
 
 import UIKit
-
 import AVFoundation
 import Photos
 
 
 class UpdateViewController: UIViewController, UITextViewDelegate {
+    
     
     @IBOutlet weak var tfTitle: UITextField!
     @IBOutlet weak var imageView: UIImageView!
@@ -23,18 +23,22 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var countLabel: UILabel!
     let maxCharacters = 60
     
+    var count = 0
+    var storeList: [Store] = []
     
     // 한식, 중식, 양식, 분식, 일식, 카페 선택 라디오 버튼
     @IBOutlet var radioButtons: [UIButton]!
     //라디오 버튼 선택 index
     var indexOfBtns: Int?
-    
+    var db:OpaquePointer?
     
     let photo = UIImagePickerController()   //앨범 이동
     
     var myTag = "한식"
     
     var imageData : NSData? = nil   // 서버로 이미지 등록을 하기 위함
+    
+    
     
     
     
@@ -56,45 +60,56 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         super.viewDidLoad()
         
-        // 뷰 텍스트 초기화
-        tfTitle.text = String(receivedName)
-        imageView.image = UIImage(data: receivedImage! as Data)
-        tvContent.text = String(receivedContent)
-        lblAddress.text = String(receivedAddress)
-        myTag = String(receivedCategory)
+//        var count = 0
+//        count += 1
+        
+//        if count == 1 {
+            lblAddress.text = String(receivedAddress)
+//        }
+        
+            // 뷰 텍스트 초기화
+            tfTitle.text = String(receivedName)
+            imageView.image = UIImage(data: receivedImage! as Data)
+            tvContent.text = String(receivedContent)
+            
+            myTag = String(receivedCategory)
+            print(receivedAddress)
+            
+            tvContent.delegate = self
+            //글자 수 제한 countlabel 초기 설정
+            
+            let currentCount = String(receivedContent).count
+            let remainingCount = maxCharacters - currentCount
+            countLabel.text = "\(remainingCount)/60"
+    //        countLabel.text = "\(maxCharacters)/60"
+            
+            
+            // 카테고리 버튼 기존 데이터 선택된 상태로 보여짐
+            switch myTag {
+            case "한식":
+                radioButtons[0].isSelected = true
+            case "중식":
+                radioButtons[1].isSelected = true
+            case "양식":
+                radioButtons[2].isSelected = true
+            case "일식":
+                radioButtons[3].isSelected = true
+            case "분식":
+                radioButtons[4].isSelected = true
+            case "카페":
+                radioButtons[5].isSelected = true
+            default:
+                radioButtons[6].isSelected = true
+
+            }
        
-        
-        tvContent.delegate = self
-        //글자 수 제한 countlabel 초기 설정
-        
-        
-        countLabel.text = "\(maxCharacters)/60"
-        
        
 
                 
         // 앨범 컨트롤러 딜리게이트 지정
         self.photo.delegate = self
         
-        
-        // 카테고리 버튼 기존 데이터 선택된 상태로 보여짐
-        switch myTag {
-        case "한식":
-            radioButtons[0].isSelected = true
-        case "중식":
-            radioButtons[1].isSelected = true
-        case "양식":
-            radioButtons[2].isSelected = true
-        case "일식":
-            radioButtons[3].isSelected = true
-        case "분식":
-            radioButtons[4].isSelected = true
-        case "카페":
-            radioButtons[5].isSelected = true
-        default:
-            radioButtons[6].isSelected = true
-        }
-        
+    
         
        
         
@@ -115,6 +130,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
             return updatedText.count <= maxCharacters
         }
+    
     //글자 수 카운트
         func textViewDidChange(_ textView: UITextView) {
             //placeholderLabel.isHidden = !textView.text.isEmpty
@@ -221,6 +237,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     @IBAction func btnDone(_ sender: UIBarButtonItem) {
         
         
+        
         if tfTitle.text!.trimmingCharacters(in: .whitespaces).isEmpty{
             let testAlert = UIAlertController(title: nil, message: "맛집 이름을 작성해주세요!", preferredStyle: .alert)
             
@@ -239,24 +256,25 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             // Alert 띄우기
             present(testAlert, animated: true)
             
-        }else if lblAddress.text?.trimmingCharacters(in: .whitespaces) == "+ 버튼을 눌러 위치를 추가하세요."{ // 위치 추가 안하면 Alert
-            // Alert
-            let testAlert = UIAlertController(title: nil, message: "맛집 위치를 추가해주세요!", preferredStyle: .alert)
-            
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = NSTextAlignment.left
-            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 17.0)!]
-            let messageAttrString = NSMutableAttributedString(string: "맛집 위치를 추가해주세요!", attributes: messageFont)
-            testAlert.setValue(messageAttrString, forKey: "attributedMessage")
-
-            // UIAlertAcrion 설정
-            let actionCancel = UIAlertAction(title: "닫기", style: .cancel)
-            
-            // UIAlertController에 UIAlertAction버튼 추가하기
-            testAlert.addAction(actionCancel)
-            
-            // Alert 띄우기
-            present(testAlert, animated: true)
+//        }
+//        else if lblAddress.text?.trimmingCharacters(in: .whitespaces) == "+ 버튼을 눌러 위치를 추가하세요."{ // 위치 추가 안하면 Alert
+//            // Alert
+//            let testAlert = UIAlertController(title: nil, message: "맛집 위치를 추가해주세요!", preferredStyle: .alert)
+//
+//            let paragraphStyle = NSMutableParagraphStyle()
+//            paragraphStyle.alignment = NSTextAlignment.left
+//            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 17.0)!]
+//            let messageAttrString = NSMutableAttributedString(string: "맛집 위치를 추가해주세요!", attributes: messageFont)
+//            testAlert.setValue(messageAttrString, forKey: "attributedMessage")
+//
+//            // UIAlertAcrion 설정
+//            let actionCancel = UIAlertAction(title: "닫기", style: .cancel)
+//
+//            // UIAlertController에 UIAlertAction버튼 추가하기
+//            testAlert.addAction(actionCancel)
+//
+//            // Alert 띄우기
+//            present(testAlert, animated: true)
         }else if (tvContent.text!.trimmingCharacters(in: .whitespaces).isEmpty) || tvContent.text == "리뷰를 작성하세요."{
             // Alert
             let testAlert = UIAlertController(title: nil, message: "리뷰를 작성해주세요!", preferredStyle: .alert)
@@ -278,9 +296,10 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             
         }else{
         
-            // DB에 정보 insert
-            dbInsert()
-            initPage()
+            // DB에 정보 update
+            dbUpdate()
+            print("gg")
+            
         }
 
         
@@ -360,14 +379,38 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         super.viewWillAppear(animated)
         
-        // address label 채워준다.
-        if Message.address.isEmpty {
-            lblAddress.text = " + 버튼을 눌러 위치를 추가하세요."
-            lblAddress.textColor = UIColor.lightGray
-        } else {
+        
+        count += 1
+
+        if count == 1 {
             lblAddress.text = String(receivedAddress)
+        }else{
+            lblAddress.text = Message.address
             lblAddress.textColor = UIColor.black
         }
+//
+        
+//        switch count {
+//        case 1:
+//            lblAddress.text = String(receivedAddress)
+//        default:
+//            lblAddress.text = Message.address
+//            lblAddress.textColor = UIColor.black
+//        @unknown _:
+//            print("ok")
+//        }
+        // address label 채워준다.
+//        if String(receivedAddress).isEmpty {
+//            lblAddress.text = " + 버튼을 눌러 위치를 추가하세요."
+//            lblAddress.textColor = UIColor.lightGray
+//        } else {
+        print("willappera")
+        
+            
+        
+        print("addnew")
+
+        print(Message.address)
         
         // 옵저버 등록
 //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -503,9 +546,9 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     }//openphoto
     
     // db에 정보 저장
-    func dbInsert(){
+    func dbUpdate(){
         
-        print("insert")
+        print("update")
         
         // DB 인스턴스 만들기
         let storeDB = StoreDB()
@@ -517,31 +560,12 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         var image : UIImage!
         var data : NSData!
         
-        if imageData != nil {
+        if imageData != nil { // 사용자가 다른 사진을 선택
             image = UIImage(data: imageData! as Data)
-            data = image.pngData()! as NSData
-        }else{ // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
-            
-            if (myTag == "한식"){
-                image = UIImage(named: "한식.png")
-            }
-            if (myTag == "일식"){
-                image = UIImage(named: "일식.png")
-            }
-            if (myTag == "분식"){
-                image = UIImage(named: "분식.png")
-            }
-            if (myTag == "양식"){
-                image = UIImage(named: "양식.png")
-            }
-            if (myTag == "기타"){
-                image = UIImage(named: "기타.png")
-            }
-            if (myTag == "중식"){
-                image = UIImage(named: "중식.png")
-            }
-            
-            data = image.pngData()! as NSData
+            data = image!.pngData()! as NSData
+        }else{ // 사용자가 다른 사진을 선택하지 않으면 원래 사진 그대로
+            image = UIImage(data: receivedImage! as Data)
+            data = image!.pngData()! as NSData
         }
         
 //        data = image!.pngData()! as NSData
@@ -549,30 +573,24 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
 //        let data = image.pngData()! as NSData
 //        let date = Date.now
         
-        let result = storeDB.updateDB(name: name, address: address, data: data, content: content, category: tag, id: receivedId)
+        print(tag)
+        print("아니!")
+        print(receivedId)
         
+        
+        storeDB.delegate = self
+        
+        let result = storeDB.updateDB(name: name, address: address, data: data, content: content, category: tag, id: receivedId)
+        print(result)
 //        let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
         
-        if result {
-            let resultAlert = UIAlertController(title: "완료", message: "수정되었습니다.", preferredStyle: .alert)
-//            let onAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in
-//                self.navigationController?.popViewController(animated: true)
-//            })
+        if result{
+            let resultAlert = UIAlertController(title: "결과", message: "수정 되었습니다", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "네 알겠습니다.", style: .default, handler: {ACTION in self.navigationController?.popViewController(animated: true)})
             
-//            let onAction = UIAlertAction(title: "OK", style: .default, handler: {ACTION in
-//                self.initPage()
-//            })
-            
-            let onAction = UIAlertAction(title: "OK", style: .default)
-            
-            resultAlert.addAction(onAction)
+            resultAlert.addAction(okAction)
             present(resultAlert, animated: true)
-            
-            //페이지 넘기기
-//            guard let nextVC = self.storyboard?.instantiateViewController(identifier: "TableViewController") else {return}
-//            self.present(nextVC, animated: true)
-
-        } else {
+        }else{
             let resultAlert = UIAlertController(title: "실패", message: "에러가 발생 되었습니다.", preferredStyle: .alert)
             let onAction = UIAlertAction(title: "OK", style: .default)
             
@@ -580,6 +598,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             present(resultAlert, animated: true)
         }
         
+        Message.address = ""
 
     }//dbInsert
 
@@ -695,4 +714,14 @@ extension UpdateViewController: UIImagePickerControllerDelegate & UINavigationCo
         
     }
     
+    
+    
 }// extension
+
+
+extension UpdateViewController: StoreModelProtocol{
+    func itemdownloaded(items: [Store]) {
+        
+    }
+}
+
