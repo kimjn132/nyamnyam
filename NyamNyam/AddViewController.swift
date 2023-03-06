@@ -447,23 +447,29 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         guard let content = tvContent.text?.trimmingCharacters(in: .whitespaces) else { return }
         var image : UIImage!
         var data : NSData!
+        var imageName : String!
         
         if imageData != nil {
             image = UIImage(data: imageData! as Data)
             data = image.pngData()! as NSData
+            imageName = "img"
+            
         }else{
             // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
             for category in categories {
                 if myTag == category{
                     image = UIImage(named: category + ".png")
+                    imageName = category + ".png"
+                    
+                    print("이미지 이름:", imageName)
                 }
             }
             
             data = image.pngData()! as NSData
         }
-                
-        let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
-                
+        
+        let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag, imageName: imageName)
+        
         if result {
             let resultAlert = UIAlertController(title: "완료", message: "입력이 되었습니다.", preferredStyle: .alert)
 
@@ -472,10 +478,6 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
             resultAlert.addAction(onAction)
             present(resultAlert, animated: true)
             
-//            //페이지 넘기기
-//            guard let nextVC = self.storyboard?.instantiateViewController(identifier: "TableViewController") else {return}
-//            self.present(nextVC, animated: true)
-
         } else {
             let resultAlert = UIAlertController(title: "실패", message: "에러가 발생 되었습니다.", preferredStyle: .alert)
             let onAction = UIAlertAction(title: "OK", style: .default)

@@ -210,6 +210,7 @@ class TableViewController: UITableViewController {
             detailView.receivedImage = storeList[indexPath!.row].image as NSData?
             detailView.receivedContent = storeList[indexPath!.row].contents
             detailView.receivedCategory = storeList[indexPath!.row].category
+            detailView.receivedImageName = storeList[indexPath!.row].imageName
             //>>detailviewcontrolller에서 정의한 property에 데이터 넣어줌
             
             
