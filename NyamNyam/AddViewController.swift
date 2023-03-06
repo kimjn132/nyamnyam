@@ -29,13 +29,12 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
     var indexOfBtns: Int?
     // 디폴트 태그: 기타
     var myTag = "기타"
-    
-//    var db: OpaquePointer?
 
     let photo = UIImagePickerController()   //앨범 이동
     
     var imageData : NSData? = nil   // 서버로 이미지 등록을 하기 위함
     
+    // 키보드 올라가는 만큼 화면 올리기 위해 필요한 NotificationCenter
     let notiCenter = NotificationCenter.default
     
     //segue를 통해 Done 버튼 클릭시 메인 피드로 이동
@@ -52,7 +51,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         
 //        editViewController.textMessage = tfMessage.text!
 //        editViewController.isOn = isOn
-//        //연결시ㅗ기
+//        //연결시키기
 //        editViewController.delegate = self
         
 //    }
@@ -133,9 +132,12 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         if Message.address.isEmpty {
             lblAddress.text = " + 버튼을 눌러 위치를 추가하세요."
             lblAddress.textColor = UIColor.lightGray
+            
         } else {
+            
             lblAddress.text = " \(Message.address)"
             lblAddress.textColor = UIColor.secondaryLabel
+            
         }
         
     }
@@ -149,18 +151,27 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         if indexOfBtns != nil{
 
             if !sender.isSelected {
+                
                 for unselectIndex in radioButtons.indices {
+                    
                     radioButtons[unselectIndex].isSelected = false
                 }
+                
                 sender.isSelected = true
                 indexOfBtns = radioButtons.firstIndex(of: sender)
+                
             } else {
+                
                 sender.isSelected = false
                 indexOfBtns = nil
+                
             }
+            
         } else {
+            
             sender.isSelected = true
             indexOfBtns = radioButtons.firstIndex(of: sender)
+            
         }
         
         // myTag에 선택한 카테고리 버튼 값 넣어주기
@@ -168,7 +179,6 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         for category in categories {
             if indexOfBtns == i{
                 myTag = category
-//                print("index:", i, "/category", category)
             }
             i += 1
         }
@@ -202,8 +212,10 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         
     }//btnImage
     
-    // 완료 버튼
+    // 완료 버튼 클릭시 alert
     @IBAction func btnDone(_ sender: UIBarButtonItem) {
+        
+//        let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "AddViewController")
         
         if tfTitle.text!.trimmingCharacters(in: .whitespaces).isEmpty{
             let testAlert = UIAlertController(title: nil, message: "맛집 이름을 작성해주세요!", preferredStyle: .alert)
@@ -261,11 +273,19 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
             present(testAlert, animated: true)
             
         }else{
-        
+
             // DB에 정보 insert
             dbInsert()
+//            self.presentingViewController?.dismiss(animated: true)
+//            self.navigationController?.pushViewController(pushVC!, animated: true)
+//            let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "TableViewController")
+//
+//            self.navigationController?.pushViewController(pushVC!, animated: true)
             initPage()
+            
         }
+        
+        
 
     }
     
@@ -316,6 +336,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
             )
         }
     }
+    
     @objc func keyboardDown() {
         self.view.transform = .identity
     }
@@ -465,18 +486,6 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         
     }//dbInsert
     
-//    // return 클릭 시 포커스 해제
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//            tfTitle.resignFirstResponder()
-//            return true
-//    }
-    
-//    func textViewShouldReturn(_ textView: UITextView) -> Bool {
-//            tvContent.resignFirstResponder()
-//            return true
-//    }
-    
-    
     @IBAction func tfTitleEditingDidBegin(_ sender: UITextField) {
         // 키보드 올리면서 화면까지 올리는 옵저버 제거
         notiCenter.removeObserver(self)
@@ -505,10 +514,9 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         notiCenter.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
         notiCenter.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-//        print("view will appear: \(Message.address)")
-        
     }//textViewDidBeginEditing
     
+    // textview 글자 수 제한 -----
     //textview 글자 수 제한 감지
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
             let currentText = tvContent.text ?? ""
@@ -525,7 +533,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         countLabel.text = "\(remainingCount)/60"
     }
     
-    // 완료 버튼 클릭시 뷰 초기화
+    // 완료 버튼 클릭 시 뷰 초기화
     func initPage(){
         
         tvContent.resignFirstResponder()
@@ -534,8 +542,15 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         tfTitle.text = ""
         imageData = nil
         imageView.image = UIImage(named: "기타.png")
-        tvContent.text = ""
-        lblAddress.text = ""
+        tvContent.text = "리뷰를 작성하세요."
+        tvContent.textColor = UIColor.systemGray4
+        lblAddress.text = " + 버튼을 눌러 위치를 추가하세요."
+        lblAddress.textColor = UIColor.lightGray
+        
+        //글자 수 제한 countlabel 초기 설정
+        countLabel.text = "\(maxCharacters)/60"
+        
+        // 태그 초기화
         myTag = "기타"
         radioButtons[0].isSelected = false
         radioButtons[1].isSelected = false
@@ -545,15 +560,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         radioButtons[5].isSelected = false
         radioButtons[6].isSelected = false
         
-//        tvContent.delegate = self
-        tvContent.text = "리뷰를 작성하세요."
-        tvContent.textColor = UIColor.systemGray4
-        
-        lblAddress.text = " + 버튼을 눌러 위치를 추가하세요."
-        lblAddress.textColor = UIColor.lightGray
-        
-        tvContent.resignFirstResponder()
-        
+        // 메세지 초기화
         Message.address = ""
                 
         // 앨범 컨트롤러 딜리게이트 지정

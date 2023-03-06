@@ -87,7 +87,7 @@
             </objects>
             <point key="canvasLocation" x="47" y="2191"/>
         </scene>
-        <!--Add View Controller-->
+        <!--리뷰 작성-->
         <scene sceneID="gD4-I2-Be7">
             <objects>
                 <viewController storyboardIdentifier="AddViewController" id="OIi-zZ-fA6" customClass="AddViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
@@ -385,7 +385,7 @@
                             <constraint firstItem="trE-Wf-m17" firstAttribute="leading" secondItem="gbl-No-UrO" secondAttribute="leading" constant="16" id="wbe-Bf-bGc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="WeO-GP-ETL">
+                    <navigationItem key="navigationItem" title="리뷰 작성" id="WeO-GP-ETL">
                         <barButtonItem key="rightBarButtonItem" title="완료" id="nHJ-BA-YKF">
                             <connections>
                                 <action selector="btnDone:" destination="OIi-zZ-fA6" id="Rb1-Md-LeU"/>
@@ -409,7 +409,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="enb-pN-U1h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1032.824427480916" y="2190.8450704225352"/>
+            <point key="canvasLocation" x="2950" y="2191"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="2tR-yx-dvd">
