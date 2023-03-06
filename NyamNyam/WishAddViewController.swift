@@ -35,6 +35,7 @@ class WishAddViewController: UIViewController {
     let photo = UIImagePickerController() // 앨범 이동
     
     var myTag = "한식"
+    var defaultImage = "한식.png"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -194,36 +195,43 @@ class WishAddViewController: UIViewController {
             if indexOfBtns == 0{
                 myTag = "한식"
                 if imageData == nil{
+                    defaultImage = "한식.png"
                     imgImage.image = UIImage(named: "한식.png")
                 }
             }else if indexOfBtns == 1{
                 myTag = "중식"
                 if imageData == nil{
+                    defaultImage = "중식.png"
                     imgImage.image = UIImage(named: "중식.png")
                 }
             }else if indexOfBtns == 2{
                 myTag = "양식"
                 if imageData == nil{
+                    defaultImage = "양식.png"
                     imgImage.image = UIImage(named: "양식.png")
                 }
             }else if indexOfBtns == 3{
                 myTag = "일식"
                 if imageData == nil{
+                    defaultImage = "일식.png"
                     imgImage.image = UIImage(named: "일식.png")
                 }
             }else if indexOfBtns == 4{
                 myTag = "분식"
                 if imageData == nil{
+                    defaultImage = "분식.png"
                     imgImage.image = UIImage(named: "분식.png")
                 }
             }else if indexOfBtns == 5{
                 myTag = "카페"
                 if imageData == nil{
+                    defaultImage = "카페.png"
                     imgImage.image = UIImage(named: "카페.png")
                 }
             }else{
                 myTag = "기타"
                 if imageData == nil{
+                    defaultImage = "기타.png"
                     imgImage.image = UIImage(named: "기타.png")
                 }
             }
@@ -295,7 +303,7 @@ class WishAddViewController: UIViewController {
             image = UIImage(data: imageData! as Data)
             data = image!.pngData()! as NSData
         }else{ // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
-            image = UIImage(named: "한식.png")
+            image = UIImage(named: defaultImage)
             data = image!.pngData()! as NSData
         }
         
