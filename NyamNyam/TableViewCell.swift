@@ -43,21 +43,15 @@ class TableViewCell: UITableViewCell {
     
     
     
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        //        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
-        //                contentView.layer.cornerRadius = 10
-        //                contentView.layer.borderWidth = 2
-        //                contentView.layer.borderColor = UIColor(hexString: "#757575")
-        
-        
+      
 
         
         ImageView.contentMode = .scaleAspectFill
         ImageView.clipsToBounds = true
-        //        ImageView.layer.cornerRadius = 10
-        //        ImageView.layer.borderWidth = 2
         
         lblStore.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         if traitCollection.userInterfaceStyle == .dark{
