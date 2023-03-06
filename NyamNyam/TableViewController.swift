@@ -212,36 +212,8 @@ class TableViewController: UITableViewController {
             detailView.receivedCategory = storeList[indexPath!.row].category
             //>>detailviewcontrolller에서 정의한 property에 데이터 넣어줌
             
-            print("segue to detail")
-        }
-        
-//        if segue.identifier == "sgDetail"{
-//            let cell = sender as! UITableViewCell
-//            let indexPath = self.tvListView.indexPath(for: cell)
-//            if let navController = segue.destination as? UINavigationController,
-//               let detailView = navController.topViewController as? UpdateViewController{
-//
-//                detailView.receivedName = storeList[indexPath!.row].name
-//                detailView.receivedAddress = storeList[indexPath!.row].address
-//                detailView.receivedImage = storeList[indexPath!.row].image as NSData?
-//                detailView.receivedContent = storeList[indexPath!.row].contents
-//                detailView.receivedCategory = storeList[indexPath!.row].category
-//                //>>detailviewcontrolller에서 정의한 property에 데이터 넣어줌
-//
-//                print("segue to detail")
-//
-//            }else if let detailView = segue.destination as? UpdateViewController{
-//                detailView.receivedName = storeList[indexPath!.row].name
-//                detailView.receivedAddress = storeList[indexPath!.row].address
-//                detailView.receivedImage = storeList[indexPath!.row].image as NSData?
-//                detailView.receivedContent = storeList[indexPath!.row].contents
-//                detailView.receivedCategory = storeList[indexPath!.row].category
-//                //>>detailviewcontrolller에서 정의한 property에 데이터 넣어줌
-//
-//                print("segue to detail")
-//            }
-//
             
+        }
             
         }
         

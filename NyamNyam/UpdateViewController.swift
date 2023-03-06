@@ -56,7 +56,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         
-        print("viewDidLoad")
+       
         
         super.viewDidLoad()
         
@@ -73,7 +73,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             tvContent.text = String(receivedContent)
             
             myTag = String(receivedCategory)
-            print(receivedAddress)
+           
             
             tvContent.delegate = self
             //글자 수 제한 countlabel 초기 설정
@@ -178,7 +178,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             myTag = "기타"
         }
         
-//        print("myTag:", myTag, "/ index: ", indexOfBtns)
+
         
         if ((imageView.image == nil) || (imageView.image == UIImage(named: "카페.png"))
             || (imageView.image == UIImage(named: "한식.png"))
@@ -189,31 +189,31 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             || (imageView.image == UIImage(named: "기타.png"))) {
             
             if myTag == "카페"{
-//                print("카페 이미지")
+
                 imageView.image = UIImage(named: "카페.png")
             }
             if myTag == "한식"{
-//                print("카페 이미지")
+
                 imageView.image = UIImage(named: "한식.png")
             }
             if myTag == "양식"{
-//                print("카페 이미지")
+
                 imageView.image = UIImage(named: "양식.png")
             }
             if myTag == "일식"{
-//                print("카페 이미지")
+
                 imageView.image = UIImage(named: "일식.png")
             }
             if myTag == "중식"{
-//                print("카페 이미지")
+
                 imageView.image = UIImage(named: "중식.png")
             }
             if myTag == "분식"{
-//                print("카페 이미지")
+
                 imageView.image = UIImage(named: "분식.png")
             }
             if myTag == "기타"{
-//                print("카페 이미지")
+
                 imageView.image = UIImage(named: "기타.png")
             }
 
@@ -298,7 +298,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
             // DB에 정보 update
             dbUpdate()
-            print("gg")
+
             
         }
 
@@ -325,7 +325,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     
     // + 버튼 눌렀을 때 kakao api를 불러온다.
     @IBAction func btnAddAddress(_ sender: UIButton) {
-        print("addressadd")
+      
 //        nullCheckDesignTfTitle()
         
         let nextVC = KakaoZipCodeVC()
@@ -354,7 +354,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         
         super.viewWillDisappear(animated)
-        print("viewWillDisappear")
+        
         
     }//viewwillDisappear
     
@@ -362,7 +362,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     override func viewDidDisappear(_ animated: Bool) {
         
         super.viewDidDisappear(animated)
-        print("viewDidDiappear")
+        
         
         //뷰 컨트롤러 포그라운드, 백그라운드 상태 체크 해제
         NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -388,35 +388,10 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             lblAddress.text = Message.address
             lblAddress.textColor = UIColor.black
         }
-//
-        
-//        switch count {
-//        case 1:
-//            lblAddress.text = String(receivedAddress)
-//        default:
-//            lblAddress.text = Message.address
-//            lblAddress.textColor = UIColor.black
-//        @unknown _:
-//            print("ok")
-//        }
-        // address label 채워준다.
-//        if String(receivedAddress).isEmpty {
-//            lblAddress.text = " + 버튼을 눌러 위치를 추가하세요."
-//            lblAddress.textColor = UIColor.lightGray
-//        } else {
-        print("willappera")
-        
-            
-        
-        print("addnew")
 
-        print(Message.address)
+
         
-        // 옵저버 등록
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        //print("view will appear: \(Message.address)")
         
     }
 
@@ -426,53 +401,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     @objc func checkBackground(){
     }
     
-//    @objc func keyboardUp(notification:NSNotification) {
-//        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-//           let keyboardRectangle = keyboardFrame.cgRectValue
-//
-//            UIView.animate(
-//                withDuration: 0.3
-//                , animations: {
-//                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
-//                }
-//            )
-//        }
-//    }
-//
-//    @objc func keyboardDown() {
-//        self.view.transform = .identity
-//    }
 
-    
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//        dbInsert()
-//        // Get the new view controller using segue.destination.
-//        // Pass the selected object to the new view controller.
-//        let tableViewController = segue.destination as! TableViewController //생성자 만들기
-//
-//        //연결시키기
-////        tableViewController.delegate = self
-//
-//        print("prepare")
-//
-//    }
-    
-    
-    // funcs =========================================================================
-//    func nullCheckDesignTfTitle(){
-//        // 맛집 이름을 적어주지 않았으면 텍스트 필드 색을 빨갛게
-//        if (tfTitle.text == "") {
-//            tfTitle.layer.borderWidth = 0.5
-//            tfTitle.layer.cornerRadius = 5
-//            tfTitle.layer.borderColor = UIColor.systemRed.cgColor
-//        }
-//
-//    }
-    
-    // alert
     func showAlert(){
         
         let alert = UIAlertController(title: "Select One", message: nil, preferredStyle: .actionSheet)
@@ -518,9 +447,9 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
             if granted {
-                print("Camera: 권한 허용")
+               
             } else {
-                print("Camera: 권한 거부")
+                
             }
         })
         
@@ -548,7 +477,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     // db에 정보 저장
     func dbUpdate(){
         
-        print("update")
+        
         
         // DB 인스턴스 만들기
         let storeDB = StoreDB()
@@ -573,17 +502,13 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
 //        let data = image.pngData()! as NSData
 //        let date = Date.now
         
-        print(tag)
-        print("아니!")
-        print(receivedId)
         
         
         storeDB.delegate = self
         
         let result = storeDB.updateDB(name: name, address: address, data: data, content: content, category: tag, id: receivedId)
-        print(result)
-//        let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
-        
+       
+
         if result{
             let resultAlert = UIAlertController(title: "결과", message: "수정 되었습니다", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "네 알겠습니다.", style: .default, handler: {ACTION in self.navigationController?.popViewController(animated: true)})
@@ -698,13 +623,7 @@ extension UpdateViewController: UIImagePickerControllerDelegate & UINavigationCo
         
         if let img = info[UIImagePickerController.InfoKey.originalImage]{
             
-            // [앨범에서 선택한 사진 정보 확인]
-            print("")
-            print("====================================")
-            print("[A_Image >> imagePickerController() :: 앨범에서 선택한 사진 정보 확인 및 사진 표시 실시]")
-            //print("[사진 정보 :: ", info)
-            print("====================================")
-            print("")
+           
             
             // [이미지 뷰에 앨범에서 선택한 사진 표시 실시]
             imageView.image = img as? UIImage
@@ -721,12 +640,7 @@ extension UpdateViewController: UIImagePickerControllerDelegate & UINavigationCo
     
     // MARK: [사진, 비디오 선택을 취소했을 때 호출되는 메소드]
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
-        print("")
-        print("===============================")
-        print("[A_Image >> imagePickerControllerDidCancel() :: 사진, 비디오 선택 취소 수행 실시]")
-        print("===============================")
-        print("")
+       
         
         // 이미지 파커 닫기
         self.dismiss(animated: true, completion: nil)
