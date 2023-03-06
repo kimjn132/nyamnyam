@@ -59,8 +59,6 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
     // override funcs ================================================
     override func viewDidLoad() {
         
-        print("viewDidLoad")
-        
         super.viewDidLoad()
         
         // 뷰 텍스트 초기화
@@ -103,7 +101,6 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
     override func viewWillDisappear(_ animated: Bool) {
         
         super.viewWillDisappear(animated)
-        print("viewWillDisappear")
         
     }//viewwillDisappear
     
@@ -111,7 +108,6 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
     override func viewDidDisappear(_ animated: Bool) {
         
         super.viewDidDisappear(animated)
-        print("viewDidDiappear")
         
         //뷰 컨트롤러 포그라운드, 백그라운드 상태 체크 해제
         NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -406,9 +402,9 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         
         AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
             if granted {
-                print("Camera: 권한 허용")
+
             } else {
-                print("Camera: 권한 거부")
+
             }
         })
         
@@ -436,8 +432,6 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
     // db에 정보 저장 -----
     func dbInsert(){
         
-        print("insert")
-        
         // DB 인스턴스 만들기
         let storeDB = StoreDB()
         
@@ -447,23 +441,30 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         guard let content = tvContent.text?.trimmingCharacters(in: .whitespaces) else { return }
         var image : UIImage!
         var data : NSData!
+        var imageName : String!
         
         if imageData != nil {
             image = UIImage(data: imageData! as Data)
             data = image.pngData()! as NSData
+            imageName = "img"
+            
         }else{
+            
             // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
             for category in categories {
+                
                 if myTag == category{
                     image = UIImage(named: category + ".png")
+                    imageName = category + ".png"
+                    
                 }
             }
             
             data = image.pngData()! as NSData
         }
-                
-        let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
-                
+        
+        let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag, imageName: imageName)
+        
         if result {
             let resultAlert = UIAlertController(title: "완료", message: "입력이 되었습니다.", preferredStyle: .alert)
 
@@ -472,10 +473,6 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
             resultAlert.addAction(onAction)
             present(resultAlert, animated: true)
             
-//            //페이지 넘기기
-//            guard let nextVC = self.storyboard?.instantiateViewController(identifier: "TableViewController") else {return}
-//            self.present(nextVC, animated: true)
-
         } else {
             let resultAlert = UIAlertController(title: "실패", message: "에러가 발생 되었습니다.", preferredStyle: .alert)
             let onAction = UIAlertAction(title: "OK", style: .default)
@@ -579,13 +576,6 @@ extension AddViewController: UIImagePickerControllerDelegate & UINavigationContr
         if let img = info[UIImagePickerController.InfoKey.originalImage]{
             
             // [앨범에서 선택한 사진 정보 확인]
-            print("")
-            print("====================================")
-            print("[A_Image >> imagePickerController() :: 앨범에서 선택한 사진 정보 확인 및 사진 표시 실시]")
-            //print("[사진 정보 :: ", info)
-            print("====================================")
-            print("")
-            
             // [이미지 뷰에 앨범에서 선택한 사진 표시 실시]
             imageView.image = img as? UIImage
             
@@ -601,13 +591,7 @@ extension AddViewController: UIImagePickerControllerDelegate & UINavigationContr
     
     // MARK: [사진, 비디오 선택을 취소했을 때 호출되는 메소드]
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
-        print("")
-        print("===============================")
-        print("[A_Image >> imagePickerControllerDidCancel() :: 사진, 비디오 선택 취소 수행 실시]")
-        print("===============================")
-        print("")
-        
+                
         // 이미지 파커 닫기
         self.dismiss(animated: true, completion: nil)
         
