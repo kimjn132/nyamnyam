@@ -147,6 +147,7 @@ class WishTableViewController: UITableViewController {
             addViewController.sgTitle = wishList[indexpath!.row].name
             Message.wishaddress = wishList[indexpath!.row].address
             addViewController.sgImage = wishList[indexpath!.row].image
+            addViewController.sgImageName = wishList[indexpath!.row].imagename
             addViewController.sgTag = wishList[indexpath!.row].category
             
         

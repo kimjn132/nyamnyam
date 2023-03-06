@@ -17,8 +17,9 @@ class WishAddViewController: UIViewController {
     @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet var tagButtons: [UIButton]!
     
-    
     var db:OpaquePointer?
+    
+    let categories = ["한식.png", "중식.png", "양식.png", "일식.png", "분식.png", "카페.png", "기타.png"]
     
     var indexOfBtns: Int? = 0
     
@@ -30,12 +31,14 @@ class WishAddViewController: UIViewController {
     var sgTitle:String?
     var sgImage:Data?
     var sgTag:String?
+    var sgImageName:String?
 
     var imageData : NSData? = nil
     let photo = UIImagePickerController() // 앨범 이동
     
-    var myTag = "한식"
-    var defaultImage = "한식.png"
+    var myTag:String = "한식"
+    var defaultImage:String = "한식.png"
+    var imageName:String = "한식.png"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,22 +179,16 @@ class WishAddViewController: UIViewController {
         }
         
         if sgclicked {
-            if indexOfBtns == 0{
-                myTag = "한식"
-            }else if indexOfBtns == 1{
-                myTag = "중식"
-            }else if indexOfBtns == 2{
-                myTag = "양식"
-            }else if indexOfBtns == 3{
-                myTag = "일식"
-            }else if indexOfBtns == 4{
-                myTag = "분식"
-            }else if indexOfBtns == 5{
-                myTag = "카페"
-            }else{
-                myTag = "기타"
-            }
-        }else{
+            print(sgImageName!)
+            print(categories.contains(sgImageName!))
+            
+//            if indexOfBtns == 0{
+//                myTag = "한식"
+//                if imageData == nil && categories.contains(sgImageName!){
+//                    defaultImage = "한식.png"
+//                    imgImage.image = UIImage(named: "한식.png")
+//                }
+            
             if indexOfBtns == 0{
                 myTag = "한식"
                 if imageData == nil{
@@ -218,20 +215,71 @@ class WishAddViewController: UIViewController {
                 }
             }else if indexOfBtns == 4{
                 myTag = "분식"
+                if imageData == nil {
+                    defaultImage = "분식.png"
+                    imgImage.image = UIImage(named: "분식.png")
+                }
+            }else if indexOfBtns == 5{
+                myTag = "카페"
+                if imageData == nil {
+                    defaultImage = "카페.png"
+                    imgImage.image = UIImage(named: "카페.png")
+                }
+            }else{
+                myTag = "기타"
+                if imageData == nil {
+                    defaultImage = "기타.png"
+                    imgImage.image = UIImage(named: "기타.png")
+                }
+            }
+        }else{
+            if indexOfBtns == 0{
+                myTag = "한식"
+                if imageData == nil{
+                    defaultImage = "한식.png"
+                    imageName = "한식.png"
+                    imgImage.image = UIImage(named: "한식.png")
+                }
+            }else if indexOfBtns == 1{
+                myTag = "중식"
+                if imageData == nil{
+                    defaultImage = "중식.png"
+                    imageName = "중식.png"
+                    imgImage.image = UIImage(named: "중식.png")
+                }
+            }else if indexOfBtns == 2{
+                myTag = "양식"
+                if imageData == nil{
+                    defaultImage = "양식.png"
+                    imageName = "양식.png"
+                    imgImage.image = UIImage(named: "양식.png")
+                }
+            }else if indexOfBtns == 3{
+                myTag = "일식"
+                if imageData == nil{
+                    defaultImage = "일식.png"
+                    imageName = "일식.png"
+                    imgImage.image = UIImage(named: "일식.png")
+                }
+            }else if indexOfBtns == 4{
+                myTag = "분식"
                 if imageData == nil{
                     defaultImage = "분식.png"
+                    imageName = "분식.png"
                     imgImage.image = UIImage(named: "분식.png")
                 }
             }else if indexOfBtns == 5{
                 myTag = "카페"
                 if imageData == nil{
                     defaultImage = "카페.png"
+                    imageName = "카페.png"
                     imgImage.image = UIImage(named: "카페.png")
                 }
             }else{
                 myTag = "기타"
                 if imageData == nil{
                     defaultImage = "기타.png"
+                    imageName = "기타.png"
                     imgImage.image = UIImage(named: "기타.png")
                 }
             }
@@ -309,7 +357,7 @@ class WishAddViewController: UIViewController {
         
         wishDB.delegate = self
         
-        let result = wishDB.insertDB(name: title!, address: address!, data: data!, category: tag)
+        let result = wishDB.insertDB(name: title!, address: address!, data: data!, imagename: imageName, category: tag)
         
         if result{
             let resultAlert = UIAlertController(title: "완료", message: "입력되었습니다", preferredStyle: .alert)
@@ -344,14 +392,22 @@ class WishAddViewController: UIViewController {
         if imageData != nil { // 사용자가 다른 사진을 선택
             image = UIImage(data: imageData! as Data)
             data = image!.pngData()! as NSData
-        }else{ // 사용자가 다른 사진을 선택하지 않으면 원래 사진 그대로
-            image = UIImage(data: sgImage!)
-            data = image!.pngData()! as NSData
+//        }else if imageData == nil && sg == defaultImage.components(separatedBy: ".")[0]{ // 사용자가 다른 사진을 선택하지 않으면 원래 사진 그대로
+//            image = UIImage(data: sgImage!)
+//            data = image!.pngData()! as NSData
+        }else{
+//            if sgclicked == false {
+                image = UIImage(named: defaultImage)
+                data = image!.pngData()! as NSData
+//            }else{
+//                image = UIImage(data: sgImage!)
+//                data = image!.pngData()! as NSData
+//            }
         }
         
         wishDB.delegate = self
         
-        let result = wishDB.updateDB(name: title!, address: address!, data: data, category: tag, id: wid)
+        let result = wishDB.updateDB(name: title!, address: address!, data: data, imagename: imageName, category: tag, id: wid)
         
         if result{
             let resultAlert = UIAlertController(title: "완료", message: "수정되었습니다", preferredStyle: .alert)
@@ -457,6 +513,7 @@ extension WishAddViewController: UIImagePickerControllerDelegate & UINavigationC
             
             // [이미지 뷰에 앨범에서 선택한 사진 표시 실시]
             imgImage.image = img as? UIImage
+            imageName = "user"
             
             // [이미지 데이터에 선택한 이미지 지정 실시]
             imageData = (img as? UIImage)!.jpegData(compressionQuality: 0.8) as NSData? // jpeg 압축 품질 설정
