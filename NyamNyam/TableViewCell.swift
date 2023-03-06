@@ -25,31 +25,15 @@ class TableViewCell: UITableViewCell {
    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-       
-        
+
     }
-    
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-       
-        
-    }
-    
     
 
-    
-    
-    
-    
+    //cell design
     override func layoutSubviews() {
         super.layoutSubviews()
         
-      
 
-        
         ImageView.contentMode = .scaleAspectFill
         ImageView.clipsToBounds = true
         
