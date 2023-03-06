@@ -64,8 +64,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
 //        var count = 0
         count1 += 1
-        print("count1")
-        print(count1)
+
         if count1 == 1 {
             lblAddress.text = String(receivedAddress)
         }else{
@@ -365,7 +364,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         // 포그라운드 처리 실시
         checkForeground()
-        print("viewdid")
+        
     }//viewDidAppear
     
     // 뷰 정지 상태
@@ -373,7 +372,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         super.viewWillDisappear(animated)
         
-        print("viewwilldis")
+        
     }//viewwillDisappear
     
     // 뷰 종료 상태
@@ -381,7 +380,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         super.viewDidDisappear(animated)
         
-        print("viewdiddisappear")
+       
         //뷰 컨트롤러 포그라운드, 백그라운드 상태 체크 해제
         NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
@@ -397,7 +396,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         super.viewWillAppear(animated)
         
-        print("viewwillapp")
+
     
         count2 += 1
 
@@ -408,12 +407,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             lblAddress.text = Message.address
 //            lblAddress.textColor = UIColor.black
         }
-        print("count2")
-        print(Message.address)
-print(count2)
-        
-        
-        
+
     }
 
     //포그라운드 및 백그라운드 상태 처리 메소드 작성
@@ -523,7 +517,6 @@ print(count2)
         
         if imageData != nil {
 
-            print("요기")
             image = UIImage(data: imageData! as Data)
             data = image.pngData()! as NSData
             imageName = "img"
@@ -544,7 +537,7 @@ print(count2)
         
 
         let result = storeDB.updateDB(name: name, address: address, data: data, content: content, category: tag, id: receivedId, imageName: imageName)
-        print(result)
+
 //        let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
         
 
