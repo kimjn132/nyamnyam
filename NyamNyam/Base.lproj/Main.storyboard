@@ -747,7 +747,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="396" height="19.333333333333332"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ㅎㅎ" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oXt-by-6a4">
-                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="19.333333333333332"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="34.333333333333336"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="ng5-zp-zhR"/>
                                                         </constraints>

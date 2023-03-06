@@ -464,7 +464,12 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
         }
         
         let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag, imageName: imageName)
-        
+        print(name)
+        print(address)
+        print(data as Any)
+        print(content)
+        print(tag)
+        print(imageName as Any)
         if result {
             let resultAlert = UIAlertController(title: "완료", message: "입력이 되었습니다.", preferredStyle: .alert)
 
