@@ -437,7 +437,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="TableViewController" id="fkQ-lo-yR0" customClass="TableViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="454" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="xh3-CF-HRG">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -561,7 +561,7 @@
             <objects>
                 <viewController id="kmL-xG-Y3C" customClass="UpdateViewController" customModule="NyamNyam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hoE-5b-xWY">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="p60-Ej-IRL" userLabel="AllStackView">
@@ -1288,7 +1288,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="CwD-2O-9gs"/>
-        <segue reference="g3s-Iw-5LR"/>
+        <segue reference="8TM-xQ-bZ2"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="baseline_apps_black_18pt_1x" width="18" height="18"/>
