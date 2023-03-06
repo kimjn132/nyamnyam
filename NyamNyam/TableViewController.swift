@@ -26,8 +26,8 @@ class TableViewController: UITableViewController {
 
     } //viewDidLoad
     
-    
-    
+
+
     // 추가 입력 새로 불러오는 역할
     override func viewWillAppear(_ animated: Bool) {
         //readValues()
