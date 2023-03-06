@@ -23,7 +23,8 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var countLabel: UILabel!
     let maxCharacters = 60
     
-    var count = 0
+    var count1 = 0
+    var count2 = 0
     var storeList: [Store] = []
     
     // 한식, 중식, 양식, 분식, 일식, 카페 선택 라디오 버튼
@@ -62,11 +63,14 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         
 //        var count = 0
-//        count += 1
-        
-//        if count == 1 {
+        count1 += 1
+        print("count1")
+        print(count1)
+        if count1 == 1 {
             lblAddress.text = String(receivedAddress)
-//        }
+        }else{
+            lblAddress.text = Message.address
+        }
         
             // 뷰 텍스트 초기화
             tfTitle.text = String(receivedName)
@@ -357,7 +361,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         // 포그라운드 처리 실시
         checkForeground()
-        
+        print("viewdid")
     }//viewDidAppear
     
     // 뷰 정지 상태
@@ -365,7 +369,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         super.viewWillDisappear(animated)
         
-        
+        print("viewwilldis")
     }//viewwillDisappear
     
     // 뷰 종료 상태
@@ -373,7 +377,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         super.viewDidDisappear(animated)
         
-        
+        print("viewdiddisappear")
         //뷰 컨트롤러 포그라운드, 백그라운드 상태 체크 해제
         NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
@@ -389,17 +393,20 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         super.viewWillAppear(animated)
         
-        
-        count += 1
+        print("viewwillapp")
+    
+        count2 += 1
 
-        if count == 1 {
+        if count2 == 1 {
             lblAddress.text = String(receivedAddress)
-        }else{
+//            Message.address = ""
+        }else {
             lblAddress.text = Message.address
-            lblAddress.textColor = UIColor.black
+//            lblAddress.textColor = UIColor.black
         }
-
-
+        print("count2")
+        print(Message.address)
+print(count2)
         
         
         
