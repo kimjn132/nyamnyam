@@ -27,6 +27,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     var storeList: [Store] = []
     
     // 한식, 중식, 양식, 분식, 일식, 카페 선택 라디오 버튼
+    let categories = ["한식", "중식", "양식", "일식", "분식", "카페", "기타"]
     @IBOutlet var radioButtons: [UIButton]!
     //라디오 버튼 선택 index
     var indexOfBtns: Int?
@@ -85,23 +86,23 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             
             
             // 카테고리 버튼 기존 데이터 선택된 상태로 보여짐
-            switch myTag {
-            case "한식":
-                radioButtons[0].isSelected = true
-            case "중식":
-                radioButtons[1].isSelected = true
-            case "양식":
-                radioButtons[2].isSelected = true
-            case "일식":
-                radioButtons[3].isSelected = true
-            case "분식":
-                radioButtons[4].isSelected = true
-            case "카페":
-                radioButtons[5].isSelected = true
-            default:
-                radioButtons[6].isSelected = true
-
-            }
+//            switch myTag {
+//            case "한식":
+//                radioButtons[0].isSelected = true
+//            case "중식":
+//                radioButtons[1].isSelected = true
+//            case "양식":
+//                radioButtons[2].isSelected = true
+//            case "일식":
+//                radioButtons[3].isSelected = true
+//            case "분식":
+//                radioButtons[4].isSelected = true
+//            case "카페":
+//                radioButtons[5].isSelected = true
+//            default:
+//                radioButtons[6].isSelected = true
+//
+//            }
        
        
 
@@ -162,6 +163,8 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             indexOfBtns = radioButtons.firstIndex(of: sender)
         }
 
+        
+        
         if indexOfBtns == 0{
             myTag = "한식"
         }else if indexOfBtns == 1{
@@ -178,7 +181,14 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             myTag = "기타"
         }
         
-
+        // myTag에 선택한 카테고리 버튼 값 넣어주기
+        var i = 0
+        for category in categories {
+            if indexOfBtns == i{
+                myTag = category
+            }
+            i += 1
+        }
         
         if ((imageView.image == nil) || (imageView.image == UIImage(named: "카페.png"))
             || (imageView.image == UIImage(named: "한식.png"))
