@@ -32,14 +32,14 @@ class WishDB{
         }
         
         // Table 만들기
-        if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS wish (wId INTEGER PRIMARY KEY AUTOINCREMENT, wName TEXT, wAddress TEXT, wImage BLOB, wTag TEXT, wDate TEXT)", nil, nil, nil) != SQLITE_OK{
+        if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS wish (wId INTEGER PRIMARY KEY AUTOINCREMENT, wName TEXT, wAddress TEXT, wImage BLOB, wImageName TEXT, wTag TEXT, wDate TEXT)", nil, nil, nil) != SQLITE_OK{
             let errMsg = String(cString: sqlite3_errmsg(db)!)
             print("Error create table : \(errMsg)")
             return  //에러 나면 리턴
         }
     } // init
     
-    func insertDB(name: String, address: String, data: AnyObject, category: String) -> Bool {
+    func insertDB(name: String, address: String, data: AnyObject, imagename:String, category: String) -> Bool {
         
         let calendar = Calendar(identifier: .gregorian)
         let timeZone = TimeZone(identifier: "Asia/Seoul")
@@ -55,14 +55,15 @@ class WishDB{
         var stmt: OpaquePointer?
         let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
         
-        let queryString = "INSERT INTO wish (wName, wAddress, wImage, wTag, wDate) VALUES (?,?,?,?,?)"
+        let queryString = "INSERT INTO wish (wName, wAddress, wImage, wImageName, wTag, wDate) VALUES (?,?,?,?,?,?)"
         
         sqlite3_prepare(db, queryString, -1, &stmt, nil)
         sqlite3_bind_text(stmt, 1, name, -1, SQLITE_TRANSIENT)
         sqlite3_bind_text(stmt, 2, address, -1, SQLITE_TRANSIENT)
         sqlite3_bind_blob(stmt, 3, data.bytes, Int32(Int64(data.length)), SQLITE_TRANSIENT)
-        sqlite3_bind_text(stmt, 4, category, -1, SQLITE_TRANSIENT)
-        sqlite3_bind_text(stmt, 5, wDate, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(stmt, 4, imagename, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(stmt, 5, category, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(stmt, 6, wDate, -1, SQLITE_TRANSIENT)
             
         if sqlite3_step(stmt) == SQLITE_DONE {
             return true
@@ -87,31 +88,33 @@ class WishDB{
             let name = String(cString: sqlite3_column_text(stmt, 1))
             let address = String(cString: sqlite3_column_text(stmt, 2))
             let image = Data(bytes: sqlite3_column_blob(stmt, 3), count: Int(sqlite3_column_bytes(stmt, 3)))
-            let category = String(cString: sqlite3_column_text(stmt, 4))
+            let imagename = String(cString: sqlite3_column_text(stmt, 4))
+            let category = String(cString: sqlite3_column_text(stmt, 5))
 //            let date = String(cString: sqlite3_column_text(stmt, 5))
 
             //while문 돌면서 List에 담기
             // image는 Data 타입으로 보내줌
-            wishList.append(Wish(id: Int(id), name: name, address: address, image: image, category: category))
+            wishList.append(Wish(id: Int(id), name: name, address: address, image: image, imagename: imagename, category: category))
 
         }
 
         self.delegate.itemdownloaded(items: wishList)     // 하단에 numberOfSection , tableView 모두 실행된다.
     }//queryDB
     
-    func updateDB(name: String, address: String, data: AnyObject, category: String, id: Int) -> Bool {
+    func updateDB(name: String, address: String, data: AnyObject, imagename: String, category: String, id: Int) -> Bool {
         var stmt: OpaquePointer?
         let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
         
-        let queryString = "UPDATE wish SET wName = ?, wAddress = ?, wImage = ?, wTag = ? WHERE wid = ?"
+        let queryString = "UPDATE wish SET wName = ?, wAddress = ?, wImage = ?, wImageName = ?, wTag = ? WHERE wid = ?"
         
         sqlite3_prepare(db, queryString, -1, &stmt, nil)
         
         sqlite3_bind_text(stmt , 1, name, -1, SQLITE_TRANSIENT)
         sqlite3_bind_text(stmt , 2, address, -1, SQLITE_TRANSIENT)
         sqlite3_bind_blob(stmt, 3, data.bytes, Int32(Int64(data.length)), SQLITE_TRANSIENT)
-        sqlite3_bind_text(stmt , 4, category, -1, SQLITE_TRANSIENT)
-        sqlite3_bind_int(stmt, 5, Int32(id))
+        sqlite3_bind_text(stmt , 4, imagename, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(stmt , 5, category, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_int(stmt, 6, Int32(id))
         
         if sqlite3_step(stmt) == SQLITE_DONE {
             return true
