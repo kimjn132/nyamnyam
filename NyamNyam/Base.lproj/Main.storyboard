@@ -190,7 +190,7 @@
                                                                                     <action selector="btnChooseCategory:" destination="OIi-zZ-fA6" eventType="touchUpInside" id="XUn-uX-7J6"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGE-5u-ga9"
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGE-5u-ga9">
                                                                                 <rect key="frame" x="360" y="0.0" width="75" height="34.333333333333336"/>
                                                                                 <color key="tintColor" systemColor="tintColor"/>
                                                                                 <state key="normal" title="Button"/>
