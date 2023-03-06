@@ -127,7 +127,6 @@
 		26A31905298AA0F400681392 /* NyamNyam */ = {
 			isa = PBXGroup;
 			children = (
-				68F72A5529B572F300AF59D6 /* View */,
 				BC2AF5E429B33B6700942180 /* Images */,
 				2669A98029B14E4300C57EC7 /* Controller */,
 				26158E6A29ACC9930082CE75 /* Model */,
@@ -154,13 +153,6 @@
 				2669A98D29B4A42800C57EC7 /* UpdateViewController.swift */,
 			);
 			path = NyamNyam;
-			sourceTree = "<group>";
-		};
-		68F72A5529B572F300AF59D6 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		BC2AF5E429B33B6700942180 /* Images */ = {
