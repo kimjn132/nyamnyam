@@ -213,13 +213,7 @@ class WishAddViewController: UIViewController {
                 || (imgImage.image == UIImage(named: "중식.png"))
                 || (imgImage.image == UIImage(named: "분식.png"))
                 || (imgImage.image == UIImage(named: "기타.png"))
-                || (sgImageName == "카페.png")
-                || (sgImageName == "한식.png")
-                || (sgImageName == "양식.png")
-                || (sgImageName == "일식.png")
-                || (sgImageName == "중식.png")
-                || (sgImageName == "분식.png")
-                || (sgImageName == "기타.png")){
+                || categories.contains(sgImageName!.components(separatedBy: ".")[0])){
                 
                 if myTag == "카페" && imageData == nil{
                     
