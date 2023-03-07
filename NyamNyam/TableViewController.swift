@@ -14,23 +14,24 @@ class TableViewController: UITableViewController {
     @IBOutlet var tvListView: UITableView!
     
     
-    // 사용자 작성 내용 리스트 형식으로 담는 변수
+    // db 연결
     var storeList: [Store] = []
 
+    // collection view에서 이미지 클릭하면 해당 id 번호의 table cell이 중앙으로 보이게 함
     var selectedId: Int?
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       
-
     } //viewDidLoad
     
 
 
     // 추가 입력 새로 불러오는 역할
     override func viewWillAppear(_ animated: Bool) {
-        //readValues()
+        // db query()
         selectData()
         
         // Date : 2023-03-04
@@ -62,6 +63,7 @@ class TableViewController: UITableViewController {
     
     
 
+    // db에 삭제되거나 수정된 데이터 판영하는 함수
     func selectData(){
         let storeDB = StoreDB()
         storeList.removeAll()
@@ -70,8 +72,7 @@ class TableViewController: UITableViewController {
 
         storeDB.queryDB()
         tvListView.reloadData()
-        
-      
+
     }
 
    
@@ -83,6 +84,7 @@ class TableViewController: UITableViewController {
             tvListView.backgroundView = nil
             return 1
         } else {
+            //데이터가 없을 때 보여지는 화면
             let noDataView = UIView(frame: CGRect(x: 0, y: 0, width: tvListView.bounds.size.width, height: tvListView.bounds.size.height))
           
             let noDataImg = UIImageView(frame: CGRect(x: 0, y: 250, width: tvListView.bounds.size.width, height: tvListView.bounds.size.height - 600))
@@ -101,6 +103,7 @@ class TableViewController: UITableViewController {
 
     }
 
+    
     // Table Row 수(사용자 입력 데이터만큼)
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -113,7 +116,7 @@ class TableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as! TableViewCell
 
-
+        
         cell.lblStore.text = storeList[indexPath.row].name
         cell.ImageView?.image = UIImage(data: storeList[indexPath.row].image!)
         cell.lblAddress.text = storeList[indexPath.row].address
@@ -136,6 +139,7 @@ class TableViewController: UITableViewController {
     */
 
     
+    // cell 스와이프 하면 데이터삭제 됨
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -143,11 +147,7 @@ class TableViewController: UITableViewController {
             let storeDB = StoreDB()
             let id = storeList[indexPath.row].id
             storeDB.delegate = self
-            
-            
-            
-            
-            
+
             let result = storeDB.deleteAction(id: id)
             if result {
                 let resultAlert = UIAlertController(title: "완료", message: "삭제가 되었습니다.", preferredStyle: .alert)
@@ -193,34 +193,35 @@ class TableViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    
+    
+    // 수정 페이지로 데이터 보내기 위함
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        
-        
-        
+  
         if segue.identifier == "sgDetail"{
-            let cell = sender as! UITableViewCell
-            let indexPath = self.tvListView.indexPath(for: cell)
-            let detailView = segue.destination as! UpdateViewController
-            
-            detailView.receivedId = storeList[indexPath!.row].id
-            detailView.receivedName = storeList[indexPath!.row].name
-            detailView.receivedAddress = storeList[indexPath!.row].address
-            detailView.receivedImage = storeList[indexPath!.row].image as NSData?
-            detailView.receivedContent = storeList[indexPath!.row].contents
-            detailView.receivedCategory = storeList[indexPath!.row].category
-            detailView.receivedImageName = storeList[indexPath!.row].imageName
-            //>>detailviewcontrolller에서 정의한 property에 데이터 넣어줌
-            
-            
-        }
+                let cell = sender as! UITableViewCell
+                let indexPath = self.tvListView.indexPath(for: cell)
+                let detailView = segue.destination as! UpdateViewController
+                
+                detailView.receivedId = storeList[indexPath!.row].id
+                detailView.receivedName = storeList[indexPath!.row].name
+                detailView.receivedAddress = storeList[indexPath!.row].address
+                detailView.receivedImage = storeList[indexPath!.row].image as NSData?
+                detailView.receivedContent = storeList[indexPath!.row].contents
+                detailView.receivedCategory = storeList[indexPath!.row].category
+                detailView.receivedImageName = storeList[indexPath!.row].imageName
+                //>>detailviewcontrolller에서 정의한 property에 데이터 넣어줌
+
+            }
             
         }
         
-    }
+    }// End
 
-
+//db protocol
 extension TableViewController: StoreModelProtocol {
     func itemdownloaded(items: [Store]) {
         storeList = items
