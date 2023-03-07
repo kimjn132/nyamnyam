@@ -350,7 +350,7 @@ class AddViewController: UIViewController, UITextViewDelegate, UITextFieldDelega
 //        //연결시키기
 ////        tableViewController.delegate = self
 //
-//        print("prepare")
+
 //
 //    }
     
