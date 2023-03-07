@@ -296,6 +296,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             }
             i += 1
 
+
         }
         
         // 사용자가 직접 사진을 안 넣으면 대신 넣을 디폴트 이미지(카테고리에 따라 다른 디폴트 이미지 제공 to 사용자)
