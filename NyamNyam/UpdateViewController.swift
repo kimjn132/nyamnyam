@@ -55,17 +55,11 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     var receivedCategory = ""
     var receivedImageName = ""
     
-    
-    
     override func viewDidLoad() {
-        
         
         super.viewDidLoad()
         
-//        var count = 0
         count1 += 1
-        print("count1")
-        print(count1)
         if count1 == 1 {
             lblAddress.text = String(receivedAddress)
         }else{
@@ -365,7 +359,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         // 포그라운드 처리 실시
         checkForeground()
-        print("viewdid")
+
     }//viewDidAppear
     
     // 뷰 정지 상태
@@ -373,7 +367,6 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         super.viewWillDisappear(animated)
         
-        print("viewwilldis")
     }//viewwillDisappear
     
     // 뷰 종료 상태
@@ -381,7 +374,6 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         super.viewDidDisappear(animated)
         
-        print("viewdiddisappear")
         //뷰 컨트롤러 포그라운드, 백그라운드 상태 체크 해제
         NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
@@ -396,8 +388,6 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        
-        print("viewwillapp")
     
         count2 += 1
 
@@ -408,12 +398,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             lblAddress.text = Message.address
 //            lblAddress.textColor = UIColor.black
         }
-        print("count2")
-        print(Message.address)
-print(count2)
-        
-        
-        
+                
     }
 
     //포그라운드 및 백그라운드 상태 처리 메소드 작성
@@ -523,16 +508,21 @@ print(count2)
         
         if imageData != nil {
 
-            print("요기")
             image = UIImage(data: imageData! as Data)
             data = image.pngData()! as NSData
             imageName = "img"
 
+        }else if imageView.image != nil {
+            
+            image = imageView.image
+            data = image.pngData()! as NSData
+            imageName = "img"
+            
         }else{
             // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
             for category in categories {
                 if myTag == category{
-                    print("조기")
+                    
                     image = UIImage(named: category + ".png")
                     imageName = category + ".png"
 
@@ -556,9 +546,6 @@ print(count2)
         
 
         let result = storeDB.updateDB(name: name, address: address, data: data, content: content, category: tag, id: receivedId, imageName: imageName)
-        print(result)
-//        let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag)
-        
 
         if result{
             let resultAlert = UIAlertController(title: "결과", message: "수정 되었습니다", preferredStyle: .alert)
@@ -659,9 +646,6 @@ print(count2)
         
         Message.address = ""
                 
-        // 앨범 컨트롤러 딜리게이트 지정
-//        self.photo.delegate = self
-
     }
 
 }
@@ -673,8 +657,6 @@ extension UpdateViewController: UIImagePickerControllerDelegate & UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let img = info[UIImagePickerController.InfoKey.originalImage]{
-            
-           
             
             // [이미지 뷰에 앨범에서 선택한 사진 표시 실시]
             imageView.image = img as? UIImage
