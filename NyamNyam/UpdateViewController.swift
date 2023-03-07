@@ -203,39 +203,41 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             || (receivedImageName == "중식.png")
             || (receivedImageName == "분식.png")
             || (receivedImageName == "기타.png")) {
+//            || categories.contains(receivedImageName.components(separatedBy: ".")[0])){
             
-            if myTag == "카페"{
+            if myTag == "카페" && imageData == nil {
 
                 imageView.image = UIImage(named: "카페.png")
+                
             }
-            if myTag == "한식"{
+            if myTag == "한식" && imageData == nil {
 
                 imageView.image = UIImage(named: "한식.png")
             }
-            if myTag == "양식"{
+            if myTag == "양식" && imageData == nil {
 
                 imageView.image = UIImage(named: "양식.png")
             }
-            if myTag == "일식"{
+            if myTag == "일식" && imageData == nil {
 
                 imageView.image = UIImage(named: "일식.png")
             }
-            if myTag == "중식"{
+            if myTag == "중식" && imageData == nil {
 
                 imageView.image = UIImage(named: "중식.png")
             }
-            if myTag == "분식"{
+            if myTag == "분식" && imageData == nil {
 
                 imageView.image = UIImage(named: "분식.png")
             }
-            if myTag == "기타"{
+            if myTag == "기타" && imageData == nil {
 
                 imageView.image = UIImage(named: "기타.png")
             }
+            
+            receivedImageName = myTag + ".png"
 
         }
-        
-        receivedImageName = ""
 
     }//btnChooseCategory
     
@@ -315,11 +317,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             
         }
 
-        
-
     }//btnDone
-    
-    
     
     // + 버튼 눌렀을 때 kakao api를 불러온다.
     @IBAction func btnAddAddress(_ sender: UIButton) {
@@ -330,10 +328,9 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
     }//btnAddAddress
     
-    
-    
     // 뷰 화면 표시
     override func viewDidAppear(_ animated: Bool) {
+        
         super.viewDidAppear(animated)
         
         // 뷰 컨트롤러 포그라운드, 백그라운드 상태 체크 설정 실시
@@ -344,12 +341,6 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         checkForeground()
         
     }//viewDidAppear
-    
-    
-//    // 뷰 정지 상태
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//    }//viewwillDisappear
     
     // 뷰 종료 상태
     override func viewDidDisappear(_ animated: Bool) {
@@ -364,10 +355,10 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
     }//viewDiddisappear
     
-    
     // viewWillAppear: 다른 화면에서 다시 올 때 실행된다.
     // kakao api로 가져온 address를 라벨로 띄워준다.
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
 
         // 수정한 주소를 다시 수정 반영된 주소로 가져오기 위함
@@ -418,6 +409,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             })
             
         }
+        
         let camera = UIAlertAction(title: "카메라", style: .default){(action) in
             self.openCamera()
         }
@@ -475,34 +467,78 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         var data : NSData!
         var imageName : String!
 
-        if imageData != nil {
-
-            image = UIImage(data: imageData! as Data)
-            data = image.pngData()! as NSData
-            imageName = "img"
-
-        }else if imageView.image != nil {
+//        if imageData != nil {
+//
+//            image = UIImage(data: imageData! as Data)
+//            data = image.pngData()! as NSData
+//            imageName = "img"
+//
+//        }else if imageView.image != nil {
+//
+//            image = imageView.image
+//            data = image.pngData()! as NSData
+//            imageName = "img"
+//
+//        }else{
+//            // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
+//            for category in categories {
+//                if myTag == category{
+//
+//                    image = UIImage(named: category + ".png")
+//                    imageName = category + ".png"
+//
+////                    print("이미지 이름:", imageName)
+//                }
+//            }
+//
+//
+//            data = image!.pngData()! as NSData
+//            imageName = "img"
+//
+//        }
+        
+        if categories.contains(receivedImageName.components(separatedBy: ".")[0]){
             
-            image = imageView.image
-            data = image.pngData()! as NSData
-            imageName = "img"
-            
-        }else{
-            // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
-            for category in categories {
-                if myTag == category{
+//            print("이미지 저장")
+
+            if imageData == nil{
+                
+                for category in categories {
+
+                    if myTag == category{
+                        
+                        image = UIImage(named: category + ".png")
+                        imageName = category + ".png"
+                        
+                    }
                     
-                    image = UIImage(named: category + ".png")
-                    imageName = category + ".png"
-
-//                    print("이미지 이름:", imageName)
                 }
+
+                data = image.pngData()! as NSData
+
+            }else{
+                
+                image = UIImage(data: imageData! as Data)
+                data = image!.pngData()! as NSData
+                imageName = "user"
+                
             }
 
+        }else{
 
-            data = image!.pngData()! as NSData
-            imageName = "img"
-
+            if imageData == nil{
+                
+                image = UIImage(data: receivedImage! as Data)
+                data = image!.pngData()! as NSData
+                imageName = receivedImageName
+                
+            }else{
+                
+                image = UIImage(data: imageData! as Data)
+                data = image!.pngData()! as NSData
+                imageName = "user"
+                
+            }
         }
 
         
@@ -556,7 +592,9 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     
     //textView 선택시 키보드가 올라가는 만큼 화면 올리기
     @objc func keyboardUp(notification:NSNotification) {
+        
         if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            
            let keyboardRectangle = keyboardFrame.cgRectValue
 
             UIView.animate(
@@ -568,7 +606,9 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         }
     }
     @objc func keyboardDown() {
+        
         self.view.transform = .identity
+        
     }
  
 }// End
@@ -586,7 +626,6 @@ extension UpdateViewController: UIImagePickerControllerDelegate & UINavigationCo
             
             // [이미지 데이터에 선택한 이미지 지정 실시]
             imageData = (img as? UIImage)!.jpegData(compressionQuality: 0.8) as NSData? // jpeg 압축 품질 설정
-            
         }
         
         // 이미지 피커 닫기
@@ -597,14 +636,11 @@ extension UpdateViewController: UIImagePickerControllerDelegate & UINavigationCo
     // MARK: [사진, 비디오 선택을 취소했을 때 호출되는 메소드]
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
        
-        
         // 이미지 파커 닫기
         self.dismiss(animated: true, completion: nil)
         
     }
-    
-    
-    
+        
 }// image extension
 
 
