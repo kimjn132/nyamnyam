@@ -121,12 +121,12 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout{
     
     // 좌우 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.1
+      return 0.5
     }
     
     // 위아래 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.1
+      return 1
     }
     
 }
