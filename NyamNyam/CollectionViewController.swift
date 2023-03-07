@@ -58,7 +58,7 @@ class CollectionViewController: UICollectionViewController {
           noDataView.addSubview(noDataImg)
           
           let noDataLabel = UILabel(frame: CGRect(x: 0, y: 100, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
-          noDataLabel.text = "저장된 사진이 없습니다"
+          noDataLabel.text = "저장된 사진이 없어요!"
           noDataLabel.textAlignment = .center
           noDataView.addSubview(noDataLabel)
           
