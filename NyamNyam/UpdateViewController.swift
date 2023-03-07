@@ -599,7 +599,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
 //                    image = UIImage(named: category + ".png")
 //                    imageName = category + ".png"
 //
-////                    print("이미지 이름:", imageName)
+
 //                }
 //            }
 //
@@ -611,7 +611,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         if categories.contains(receivedImageName.components(separatedBy: ".")[0]){
             
-//            print("이미지 저장")
+
 
             if imageData == nil{
                 

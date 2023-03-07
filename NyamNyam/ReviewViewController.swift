@@ -63,14 +63,7 @@ class ReviewViewController: UIViewController, UIImagePickerControllerDelegate & 
 //        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 //            if let img = info[UIImagePickerController.InfoKey.originalImage]{
 //
-//                // [앨범에서 선택한 사진 정보 확인]
-//                print("")
-//                print("====================================")
-//                print("[A_Image >> imagePickerController() :: 앨범에서 선택한 사진 정보 확인 및 사진 표시 실시]")
-//                //print("[사진 정보 :: ", info)
-//                print("====================================")
-//                print("")
-//
+
 //
 //                // [이미지 뷰에 앨범에서 선택한 사진 표시 실시]
 //                self.imageView.image = img as? UIImage
@@ -79,12 +72,7 @@ class ReviewViewController: UIViewController, UIImagePickerControllerDelegate & 
 //                // [이미지 데이터에 선택한 이미지 지정 실시]
 //                self.imageData = (img as? UIImage)!.jpegData(compressionQuality: 0.8) as NSData? // jpeg 압축 품질 설정
 //                /*
-//                 print("")
-//                 print("===============================")
-//                 print("[A_Image >> imagePickerController() :: 앨범에서 선택한 사진 정보 확인 및 사진 표시 실시]")
-//                 print("[imageData :: ", self.imageData)
-//                 print("===============================")
-//                 print("")
+
 //                 // */
 //
 //
@@ -103,12 +91,7 @@ class ReviewViewController: UIViewController, UIImagePickerControllerDelegate & 
 //
 //        // MARK: [사진, 비디오 선택을 취소했을 때 호출되는 메소드]
 //        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-//            print("")
-//            print("===============================")
-//            print("[A_Image >> imagePickerControllerDidCancel() :: 사진, 비디오 선택 취소 수행 실시]")
-//            print("===============================")
-//            print("")
-//
+
 //            // [이미지 파커 닫기 수행]
 //            self.dismiss(animated: true, completion: nil)
 //

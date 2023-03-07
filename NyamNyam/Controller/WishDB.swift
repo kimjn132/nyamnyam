@@ -26,15 +26,13 @@ class WishDB{
         // 설정한 것 실행(파일 연결)
         if let percentEncodedPath = fileURL.path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
             if sqlite3_open(percentEncodedPath, &db) != SQLITE_OK {
-                //if error 걸리면
-                print("Error opening database")
+                
             }
         }
         
         // Table 만들기
         if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS wish (wId INTEGER PRIMARY KEY AUTOINCREMENT, wName TEXT, wAddress TEXT, wImage BLOB, wImageName TEXT, wTag TEXT, wDate TEXT)", nil, nil, nil) != SQLITE_OK{
-            let errMsg = String(cString: sqlite3_errmsg(db)!)
-            print("Error create table : \(errMsg)")
+            
             return  //에러 나면 리턴
         }
     } // init
@@ -77,8 +75,7 @@ class WishDB{
         let queryString = "SELECT * FROM wish order by wId desc"
         
         if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
-            let errMsg = String(cString: sqlite3_errmsg(db)!)
-            print("Error preparing select : \(errMsg)")
+            
             return  //에러 발생 시 리턴
         }
         

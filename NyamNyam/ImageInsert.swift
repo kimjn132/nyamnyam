@@ -17,11 +17,7 @@ class ImageInsert{
     // 카메라 호출
     func checkCameraPermission(){
         AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
-            if granted {
-                print("Camera: 권한 허용")
-            } else {
-                print("Camera: 권한 거부")
-            }
+            
         })
     }// 카메라 호출
 }
