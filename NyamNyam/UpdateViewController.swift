@@ -29,7 +29,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     // 한식, 중식, 양식, 분식, 일식, 카페 선택 라디오 버튼
     let categories = ["한식", "중식", "양식", "일식", "분식", "카페", "기타"]
     @IBOutlet var radioButtons: [UIButton]!
-    var indexOfBtns: Int?   //라디오 버튼 선택 index
+    var indexOfBtns: Int? = 0   //라디오 버튼 선택 index, 0 초기값만 있으면 중복 체크 안됨!
 
     //이미지 수정
     let photo = UIImagePickerController()   //앨범 이동
@@ -73,7 +73,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         tfTitle.text = String(receivedName)
         imageView.image = UIImage(data: receivedImage! as Data)
         tvContent.text = String(receivedContent)
-        myTag = String(receivedCategory)
+        myTag = receivedCategory
        
         
     
@@ -109,6 +109,23 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
 //                radioButtons[6].isSelected = true
 //
 //            }
+//        myTag = sgTag!
+        
+        if receivedCategory == "한식"{
+            radioButtons[0].isSelected = true
+        }else if receivedCategory == "중식"{
+            radioButtons[1].isSelected = true
+        }else if receivedCategory == "양식"{
+            radioButtons[2].isSelected = true
+        }else if receivedCategory == "일식"{
+            radioButtons[3].isSelected = true
+        }else if receivedCategory == "분식"{
+            radioButtons[4].isSelected = true
+        }else if receivedCategory == "카페"{
+            radioButtons[5].isSelected = true
+        }else{
+            radioButtons[6].isSelected = true
+        }
                           
     }//viewDidLoad
     
@@ -141,9 +158,103 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     // 맛집 카테고리 클릭 버튼
     @IBAction func btnChooseCategory(_ sender: UIButton) {
         
-        // 카테고리 한 개만 클릭되게 (중복 안되게)
+//        // 카테고리 한 개만 클릭되게 (중복 안되게)
+//        if indexOfBtns != nil{
+//
+//            if !sender.isSelected {
+//                for unselectIndex in radioButtons.indices {
+//                    radioButtons[unselectIndex].isSelected = false
+//                }
+//                sender.isSelected = true
+//                indexOfBtns = radioButtons.firstIndex(of: sender)
+//            } else {
+//                sender.isSelected = false
+//                indexOfBtns = nil
+//            }
+//        } else {
+//            sender.isSelected = true
+//            indexOfBtns = radioButtons.firstIndex(of: sender)
+//        }
+//
+//
+//        // 해당 카테고리 버튼 누르면 myTag에 해당되는 String값 저장을 위한 세팅
+//        if indexOfBtns == 0{
+//            myTag = "한식"
+//        }else if indexOfBtns == 1{
+//            myTag = "중식"
+//        }else if indexOfBtns == 2{
+//            myTag = "양식"
+//        }else if indexOfBtns == 3{
+//            myTag = "일식"
+//        }else if indexOfBtns == 4{
+//            myTag = "분식"
+//        }else if indexOfBtns == 5{
+//            myTag = "카페"
+//        }else {
+//            myTag = "기타"
+//        }
+//
+//
+//        // myTag에 선택한 카테고리 버튼 값 넣어주기
+//        var i = 0
+//        for category in categories {
+//            if indexOfBtns == i{
+//                myTag = category
+//            }
+//            i += 1
+//        }
+//
+//        // 사용자가 직접 사진을 안 넣으면 대신 넣을 디폴트 이미지(카테고리에 따라 다른 디폴트 이미지 제공 to 사용자)
+//        if ((imageView.image == nil)
+//            || (imageView.image == UIImage(named: "카페.png"))
+//            || (imageView.image == UIImage(named: "한식.png"))
+//            || (imageView.image == UIImage(named: "양식.png"))
+//            || (imageView.image == UIImage(named: "일식.png"))
+//            || (imageView.image == UIImage(named: "중식.png"))
+//            || (imageView.image == UIImage(named: "분식.png"))
+//            || (imageView.image == UIImage(named: "기타.png"))
+//            || (receivedImageName == "카페.png")
+//            || (receivedImageName == "한식.png")
+//            || (receivedImageName == "양식.png")
+//            || (receivedImageName == "일식.png")
+//            || (receivedImageName == "중식.png")
+//            || (receivedImageName == "분식.png")
+//            || (receivedImageName == "기타.png")) {
+//
+//            if myTag == "카페"{
+//
+//                imageView.image = UIImage(named: "카페.png")
+//            }
+//            if myTag == "한식"{
+//
+//                imageView.image = UIImage(named: "한식.png")
+//            }
+//            if myTag == "양식"{
+//
+//                imageView.image = UIImage(named: "양식.png")
+//            }
+//            if myTag == "일식"{
+//
+//                imageView.image = UIImage(named: "일식.png")
+//            }
+//            if myTag == "중식"{
+//
+//                imageView.image = UIImage(named: "중식.png")
+//            }
+//            if myTag == "분식"{
+//
+//                imageView.image = UIImage(named: "분식.png")
+//            }
+//            if myTag == "기타"{
+//
+//                imageView.image = UIImage(named: "기타.png")
+//            }
+//
+//        }
+//
+//        receivedImageName = ""
         if indexOfBtns != nil{
-
+            
             if !sender.isSelected {
                 for unselectIndex in radioButtons.indices {
                     radioButtons[unselectIndex].isSelected = false
@@ -158,33 +269,33 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             sender.isSelected = true
             indexOfBtns = radioButtons.firstIndex(of: sender)
         }
-
         
-        // 해당 카테고리 버튼 누르면 myTag에 해당되는 String값 저장을 위한 세팅
-        if indexOfBtns == 0{
-            myTag = "한식"
-        }else if indexOfBtns == 1{
-            myTag = "중식"
-        }else if indexOfBtns == 2{
-            myTag = "양식"
-        }else if indexOfBtns == 3{
-            myTag = "일식"
-        }else if indexOfBtns == 4{
-            myTag = "분식"
-        }else if indexOfBtns == 5{
-            myTag = "카페"
-        }else {
-            myTag = "기타"
-        }
-        
-
-        // myTag에 선택한 카테고리 버튼 값 넣어주기
-        var i = 0
+  
+            
+            if indexOfBtns == 0{
+                myTag = "한식"
+            }else if indexOfBtns == 1{
+                myTag = "중식"
+            }else if indexOfBtns == 2{
+                myTag = "양식"
+            }else if indexOfBtns == 3{
+                myTag = "일식"
+            }else if indexOfBtns == 4{
+                myTag = "분식"
+            }else if indexOfBtns == 5{
+                myTag = "카페"
+            }else {
+                myTag = "기타"
+            }
+            
+            // myTag에 선택한 카테고리 버튼 값 넣어주기
+            var i = 0
         for category in categories {
             if indexOfBtns == i{
                 myTag = category
             }
             i += 1
+
         }
         
         // 사용자가 직접 사진을 안 넣으면 대신 넣을 디폴트 이미지(카테고리에 따라 다른 디폴트 이미지 제공 to 사용자)
