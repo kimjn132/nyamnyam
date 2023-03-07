@@ -51,14 +51,11 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     var receivedCategory = ""
     var receivedImageName = ""
     
+
     // 주소 업데이트 반영을 위해 설정해주는 if문 값
     var count1 = 0
     var count2 = 0
-    
-    
-    
-    
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -354,12 +351,10 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
 //        super.viewWillDisappear(animated)
 //    }//viewwillDisappear
     
-    
     // 뷰 종료 상태
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-       
         //뷰 컨트롤러 포그라운드, 백그라운드 상태 체크 해제
         NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
@@ -486,9 +481,24 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             data = image.pngData()! as NSData
             imageName = "img"
 
-        }else{
+        }else if imageView.image != nil {
             
-            image = UIImage(data: receivedImage! as Data)
+            image = imageView.image
+            data = image.pngData()! as NSData
+            imageName = "img"
+            
+        }else{
+            // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
+            for category in categories {
+                if myTag == category{
+                    
+                    image = UIImage(named: category + ".png")
+                    imageName = category + ".png"
+
+//                    print("이미지 이름:", imageName)
+                }
+            }
+
 
             data = image!.pngData()! as NSData
             imageName = "img"
@@ -500,7 +510,6 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
 
         let result = storeDB.updateDB(name: name, address: address, data: data, content: content, category: tag, id: receivedId, imageName: imageName)
-
 
         if result{
             let resultAlert = UIAlertController(title: "결과", message: "수정 되었습니다", preferredStyle: .alert)
@@ -561,8 +570,6 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     @objc func keyboardDown() {
         self.view.transform = .identity
     }
-    
-    
  
 }// End
 
@@ -573,7 +580,6 @@ extension UpdateViewController: UIImagePickerControllerDelegate & UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let img = info[UIImagePickerController.InfoKey.originalImage]{
-
             
             // [이미지 뷰에 앨범에서 선택한 사진 표시 실시]
             imageView.image = img as? UIImage
