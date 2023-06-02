@@ -44,11 +44,15 @@ class TableViewController: UITableViewController {
             }
 
         let dismissButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissModal))
-        navigationItem.leftBarButtonItem = dismissButton
-        if selectedId == nil {
-            dismissButton.isHidden = true
+                navigationItem.leftBarButtonItem = dismissButton
+                if selectedId == nil {
+                    //iOS 16.0 버전 이하도 사용할 수 있도록! dismissButton.isHidden을 사용하면 iOS 16.0 이하는 사용할 수 없다.
+                    self.navigationItem.leftBarButtonItem = nil
+                    //iOS 16.0 버전 이하도 사용할 수 있도록
+//            dismissButton.isHidden = true
         } else {
-            dismissButton.isHidden = false
+//            dismissButton.isHidden = false
+            self.navigationItem.setRightBarButton(nil, animated: true)
         }
     }
 
@@ -206,6 +210,7 @@ class TableViewController: UITableViewController {
                 let indexPath = self.tvListView.indexPath(for: cell)
                 let detailView = segue.destination as! UpdateViewController
                 
+                detailView.sgclicked = true
                 detailView.receivedId = storeList[indexPath!.row].id
                 detailView.receivedName = storeList[indexPath!.row].name
                 detailView.receivedAddress = storeList[indexPath!.row].address

@@ -43,6 +43,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     
     
     // 수정할 내용 불러오기 위한 변수 선언
+    var sgclicked:Bool = false
     var receivedId = 0
     var receivedName = ""
     var receivedAddress = ""
@@ -60,20 +61,47 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         
         
-        count1 += 1
-        // 처음 1번 페이지 불러올 때
-        if count1 == 1 {
-            lblAddress.text = String(receivedAddress)
-        //수정한 후 2번 이상 페이지 불러올 때
-        }else{
-            lblAddress.text = Message.address
+        if sgclicked == true{
+            
+            count1 += 1
+            // 처음 1번 페이지 불러올 때
+            if count1 == 1 {
+                lblAddress.text = String(receivedAddress)
+            //수정한 후 2번 이상 페이지 불러올 때
+            }else{
+                lblAddress.text = Message.address
+            }
+            
+            // 뷰 텍스트 첫 화면(수정 전 데이터)
+            tfTitle.text = String(receivedName)
+            imageView.image = UIImage(data: receivedImage! as Data)
+            tvContent.text = String(receivedContent)
+            myTag = receivedCategory
+            
+            
+            if receivedCategory == "한식"{
+                radioButtons[0].isSelected = true
+            }else if receivedCategory == "중식"{
+                radioButtons[1].isSelected = true
+            }else if receivedCategory == "양식"{
+                radioButtons[2].isSelected = true
+            }else if receivedCategory == "일식"{
+                radioButtons[3].isSelected = true
+            }else if receivedCategory == "분식"{
+                radioButtons[4].isSelected = true
+            }else if receivedCategory == "카페"{
+                radioButtons[5].isSelected = true
+            }else{
+                radioButtons[6].isSelected = true
+            }
+        }else{ // + barbutton으로 화면 넘어온 경우
+            imageView.image = UIImage(named: "한식.png")
+            radioButtons[0].isSelected = true
         }
         
-        // 뷰 텍스트 첫 화면(수정 전 데이터)
-        tfTitle.text = String(receivedName)
-        imageView.image = UIImage(data: receivedImage! as Data)
-        tvContent.text = String(receivedContent)
-        myTag = receivedCategory
+        
+        
+        
        
         
     
@@ -88,44 +116,6 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         // 앨범 컨트롤러 딜리게이트 지정
         self.photo.delegate = self
-        
-        //아래 switch문 하면 카테고리 라디오 버튼 중복 입력되서 주석 처리함
-        
-//            // 카테고리 버튼 기존 데이터 선택된 상태로 보여짐
-//            switch myTag {
-//            case "한식":
-//                radioButtons[0].isSelected = true
-//            case "중식":
-//                radioButtons[1].isSelected = true
-//            case "양식":
-//                radioButtons[2].isSelected = true
-//            case "일식":
-//                radioButtons[3].isSelected = true
-//            case "분식":
-//                radioButtons[4].isSelected = true
-//            case "카페":
-//                radioButtons[5].isSelected = true
-//            default:
-//                radioButtons[6].isSelected = true
-//
-//            }
-//        myTag = sgTag!
-        
-        if receivedCategory == "한식"{
-            radioButtons[0].isSelected = true
-        }else if receivedCategory == "중식"{
-            radioButtons[1].isSelected = true
-        }else if receivedCategory == "양식"{
-            radioButtons[2].isSelected = true
-        }else if receivedCategory == "일식"{
-            radioButtons[3].isSelected = true
-        }else if receivedCategory == "분식"{
-            radioButtons[4].isSelected = true
-        }else if receivedCategory == "카페"{
-            radioButtons[5].isSelected = true
-        }else{
-            radioButtons[6].isSelected = true
-        }
                           
     }//viewDidLoad
     
@@ -158,101 +148,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     // 맛집 카테고리 클릭 버튼
     @IBAction func btnChooseCategory(_ sender: UIButton) {
         
-//        // 카테고리 한 개만 클릭되게 (중복 안되게)
-//        if indexOfBtns != nil{
-//
-//            if !sender.isSelected {
-//                for unselectIndex in radioButtons.indices {
-//                    radioButtons[unselectIndex].isSelected = false
-//                }
-//                sender.isSelected = true
-//                indexOfBtns = radioButtons.firstIndex(of: sender)
-//            } else {
-//                sender.isSelected = false
-//                indexOfBtns = nil
-//            }
-//        } else {
-//            sender.isSelected = true
-//            indexOfBtns = radioButtons.firstIndex(of: sender)
-//        }
-//
-//
-//        // 해당 카테고리 버튼 누르면 myTag에 해당되는 String값 저장을 위한 세팅
-//        if indexOfBtns == 0{
-//            myTag = "한식"
-//        }else if indexOfBtns == 1{
-//            myTag = "중식"
-//        }else if indexOfBtns == 2{
-//            myTag = "양식"
-//        }else if indexOfBtns == 3{
-//            myTag = "일식"
-//        }else if indexOfBtns == 4{
-//            myTag = "분식"
-//        }else if indexOfBtns == 5{
-//            myTag = "카페"
-//        }else {
-//            myTag = "기타"
-//        }
-//
-//
-//        // myTag에 선택한 카테고리 버튼 값 넣어주기
-//        var i = 0
-//        for category in categories {
-//            if indexOfBtns == i{
-//                myTag = category
-//            }
-//            i += 1
-//        }
-//
-//        // 사용자가 직접 사진을 안 넣으면 대신 넣을 디폴트 이미지(카테고리에 따라 다른 디폴트 이미지 제공 to 사용자)
-//        if ((imageView.image == nil)
-//            || (imageView.image == UIImage(named: "카페.png"))
-//            || (imageView.image == UIImage(named: "한식.png"))
-//            || (imageView.image == UIImage(named: "양식.png"))
-//            || (imageView.image == UIImage(named: "일식.png"))
-//            || (imageView.image == UIImage(named: "중식.png"))
-//            || (imageView.image == UIImage(named: "분식.png"))
-//            || (imageView.image == UIImage(named: "기타.png"))
-//            || (receivedImageName == "카페.png")
-//            || (receivedImageName == "한식.png")
-//            || (receivedImageName == "양식.png")
-//            || (receivedImageName == "일식.png")
-//            || (receivedImageName == "중식.png")
-//            || (receivedImageName == "분식.png")
-//            || (receivedImageName == "기타.png")) {
-//
-//            if myTag == "카페"{
-//
-//                imageView.image = UIImage(named: "카페.png")
-//            }
-//            if myTag == "한식"{
-//
-//                imageView.image = UIImage(named: "한식.png")
-//            }
-//            if myTag == "양식"{
-//
-//                imageView.image = UIImage(named: "양식.png")
-//            }
-//            if myTag == "일식"{
-//
-//                imageView.image = UIImage(named: "일식.png")
-//            }
-//            if myTag == "중식"{
-//
-//                imageView.image = UIImage(named: "중식.png")
-//            }
-//            if myTag == "분식"{
-//
-//                imageView.image = UIImage(named: "분식.png")
-//            }
-//            if myTag == "기타"{
-//
-//                imageView.image = UIImage(named: "기타.png")
-//            }
-//
-//        }
-//
-//        receivedImageName = ""
+
         if indexOfBtns != nil{
             
             if !sender.isSelected {
@@ -366,6 +262,20 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     // Edit button
     @IBAction func btnDone(_ sender: UIBarButtonItem) {
         
+        
+        
+        if tfTitle.text?.trimmingCharacters(in: .whitespaces) != "" && lblAddress.text?.trimmingCharacters(in: .whitespaces) != "'+'를 눌러 위치를 추가해주세요." &&
+            tvContent.text?.trimmingCharacters(in: .whitespaces) != "" &&
+            sgclicked == false {
+            dbInsert()
+            
+        }
+        if sgclicked {
+            // DB에 정보 update
+            dbUpdate()
+        }
+        
+        
         if tfTitle.text!.trimmingCharacters(in: .whitespaces).isEmpty{
             let testAlert = UIAlertController(title: nil, message: "맛집 이름을 작성해주세요!", preferredStyle: .alert)
             
@@ -385,7 +295,8 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             present(testAlert, animated: true)
             
         }
-        else if lblAddress.text?.trimmingCharacters(in: .whitespaces) == "+ 버튼을 눌러 위치를 추가하세요."{ // 위치 추가 안하면 Alert
+        
+        if lblAddress.text?.trimmingCharacters(in: .whitespaces) == "+ 버튼을 눌러 위치를 추가하세요."{ // 위치 추가 안하면 Alert
             // Alert
             let testAlert = UIAlertController(title: nil, message: "맛집 위치를 추가해주세요!", preferredStyle: .alert)
 
@@ -403,7 +314,9 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
 
             // Alert 띄우기
             present(testAlert, animated: true)
-        }else if (tvContent.text!.trimmingCharacters(in: .whitespaces).isEmpty) || tvContent.text == "리뷰를 작성하세요."{
+        }
+        
+        if (tvContent.text!.trimmingCharacters(in: .whitespaces).isEmpty) || tvContent.text == "리뷰를 작성하세요."{
             // Alert
             let testAlert = UIAlertController(title: nil, message: "리뷰를 작성해주세요!", preferredStyle: .alert)
             
@@ -421,11 +334,6 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             
             // Alert 띄우기
             present(testAlert, animated: true)
-            
-        }else{
-        
-            // DB에 정보 update
-            dbUpdate()
             
         }
 
@@ -579,36 +487,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         var data : NSData!
         var imageName : String!
 
-//        if imageData != nil {
-//
-//            image = UIImage(data: imageData! as Data)
-//            data = image.pngData()! as NSData
-//            imageName = "img"
-//
-//        }else if imageView.image != nil {
-//
-//            image = imageView.image
-//            data = image.pngData()! as NSData
-//            imageName = "img"
-//
-//        }else{
-//            // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
-//            for category in categories {
-//                if myTag == category{
-//
-//                    image = UIImage(named: category + ".png")
-//                    imageName = category + ".png"
-//
 
-//                }
-//            }
-//
-//
-//            data = image!.pngData()! as NSData
-//            imageName = "img"
-//
-//        }
-        
         if categories.contains(receivedImageName.components(separatedBy: ".")[0]){
             
 
@@ -674,7 +553,62 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         }
         // static 초기화 안 해주면 table 돌아간 후 다른 데이터 수정할 때 이전 데이터 수정한 주소가 똑같이 불러와져서 초기화 시켜줌
         Message.address = ""
+        
+        sgclicked = false
 
+    }//dbUpdate
+    
+    func dbInsert(){
+        
+        // DB 인스턴스 만들기
+        let storeDB = StoreDB()
+        
+        let tag = myTag
+        guard let name = tfTitle.text?.trimmingCharacters(in: .whitespaces) else { return }
+        guard let address = lblAddress.text?.trimmingCharacters(in: .whitespaces) else { return }
+        guard let content = tvContent.text?.trimmingCharacters(in: .whitespaces) else { return }
+        var image : UIImage!
+        var data : NSData!
+        var imageName : String!
+        
+        if imageData != nil {
+            image = UIImage(data: imageData! as Data)
+            data = image.pngData()! as NSData
+            imageName = "img"
+            
+        }else{
+            
+            // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
+            for category in categories {
+                
+                if myTag == category{
+                    image = UIImage(named: category + ".png")
+                    imageName = category + ".png"
+                    
+                }
+            }
+            
+            data = image.pngData()! as NSData
+        }
+        
+        let result = storeDB.insertDB(name: name, address: address, data: data, content: content, category: tag, imageName: imageName)
+        
+        if result {
+            let resultAlert = UIAlertController(title: "완료", message: "입력이 되었습니다.", preferredStyle: .alert)
+
+            let okAction = UIAlertAction(title: "네 알겠습니다.", style: .default, handler: {ACTION in self.navigationController?.popViewController(animated: true)})
+            
+            resultAlert.addAction(okAction)
+            present(resultAlert, animated: true)
+            
+        } else {
+            let resultAlert = UIAlertController(title: "실패", message: "에러가 발생 되었습니다.", preferredStyle: .alert)
+            let onAction = UIAlertAction(title: "OK", style: .default)
+            
+            resultAlert.addAction(onAction)
+            present(resultAlert, animated: true)
+        }
+        
     }//dbInsert
 
     
