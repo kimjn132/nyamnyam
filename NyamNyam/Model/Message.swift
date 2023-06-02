@@ -7,7 +7,6 @@
 
 import Foundation
 
-import Foundation
 
 struct Message{
     static var check = ""

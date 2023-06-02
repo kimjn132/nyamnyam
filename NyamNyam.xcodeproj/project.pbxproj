@@ -28,7 +28,6 @@
 		683FB27F29B36B3800800390 /* 분식.png in Resources */ = {isa = PBXBuildFile; fileRef = 683FB27E29B36B3800800390 /* 분식.png */; };
 		688AC99D29ACDF430038965D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC99C29ACDF430038965D /* Message.swift */; };
 		688AC9A129ACDF890038965D /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC99E29ACDF890038965D /* ReviewViewController.swift */; };
-		688AC9A229ACDF890038965D /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC99F29ACDF890038965D /* AddViewController.swift */; };
 		688AC9A529ACE03C0038965D /* KakaoZipCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */; };
 		BC2AF5E829B37CD800942180 /* WishKakaoZipCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2AF5E729B37CD800942180 /* WishKakaoZipCode.swift */; };
 		BC6F187E29B4B2A900203E3C /* WishDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6F187D29B4B2A900203E3C /* WishDB.swift */; };
@@ -64,7 +63,6 @@
 		683FB27E29B36B3800800390 /* 분식.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "분식.png"; sourceTree = "<group>"; };
 		688AC99C29ACDF430038965D /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		688AC99E29ACDF890038965D /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
-		688AC99F29ACDF890038965D /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakaoZipCodeVC.swift; sourceTree = "<group>"; };
 		BC2AF5E729B37CD800942180 /* WishKakaoZipCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishKakaoZipCode.swift; sourceTree = "<group>"; };
 		BC6F187D29B4B2A900203E3C /* WishDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishDB.swift; sourceTree = "<group>"; };
@@ -113,6 +111,7 @@
 				26A31904298AA0F400681392 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		26A31904298AA0F400681392 /* Products */ = {
 			isa = PBXGroup;
@@ -136,7 +135,6 @@
 				26A31914298AA0F500681392 /* Info.plist */,
 				26158E6F29ACCA170082CE75 /* TableViewCell.swift */,
 				26158E6D29ACCA050082CE75 /* TableViewController.swift */,
-				688AC99F29ACDF890038965D /* AddViewController.swift */,
 				688AC99E29ACDF890038965D /* ReviewViewController.swift */,
 				688AC9A429ACE03C0038965D /* KakaoZipCodeVC.swift */,
 				BC2AF5E729B37CD800942180 /* WishKakaoZipCode.swift */,
@@ -245,7 +243,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				16A1D93A29AF1AC90010C328 /* CollectionViewController.swift in Sources */,
-				688AC9A229ACDF890038965D /* AddViewController.swift in Sources */,
 				26158E7229ACCB7B0082CE75 /* Store.swift in Sources */,
 				BC6F188029B4B40400203E3C /* Wish.swift in Sources */,
 				26A31907298AA0F400681392 /* AppDelegate.swift in Sources */,
@@ -340,7 +337,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -394,7 +391,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -409,11 +406,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = B575A5584Q;
+				DEVELOPMENT_TEAM = B575A5584Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NyamNyam/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ChuLoop;
@@ -424,9 +421,11 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -435,10 +434,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nyamnyam.chuloop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Chuloops;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -447,12 +448,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = B575A5584Q;
+				DEVELOPMENT_TEAM = B575A5584Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NyamNyam/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ChuLoop;
@@ -463,9 +463,11 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -474,10 +476,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nyamnyam.chuloop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Chuloops;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
