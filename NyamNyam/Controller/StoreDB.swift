@@ -49,16 +49,17 @@ class StoreDB {
     
     func insertDB(name: String, address: String, data: AnyObject, content: String, category: String, imageName: String) -> Bool {
         
-        let calendar = Calendar(identifier: .gregorian)
-        let timeZone = TimeZone(identifier: "Asia/Seoul")
-        let dateComponents = calendar.dateComponents(in: timeZone!, from: Date())
-        let myDate = calendar.date(from: dateComponents)!
+//        let calendar = Calendar(identifier: .gregorian)
+//        let timeZone = TimeZone(identifier: "Asia/Seoul")
+//        let dateComponents = calendar.dateComponents(in: timeZone!, from: Date())
+//        let myDate = calendar.date(from: dateComponents)!
 
-        
+        let writtenDate = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.locale = Locale(identifier: "ko")
+        dateFormatter.dateFormat = "yyyy.MM.dd. E요일"
 
-        let sDate = dateFormatter.string(from: myDate)
+        let sDate = dateFormatter.string(from: writtenDate)
         
         var stmt: OpaquePointer?
         let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)

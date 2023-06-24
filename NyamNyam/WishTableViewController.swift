@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SQLite3
+
 
 class WishTableViewController: UITableViewController {
     
