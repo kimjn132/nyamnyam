@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import SQLite3
-import AVFoundation
 import Photos
+
 
 class WishAddViewController: UIViewController {
     
@@ -346,8 +345,6 @@ class WishAddViewController: UIViewController {
             data = image!.pngData()! as NSData
             dbimageName = "user"
         }else{ // 사용자가 사진을 선택하지 않으면 default 이미지로 넣기
-//            image = UIImage(named: defaultImage)
-//            data = image!.pngData()! as NSData
             for category in categories {
                 if myTag == category{
                     image = UIImage(named: category + ".png")
@@ -381,6 +378,7 @@ class WishAddViewController: UIViewController {
         Message.wishaddress = "'+'를 눌러 위치를 추가해주세요."
     
     }//dbInsert
+    
     
     func dbUpdate(){
         let wishDB = WishDB()

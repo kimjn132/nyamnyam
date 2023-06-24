@@ -408,17 +408,16 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="JUt-3Q-Amq">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="34.333333333333336"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ㅎㅎ" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oXt-by-6a4">
-                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="34.333333333333336"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="'+'를 눌러 위치를 추가하거나 직접입력하세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NO5-BS-Prs">
+                                                        <rect key="frame" x="0.0" y="0.0" width="295" height="34.333333333333336"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="ng5-zp-zhR"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="BDf-g9-UAu"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SpQ-AC-Os2">
-                                                        <rect key="frame" x="281" y="0.0" width="62" height="34.333333333333336"/>
+                                                        <rect key="frame" x="296" y="0.0" width="47" height="34.333333333333336"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system">
                                                             <color key="baseForegroundColor" systemColor="tintColor"/>
@@ -478,7 +477,7 @@
                     <connections>
                         <outlet property="countLabel" destination="Rn2-kR-qyn" id="VZY-jk-GRD"/>
                         <outlet property="imageView" destination="LF3-Or-xHk" id="5Dr-wJ-msN"/>
-                        <outlet property="lblAddress" destination="oXt-by-6a4" id="uio-Ak-Ugt"/>
+                        <outlet property="lblAddress" destination="NO5-BS-Prs" id="Fy9-ok-7ut"/>
                         <outlet property="tfTitle" destination="ggz-bm-mfH" id="l6h-ca-csJ"/>
                         <outlet property="tvContent" destination="F6R-Mf-2MI" id="SpC-hp-fcb"/>
                         <outletCollection property="radioButtons" destination="tvP-ez-wav" collectionClass="NSMutableArray" id="xhI-2t-2jf"/>

@@ -8,7 +8,6 @@
 import UIKit
 
 
-
 class TableViewController: UITableViewController {
     
     @IBOutlet var tvListView: UITableView!
@@ -46,12 +45,8 @@ class TableViewController: UITableViewController {
         let dismissButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissModal))
                 navigationItem.leftBarButtonItem = dismissButton
                 if selectedId == nil {
-                    //iOS 16.0 버전 이하도 사용할 수 있도록! dismissButton.isHidden을 사용하면 iOS 16.0 이하는 사용할 수 없다.
                     self.navigationItem.leftBarButtonItem = nil
-                    //iOS 16.0 버전 이하도 사용할 수 있도록
-//            dismissButton.isHidden = true
         } else {
-//            dismissButton.isHidden = false
             self.navigationItem.setRightBarButton(nil, animated: true)
         }
     }
@@ -219,6 +214,7 @@ class TableViewController: UITableViewController {
                 detailView.receivedCategory = storeList[indexPath!.row].category
                 detailView.receivedImageName = storeList[indexPath!.row].imageName
                 //>>detailviewcontrolller에서 정의한 property에 데이터 넣어줌
+            print(detailView.receivedAddress)
 
             }
             

@@ -6,7 +6,7 @@
 //  Desc : CollectionView를 이용한 사진모음, Cell클릭시 TableView Modal로 나타남
 
 import UIKit
-import SQLite3
+//import SQLite3
 
 private let reuseIdentifier = "Cell"
 
