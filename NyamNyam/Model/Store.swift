@@ -30,3 +30,11 @@ class Store{
         
     }
 }
+
+struct AddressModel {
+    var address: String
+    
+    init(address: String) {
+        self.address = address
+    }
+}
