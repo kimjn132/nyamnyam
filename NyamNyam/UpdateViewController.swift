@@ -56,6 +56,11 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     var count2 = 0
     
     
+    let kakaoZipCodeVC = KakaoZipCodeVC()
+    var newAddress: AddressModel?
+    
+
+    
 
     
     // ================== LifeCycle Method ==================
@@ -63,17 +68,10 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        textViewDidEndEditing(tvContent)
+        textViewDidBeginEditing(tvContent, lblAddress)
         
         if sgclicked == true {   // TableView에서 클릭할 때
-            
-//            count1 += 1
-//            // 처음 1번 페이지 불러올 때
-//            if count1 == 1 {
-//                lblAddress.text = String(receivedAddress)
-//                //수정한 후 2번 이상 페이지 불러올 때
-//            }else{
-//                lblAddress.text = Message.address
-//            }
             
             
             
@@ -120,31 +118,39 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         tvContent.delegate = self
         
         // 앨범 컨트롤러 딜리게이트 지정
-        self.photo.delegate = self
+        photo.delegate = self
+        
+        
+        
         
     }//viewDidLoad
     
     // kakao api로 가져온 address를 라벨로 띄워준다.
-//    override func viewWillAppear(_ animated: Bool) {
-//
-//        super.viewWillAppear(animated)
-//
-////        lblAddress.text = String(receivedAddress)
-////         수정한 주소를 다시 수정 반영된 주소로 가져오기 위함
-//                count2 += 1
-//
-//                if count2 == 1 {
-//                    //수정 전 주소
-//                    lblAddress.text = String(receivedAddress)
-//                    print(count2)
-//                }else if count2 == 2 {
-//                    //수정 후 주소
-//                    lblAddress.text = Message.address
-//                    print(count2)
-//                }
-//
-//
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+
+        super.viewWillAppear(animated)
+
+
+        
+        count2 += 1
+        
+        
+        if count2 == 1 {
+            lblAddress.text = String(receivedAddress)
+        } else {
+            lblAddress.text = newAddress?.address
+        }
+        
+        
+        if newAddress?.address == nil {
+            count2 = 1
+        }
+        
+        
+
+
+
+    }
     
     // 뷰 화면 표시
     override func viewDidAppear(_ animated: Bool) {
@@ -157,35 +163,9 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         // 포그라운드 처리 실시
         checkForeground()
-        
-        print("didappear")
-        
-//        count2 += 1
-//
-//        if count2 == 1 {
-//            //수정 전 주소
-//            lblAddress.text = String(receivedAddress)
-//
-//        }else if count2 >= 2 {
-//            //수정 후 주소
-//            if Message.address == String(receivedAddress) {
-//                lblAddress.text = String(receivedAddress)
-//            } else {
-//                lblAddress.text = Message.address
-//            }
-        
-//        if Message.address == String(receivedAddress) {
-//            lblAddress.text = String(receivedAddress)
-//        } else {
-//            lblAddress.text = Message.address
-//        }
-        
-        lblAddress.text = Message.address
 
-        
-// 주소 창에서 dismiss 버튼 눌렀을 때 receivedAddress 가져오도록 처리도 해줘야 된다.
-        
     }//viewDidAppear
+    
     
     
     // 뷰 정지 상태
@@ -228,21 +208,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     }
     
     
-    //글자 수 제한 감지
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let currentText = tvContent.text ?? ""
-        guard let stringRange = Range(range, in: currentText) else { return false }
-        let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
-        return updatedText.count <= maxCharacters
-    }
     
-    //글자 수 카운트
-    func textViewDidChange(_ textView: UITextView) {
-        //placeholderLabel.isHidden = !textView.text.isEmpty
-        let currentCount = tvContent.text.count
-        let remainingCount = maxCharacters - currentCount
-        countLabel.text = "\(remainingCount)/60"
-    }
     
     
     // 맛집 카테고리 클릭 버튼
@@ -445,7 +411,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
 
         
         let nextVC = KakaoZipCodeVC()
-
+        nextVC.kakaoDelegate = self
         // 이동하기 before 페이지 컨트롤러에서 after 페이지에 미리 navigationController로 감싸준 뒤 이동시켜야 한다.
         let navigationController = UINavigationController(rootViewController: nextVC)
         navigationController.modalPresentationStyle = .fullScreen
@@ -455,10 +421,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     }//btnAddAddress
     
 
-//    @objc private func backButtonPressed(_ sender: Any) {
-//        dismiss(animated: true, completion: nil) // 모달로 표시된 KakaoZipCodeVC를 닫음
-//        // 추가적인 동작 수행
-//    }
+
 
     
 
@@ -619,7 +582,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             present(resultAlert, animated: true)
         }
         // static 초기화 안 해주면 table 돌아간 후 다른 데이터 수정할 때 이전 데이터 수정한 주소가 똑같이 불러와져서 초기화 시켜줌
-        Message.address = ""
+        
         
         sgclicked = false
         
@@ -687,21 +650,21 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     // textview 디자인 함수들 -----
     // 1. textview에 입력된 글이 없을 시 placeholder를 띄운다.
     func textViewDidEndEditing(_ textView: UITextView) {
-        
+        let placeholder = "리뷰를 작성하세요"
         if tvContent.text.isEmpty{
-            tvContent.text = "리뷰를 작성하세요."
+            tvContent.text = placeholder
             tvContent.textColor = UIColor.lightGray
+        }else{
+            tvContent.text = nil
+            tvContent.textColor = UIColor.black
         }
         
     }
     
     // 2. 사용자가 입력을 시작한 경우 placeholder를 비운다.
-    func textViewDidBeginEditing(_ textView: UITextView) {
+    func textViewDidBeginEditing(_ textView: UITextView, _ textField: UITextField) {
         
-        if tvContent.textColor == UIColor.lightGray{
-            tvContent.text = nil
-            tvContent.textColor = UIColor.black
-        }
+        
         // 옵저버 등록 - textview 클릭시 키보드만큼 화면이 올라가도록
         notiCenter.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
         notiCenter.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -723,6 +686,8 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             )
         }
     }
+    
+    
     @objc func keyboardDown() {
         
         self.view.transform = .identity
@@ -730,43 +695,4 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     }
     
 }// End
-
-// ----------------extensions----------------
-extension UpdateViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-    
-    
-    // MARK: [사진, 비디오 선택을 했을 때 호출되는 메소드]
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        if let img = info[UIImagePickerController.InfoKey.originalImage]{
-            
-            // [이미지 뷰에 앨범에서 선택한 사진 표시 실시]
-            imageView.image = img as? UIImage
-            
-            // [이미지 데이터에 선택한 이미지 지정 실시]
-            imageData = (img as? UIImage)!.jpegData(compressionQuality: 0.8) as NSData? // jpeg 압축 품질 설정
-        }
-        
-        // 이미지 피커 닫기
-        dismiss(animated: true, completion: nil)
-        
-    }
-    
-    // MARK: [사진, 비디오 선택을 취소했을 때 호출되는 메소드]
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
-        // 이미지 파커 닫기
-        self.dismiss(animated: true, completion: nil)
-        
-    }
-    
-}// image extension
-
-
-// db protocol 불러오기
-extension UpdateViewController: StoreModelProtocol {
-    func itemdownloaded(items: [Store]) {
-        
-    }
-}// db extension
 
