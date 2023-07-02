@@ -45,7 +45,11 @@ extension UpdateViewController: UIImagePickerControllerDelegate & UINavigationCo
 
 
 // db protocol 불러오기
-extension UpdateViewController: StoreModelProtocol {
+extension UpdateViewController: UITextViewDelegate, StoreModelProtocol {
+    func itemdownloaded(items: [Store]) {
+        
+    }
+    
     
     //글자 수 제한 감지
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -63,8 +67,55 @@ extension UpdateViewController: StoreModelProtocol {
         countLabel.text = "\(remainingCount)/60"
     }
     
-    func itemdownloaded(items: [Store]) {
 
+    
+    // textview 디자인 함수들 -----
+    // 1. textview에 입력된 글이 없을 시 placeholder를 띄운다.
+    func textViewDidEndEditing(_ textView: UITextView) {
+        screenUpDownforKeyboard()
+        if tvContent.text.isEmpty {
+            tvContent.text = placeholder
+            tvContent.textColor = .lightGray
+        }
+    }
+    
+    // 2. 사용자가 입력을 시작한 경우 placeholder를 비운다.
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        screenUpDownforKeyboard()
+        if tvContent.textColor == .lightGray {
+            tvContent.text = nil
+            tvContent.textColor = UIColor.black
+        }
+    }
+    
+
+    private func screenUpDownforKeyboard() {
+        // 옵저버 등록 - textview 클릭시 키보드만큼 화면이 올라가도록
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    //textView 선택시 키보드가 올라가는 만큼 화면 올리기
+    @objc func keyboardUp(notification: NSNotification) {
+        
+        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            
+            UIView.animate(
+                withDuration: 0.3
+                , animations: {
+                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
+                }
+            )
+        }
+    }
+    
+    
+    @objc func keyboardDown() {
+        
+        self.view.transform = .identity
+        
     }
     
 }// db extension
