@@ -9,7 +9,7 @@ import UIKit
 import Photos
 
 
-class UpdateViewController: UIViewController, UITextViewDelegate {
+class UpdateViewController: UIViewController {
     
     @IBOutlet weak var tfTitle: UITextField!
     @IBOutlet weak var imageView: UIImageView!
@@ -35,9 +35,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     
     //기본 디폴트
     var myTag = "기타"
-    
-    // 키보드 올라가는 것 감지
-    let notiCenter = NotificationCenter.default
+
     
     
     // 수정할 내용 불러오기 위한 변수 선언
@@ -58,7 +56,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     
     let kakaoZipCodeVC = KakaoZipCodeVC()
     var newAddress: AddressModel?
-    
+    let placeholder = "리뷰를 작성하세요"
 
     
 
@@ -68,8 +66,8 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        textViewDidEndEditing(tvContent)
-        textViewDidBeginEditing(tvContent, lblAddress)
+        tvContent.delegate = self
+        
         
         if sgclicked == true {   // TableView에서 클릭할 때
             
@@ -79,6 +77,8 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             tfTitle.text = String(receivedName)
             imageView.image = UIImage(data: receivedImage! as Data)
             tvContent.text = String(receivedContent)
+//            tvContent.textColor = .black
+            
             myTag = receivedCategory
             lblAddress.text = String(receivedAddress)
             
@@ -105,6 +105,9 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
             imageView.image = UIImage(named: "한식.png")
             radioButtons[0].isSelected = true
             lblAddress.text = ""
+            tvContent.text = placeholder
+            tvContent.textColor = .lightGray
+            
         }
         
         
@@ -163,6 +166,8 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
         
         // 포그라운드 처리 실시
         checkForeground()
+        
+        
 
     }//viewDidAppear
     
@@ -203,7 +208,6 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     
     //키보드 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //self == java의 this
         self.view.endEditing(true)
     }
     
@@ -647,52 +651,7 @@ class UpdateViewController: UIViewController, UITextViewDelegate {
     
     
     
-    // textview 디자인 함수들 -----
-    // 1. textview에 입력된 글이 없을 시 placeholder를 띄운다.
-    func textViewDidEndEditing(_ textView: UITextView) {
-        let placeholder = "리뷰를 작성하세요"
-        if tvContent.text.isEmpty{
-            tvContent.text = placeholder
-            tvContent.textColor = UIColor.lightGray
-        }else{
-            tvContent.text = nil
-            tvContent.textColor = UIColor.black
-        }
-        
-    }
     
-    // 2. 사용자가 입력을 시작한 경우 placeholder를 비운다.
-    func textViewDidBeginEditing(_ textView: UITextView, _ textField: UITextField) {
-        
-        
-        // 옵저버 등록 - textview 클릭시 키보드만큼 화면이 올라가도록
-        notiCenter.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
-        notiCenter.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    
-    //textView 선택시 키보드가 올라가는 만큼 화면 올리기
-    @objc func keyboardUp(notification:NSNotification) {
-        
-        if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            
-            UIView.animate(
-                withDuration: 0.3
-                , animations: {
-                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
-                }
-            )
-        }
-    }
-    
-    
-    @objc func keyboardDown() {
-        
-        self.view.transform = .identity
-        
-    }
     
 }// End
 
